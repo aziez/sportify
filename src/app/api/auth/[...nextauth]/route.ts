@@ -2,6 +2,7 @@ import axiosInstance from '@/lib/axios';
 import { NextAuthOptions } from 'next-auth';
 import NextAuth from 'next-auth/next';
 import CredentialsProvider from 'next-auth/providers/credentials';
+import jwt from 'jsonwebtoken';
 
 export const authOptions: NextAuthOptions = {
   callbacks: {
@@ -48,6 +49,14 @@ export const authOptions: NextAuthOptions = {
       },
     }),
   ],
+  jwt: {
+    async encode({ secret, token }) {
+      return jwt.sign(token, secret);
+    },
+    async decode({ secret, token }) {
+      return jwt.verify(token, secret);
+    },
+  },
 };
 
 const handler = NextAuth(authOptions);
