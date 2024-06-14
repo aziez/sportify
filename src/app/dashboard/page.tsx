@@ -1,8 +1,12 @@
+'use client';
 import { Button } from '@/components/ui/button';
 import TopNavbar from '@/components/layouts/top-navbar';
 import SideNavbar from '@/components/layouts/side-navbar';
+import { useSession } from 'next-auth/react';
 
 export function Dashboard() {
+  const { data: session, status } = useSession();
+
   return (
     <div className="grid min-h-screen w-full md:grid-cols-[220px_1fr] lg:grid-cols-[280px_1fr]">
       <SideNavbar />
@@ -24,6 +28,8 @@ export function Dashboard() {
                 You can start selling as soon as you add a product.
               </p>
               <Button className="mt-4">Add Product</Button>
+              <h2>Session Data:</h2>
+              <pre>{JSON.stringify(session, null, 2)}</pre>
             </div>
           </div>
         </main>

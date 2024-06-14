@@ -20,7 +20,7 @@ export default function Login() {
           </div>
         </div>
       </div>
-      <div className="hidden lg:block">
+      <div className="hidden p-6 lg:block">
         <Image
           src={welcomeImg}
           alt="Image"

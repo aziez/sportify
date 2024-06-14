@@ -16,6 +16,9 @@ import {
 import { Input } from '@/components/ui/input';
 import { Button } from '@/components/ui/button';
 import { AvatarIcon, EyeClosedIcon, EyeOpenIcon } from '@radix-ui/react-icons';
+import toast, { Toaster } from 'react-hot-toast';
+import { Loader2Icon } from 'lucide-react';
+import { useRouter } from 'next/navigation';
 
 const formSchema = z.object({
   username: z.string().min(1, { message: 'username is required' }),
@@ -25,6 +28,7 @@ const formSchema = z.object({
 type Inputs = z.infer<typeof formSchema>;
 
 const FormLogin = () => {
+  const router = useRouter();
   const [show, setShow] = useState(false);
   const [pending, startTransition] = useTransition();
   const form = useForm<Inputs>({
@@ -38,12 +42,23 @@ const FormLogin = () => {
   const { handleSubmit, control, reset } = form;
 
   function onSubmit(data: Inputs) {
-    console.log(data);
+    // console.log(data);
 
     startTransition(async () => {
-      let res = await signIn('credentials', { data, redirect: false });
+      let res = await signIn('credentials', {
+        username: data?.username,
+        password: data?.password,
+        redirect: false,
+      });
 
-      console.log(res, 'RESPONSEEDD');
+      // console.log(res, 'RESSSSPONSEEEEE');
+
+      if (res?.ok) {
+        toast.success('Login Successful');
+        router.push('/dashboard');
+      } else if (!res?.ok) {
+        toast.error('Login Vailed');
+      }
     });
   }
 
@@ -53,6 +68,7 @@ const FormLogin = () => {
 
   return (
     <Form {...form}>
+      <Toaster />
       <form
         onSubmit={handleSubmit(onSubmit)}
         className="2x:mt-7 mt-5 space-y-6"
@@ -107,7 +123,10 @@ const FormLogin = () => {
             </FormItem>
           )}
         />
-        <Button type="submit">Login</Button>
+        <Button variant={'ringHover'} disabled={pending} type="submit">
+          {pending && <Loader2Icon className="mr-2 h-5 w-5 animate-spin" />}
+          Login
+        </Button>
       </form>
     </Form>
   );
