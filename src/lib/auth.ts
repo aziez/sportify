@@ -1,8 +1,9 @@
 // lib/auth.ts
-import CredentialsProvider from 'next-auth/providers/credentials';
-import { NextAuthOptions } from 'next-auth';
-import axiosInstance from './axios';
 import { cookies } from 'next/headers';
+import { NextAuthOptions } from 'next-auth';
+import CredentialsProvider from 'next-auth/providers/credentials';
+
+import axiosInstance from './axios';
 
 export const authOptions: NextAuthOptions = {
   providers: [

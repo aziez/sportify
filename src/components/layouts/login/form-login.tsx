@@ -1,10 +1,16 @@
 'use client';
 
+import { zodResolver } from '@hookform/resolvers/zod';
+import { AvatarIcon, EyeClosedIcon, EyeOpenIcon } from '@radix-ui/react-icons';
+import { Loader2Icon } from 'lucide-react';
+import { useRouter } from 'next/navigation';
+import { signIn } from 'next-auth/react';
 import { useState, useTransition } from 'react';
 import { useForm } from 'react-hook-form';
-import { zodResolver } from '@hookform/resolvers/zod';
-import { signIn } from 'next-auth/react';
+import toast, { Toaster } from 'react-hot-toast';
 import { z } from 'zod';
+
+import { Button } from '@/components/ui/button';
 import {
   Form,
   FormControl,
@@ -14,11 +20,6 @@ import {
   FormMessage,
 } from '@/components/ui/form';
 import { Input } from '@/components/ui/input';
-import { Button } from '@/components/ui/button';
-import { AvatarIcon, EyeClosedIcon, EyeOpenIcon } from '@radix-ui/react-icons';
-import toast, { Toaster } from 'react-hot-toast';
-import { Loader2Icon } from 'lucide-react';
-import { useRouter } from 'next/navigation';
 
 const formSchema = z.object({
   username: z.string().min(1, { message: 'username is required' }),
@@ -45,7 +46,7 @@ const FormLogin = () => {
     // console.log(data);
 
     startTransition(async () => {
-      let res = await signIn('credentials', {
+      const res = await signIn('credentials', {
         username: data?.username,
         password: data?.password,
         redirect: false,

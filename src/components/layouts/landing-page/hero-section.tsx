@@ -1,18 +1,19 @@
 'use client';
-import React from 'react';
 import {
   motion,
-  useScroll,
-  useTransform,
-  useSpring,
   MotionValue,
+  useScroll,
+  useSpring,
+  useTransform,
 } from 'framer-motion';
+import { ShoppingBagIcon } from 'lucide-react';
 import Image from 'next/image';
 import Link from 'next/link';
+import React from 'react';
+
 import { Button } from '@/components/ui/button';
-import { ShoppingBagIcon } from 'lucide-react';
-import { ProductCard } from './farmui/product-card';
 import { Separator } from '@/components/ui/separator';
+import { ProductCard } from './farmui/product-card';
 // import { ProductCard } from '@/components/component/product-card';
 
 export const HeroParallax = ({

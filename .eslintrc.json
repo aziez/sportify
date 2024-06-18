@@ -9,7 +9,8 @@
     "project": "./tsconfig.json"
   },
   "extends": [
-    "eslint:recomended",
+    "eslint:recommended",
+    "next/core-web-vitals",
     "plugin:@typescript-eslint/recommended",
     "plugin:react/recommended",
     "plugin:react-hooks/recommended",
@@ -17,8 +18,7 @@
     "plugin:prettier/recommended",
     "plugin:import/errors",
     "plugin:import/warnings",
-    "plugin:import/typescript",
-    "plugin:next/recommended"
+    "plugin:import/typescript"
   ],
   "plugins": [
     "@typescript-eslint",

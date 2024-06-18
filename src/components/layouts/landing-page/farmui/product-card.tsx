@@ -1,8 +1,9 @@
-import { FC } from 'react';
-import { Card, CardContent } from '../../../ui/card';
+import { motion, MotionValue } from 'framer-motion';
 import Image from 'next/image';
+import { FC } from 'react';
+
 import { Badge } from '../../../ui/badge';
-import { MotionValue, motion } from 'framer-motion';
+import { Card, CardContent } from '../../../ui/card';
 
 interface StarIconProps {
   className?: string;

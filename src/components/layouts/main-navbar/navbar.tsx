@@ -1,12 +1,13 @@
 // @flow
-import * as React from 'react';
-import { ThemeToggle } from '../../toogle-theme';
-import { Button } from '../../ui/button';
 import { ShoppingCartIcon, User2Icon } from 'lucide-react';
 import { getServerSession } from 'next-auth';
+import * as React from 'react';
+
 import { authOptions } from '@/lib/auth';
-import { AvatarImage, Avatar, AvatarFallback } from '../../ui/avatar';
+import { ThemeToggle } from '../../toogle-theme';
+import { Avatar, AvatarFallback, AvatarImage } from '../../ui/avatar';
 import { Badge } from '../../ui/badge';
+import { Button } from '../../ui/button';
 import { ChartItem } from './chart-items';
 
 const Navbar = async () => {

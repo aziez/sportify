@@ -1,5 +1,8 @@
 'use client';
 
+import { ShoppingCartIcon } from 'lucide-react';
+import * as React from 'react';
+
 import { Badge } from '@/components/ui/badge';
 import { Button } from '@/components/ui/button';
 import {
@@ -8,8 +11,6 @@ import {
   DropdownMenuItem,
   DropdownMenuTrigger,
 } from '@/components/ui/dropdown-menu';
-import { ShoppingCartIcon } from 'lucide-react';
-import * as React from 'react';
 type Props = {};
 
 export const ChartItem = (props: Props) => {

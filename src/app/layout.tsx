@@ -1,13 +1,15 @@
+import '@/styles/globals.css';
+
 import type { Metadata } from 'next';
 import { Inter as FontSans } from 'next/font/google';
-import '@/styles/globals.css';
-import { cn } from '@/lib/utils';
-import { fontJakarta } from '@/styles/font';
-import { ThemeProvider } from '@/provider/theme-provider';
-import LayoutProvider from '@/provider/layout-provider';
 import { getServerSession } from 'next-auth';
-import AuthProvider from '@/provider/auth-provider';
+
 import { authOptions } from '@/lib/auth';
+import { cn } from '@/lib/utils';
+import AuthProvider from '@/provider/auth-provider';
+import LayoutProvider from '@/provider/layout-provider';
+import { ThemeProvider } from '@/provider/theme-provider';
+import { fontJakarta } from '@/styles/font';
 
 const fontSans = FontSans({
   subsets: ['latin'],

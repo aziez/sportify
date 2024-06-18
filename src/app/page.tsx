@@ -1,14 +1,15 @@
-import { ThemeToggle } from '@/components/toogle-theme';
-import { Button } from '@/components/ui/button';
-import { getServerSession } from 'next-auth';
-import Image from 'next/image';
 import { User } from 'lucide-react';
+import Image from 'next/image';
 import Link from 'next/link';
-import { authOptions } from '@/lib/auth';
-import Navbar from '@/components/layouts/main-navbar/navbar';
-import { HeroParallax } from '@/components/layouts/landing-page/hero-section';
+import { getServerSession } from 'next-auth';
+
 import { FeatureCard } from '@/components/layouts/landing-page/farmui/feature-card';
 import FeatureSection from '@/components/layouts/landing-page/feature-section';
+import { HeroParallax } from '@/components/layouts/landing-page/hero-section';
+import Navbar from '@/components/layouts/main-navbar/navbar';
+import { ThemeToggle } from '@/components/toogle-theme';
+import { Button } from '@/components/ui/button';
+import { authOptions } from '@/lib/auth';
 
 export default async function Home() {
   const session = await getServerSession(authOptions);

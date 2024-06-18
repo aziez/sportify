@@ -1,5 +1,4 @@
 'use client';
-import Link from 'next/link';
 import {
   Bell,
   CircleUser,
@@ -12,6 +11,8 @@ import {
   ShoppingCart,
   Users,
 } from 'lucide-react';
+import Link from 'next/link';
+import { getSession, signOut, useSession } from 'next-auth/react';
 
 import { Badge } from '@/components/ui/badge';
 import { Button } from '@/components/ui/button';
@@ -32,7 +33,6 @@ import {
 } from '@/components/ui/dropdown-menu';
 import { Input } from '@/components/ui/input';
 import { Sheet, SheetContent, SheetTrigger } from '@/components/ui/sheet';
-import { getSession, signOut, useSession } from 'next-auth/react';
 
 const TopNavbar = () => {
   const { data: session, status } = useSession();

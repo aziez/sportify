@@ -1,4 +1,3 @@
-import Link from 'next/link';
 import {
   Bell,
   Home,
@@ -8,7 +7,9 @@ import {
   ShoppingCart,
   Users,
 } from 'lucide-react';
+import Link from 'next/link';
 
+import Spotify from 'public/logo.svg';
 import { Badge } from '@/components/ui/badge';
 import {
   Card,
@@ -18,7 +19,6 @@ import {
   CardTitle,
 } from '@/components/ui/card';
 import { Button } from '../ui/button';
-import Spotify from 'public/logo.svg';
 
 const SideNavbar = () => {
   return (

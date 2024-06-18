@@ -1,11 +1,11 @@
 'use client';
 
-import LayoutLoader from '@/components/layout-loader';
-import { useMounted } from '@/hooks/use-mounted';
 import { motion } from 'framer-motion';
 import { usePathname } from 'next/navigation';
-
 import { FC, ReactNode } from 'react';
+
+import LayoutLoader from '@/components/layout-loader';
+import { useMounted } from '@/hooks/use-mounted';
 
 interface ProviderProps {
   children: ReactNode;

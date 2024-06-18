@@ -1,8 +1,9 @@
 'use client';
-import { Button } from '@/components/ui/button';
-import TopNavbar from '@/components/layouts/top-navbar';
-import SideNavbar from '@/components/layouts/side-navbar';
 import { useSession } from 'next-auth/react';
+
+import SideNavbar from '@/components/layouts/side-navbar';
+import TopNavbar from '@/components/layouts/top-navbar';
+import { Button } from '@/components/ui/button';
 
 export function Dashboard() {
   const { data: session, status } = useSession();

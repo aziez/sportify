@@ -1,10 +1,11 @@
 'úse client';
-import { Button } from '@/components/ui/button';
-import { Card, CardContent, CardFooter } from '@/components/ui/card';
+import { motion, MotionValue } from 'framer-motion';
+import { ArrowBigLeft, ArrowBigRightIcon, MoveRightIcon } from 'lucide-react';
 import Image from 'next/image';
 import Link from 'next/link';
-import { MotionValue, motion } from 'framer-motion';
-import { ArrowBigLeft, ArrowBigRightIcon, MoveRightIcon } from 'lucide-react';
+
+import { Button } from '@/components/ui/button';
+import { Card, CardContent, CardFooter } from '@/components/ui/card';
 
 export const FeatureCard = ({
   features,

@@ -1,17 +1,18 @@
 'use client';
-import React from 'react';
-import Image from 'next/image';
-import { ContainerScroll } from '@/components/ui/container-scroll-animation';
-import { FeatureCard } from './farmui/feature-card';
 import {
   motion,
-  useScroll,
-  useTransform,
-  useSpring,
   MotionValue,
+  useScroll,
+  useSpring,
+  useTransform,
 } from 'framer-motion';
-import { ScrollArea } from '@/components/ui/scroll-area';
+import Image from 'next/image';
+import React from 'react';
+
 import { BentoGrid, BentoGridItem } from '@/components/ui/bento-grid';
+import { ContainerScroll } from '@/components/ui/container-scroll-animation';
+import { ScrollArea } from '@/components/ui/scroll-area';
+import { FeatureCard } from './farmui/feature-card';
 
 export const FeatureSection = ({
   features,
