@@ -1,20 +1,12 @@
 'use client';
-import {
-  motion,
-  MotionValue,
-  useScroll,
-  useSpring,
-  useTransform,
-} from 'framer-motion';
-import Image from 'next/image';
-import React from 'react';
 
-import { BentoGrid, BentoGridItem } from '@/components/ui/bento-grid';
+
+import { BentoGrid } from '@/components/ui/bento-grid';
 import { ContainerScroll } from '@/components/ui/container-scroll-animation';
 import { ScrollArea } from '@/components/ui/scroll-area';
 import { FeatureCard } from './farmui/feature-card';
 
-export const FeatureSection = ({
+ const FeatureSection = ({
   features,
 }: {
   features: {
@@ -42,7 +34,7 @@ export const FeatureSection = ({
       <ScrollArea className="h-full px-4">
         <BentoGrid className="mx-auto max-w-4xl md:auto-rows-[20rem]">
           {features.map((feature, i) => (
-            <FeatureCard features={feature} />
+            <FeatureCard key={i} features={feature} />
           ))}
         </BentoGrid>
       </ScrollArea>

@@ -1,12 +1,9 @@
-// @flow
-import { ShoppingCartIcon, User2Icon } from 'lucide-react';
-import { getServerSession } from 'next-auth';
-import * as React from 'react';
 
+import {  User2Icon } from 'lucide-react';
+import { getServerSession } from 'next-auth';
 import { authOptions } from '@/lib/auth';
 import { ThemeToggle } from '../../toogle-theme';
 import { Avatar, AvatarFallback, AvatarImage } from '../../ui/avatar';
-import { Badge } from '../../ui/badge';
 import { Button } from '../../ui/button';
 import { ChartItem } from './chart-items';
 

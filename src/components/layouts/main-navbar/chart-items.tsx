@@ -11,9 +11,8 @@ import {
   DropdownMenuItem,
   DropdownMenuTrigger,
 } from '@/components/ui/dropdown-menu';
-type Props = {};
 
-export const ChartItem = (props: Props) => {
+export const ChartItem = () => {
   return (
     <DropdownMenu>
       <DropdownMenuTrigger asChild>

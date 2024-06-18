@@ -1,18 +1,9 @@
 'use client';
-import {
-  motion,
-  MotionValue,
-  useScroll,
-  useSpring,
-  useTransform,
-} from 'framer-motion';
+import { motion, useScroll, useSpring, useTransform } from 'framer-motion';
 import { ShoppingBagIcon } from 'lucide-react';
-import Image from 'next/image';
-import Link from 'next/link';
 import React from 'react';
 
 import { Button } from '@/components/ui/button';
-import { Separator } from '@/components/ui/separator';
 import { ProductCard } from './farmui/product-card';
 // import { ProductCard } from '@/components/component/product-card';
 
@@ -23,8 +14,8 @@ export const HeroParallax = ({
     title: string;
     link: string;
     thumbnail: string;
-    sale: boolean;
-    rating: number;
+    sale?: boolean;
+    rating?: number;
   }[];
 }) => {
   const firstRow = products.slice(0, 5);

@@ -40,7 +40,7 @@ const FormLogin = () => {
     },
   });
 
-  const { handleSubmit, control, reset } = form;
+  const { handleSubmit, control } = form;
 
   function onSubmit(data: Inputs) {
     // console.log(data);

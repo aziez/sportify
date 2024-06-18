@@ -1,5 +1,5 @@
 // lib/auth.ts
-import { cookies } from 'next/headers';
+// import { cookies } from 'next/headers';
 import { NextAuthOptions } from 'next-auth';
 import CredentialsProvider from 'next-auth/providers/credentials';
 

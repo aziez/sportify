@@ -1,18 +1,8 @@
-import { User } from 'lucide-react';
-import Image from 'next/image';
-import Link from 'next/link';
-import { getServerSession } from 'next-auth';
-
-import { FeatureCard } from '@/components/layouts/landing-page/farmui/feature-card';
 import FeatureSection from '@/components/layouts/landing-page/feature-section';
 import { HeroParallax } from '@/components/layouts/landing-page/hero-section';
 import Navbar from '@/components/layouts/main-navbar/navbar';
-import { ThemeToggle } from '@/components/toogle-theme';
-import { Button } from '@/components/ui/button';
-import { authOptions } from '@/lib/auth';
 
 export default async function Home() {
-  const session = await getServerSession(authOptions);
   const products = [
     {
       title: 'Moonbeam',
@@ -41,15 +31,18 @@ export default async function Home() {
       link: 'https://editorially.org',
       thumbnail:
         'https://aceternity.com/images/products/thumbnails/new/editorially.png',
+      sale: false,
     },
     {
       title: 'Editrix AI',
+      sale: true,
       link: 'https://editrix.ai',
       thumbnail:
         'https://aceternity.com/images/products/thumbnails/new/editrix.png',
     },
     {
       title: 'Pixel Perfect',
+      sale: true,
       link: 'https://app.pixelperfect.quest',
       thumbnail:
         'https://aceternity.com/images/products/thumbnails/new/pixelperfect.png',
@@ -60,28 +53,33 @@ export default async function Home() {
       link: 'https://algochurn.com',
       thumbnail:
         'https://aceternity.com/images/products/thumbnails/new/algochurn.png',
+      sale: true,
     },
     {
       title: 'Aceternity UI',
       link: 'https://ui.aceternity.com',
       thumbnail:
         'https://aceternity.com/images/products/thumbnails/new/aceternityui.png',
+      sale: true,
     },
     {
       title: 'Tailwind Master Kit',
       link: 'https://tailwindmasterkit.com',
+      sale: true,
       thumbnail:
         'https://aceternity.com/images/products/thumbnails/new/tailwindmasterkit.png',
     },
     {
       title: 'SmartBridge',
       link: 'https://smartbridgetech.com',
+      sale: true,
       thumbnail:
         'https://aceternity.com/images/products/thumbnails/new/smartbridge.png',
     },
     {
       title: 'Renderwork Studio',
       link: 'https://renderwork.studio',
+      sale: true,
       thumbnail:
         'https://aceternity.com/images/products/thumbnails/new/renderwork.png',
     },
@@ -89,18 +87,21 @@ export default async function Home() {
     {
       title: 'Creme Digital',
       link: 'https://cremedigital.com',
+      sale: true,
       thumbnail:
         'https://aceternity.com/images/products/thumbnails/new/cremedigital.png',
     },
     {
       title: 'Golden Bells Academy',
       link: 'https://goldenbellsacademy.com',
+      sale: true,
       thumbnail:
         'https://aceternity.com/images/products/thumbnails/new/goldenbellsacademy.png',
     },
     {
       title: 'Invoker Labs',
       link: 'https://invoker.lol',
+      sale: true,
       thumbnail:
         'https://aceternity.com/images/products/thumbnails/new/invoker.png',
     },

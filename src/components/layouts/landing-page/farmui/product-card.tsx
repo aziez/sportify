@@ -51,8 +51,8 @@ export const ProductCard = ({
     title: string;
     link: string;
     thumbnail: string;
-    sale: boolean;
-    rating: number;
+    sale?: boolean;
+    rating?: number;
   };
   translate: MotionValue<number>;
 }) => {
@@ -86,7 +86,7 @@ export const ProductCard = ({
           <div className="flex items-center justify-between">
             <h3 className="text-lg font-bold">{product.title}</h3>
             <div className="flex items-center space-x-1 text-yellow-500">
-              <Rating value={product.rating} />
+              <Rating value={product.rating ?? 3} />
               <span className="text-sm text-gray-500 dark:text-gray-400">
                 {product.rating}
               </span>
