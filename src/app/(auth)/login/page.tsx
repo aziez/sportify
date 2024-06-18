@@ -1,16 +1,15 @@
 import FormLogin from '@/components/layouts/login/form-login';
 import Image from 'next/image';
-import Sfund from 'public/svg/sfund.svg';
-import welcomeImg from 'public/svg/welcome.svg?url';
+import Sfund from 'public/logo.svg';
+import welcomeImg from 'public/img/DSCF2992-scaled-e1717593656488.jpg';
 
 export default function Login() {
   return (
-    <div className="w-full items-center justify-center lg:grid lg:grid-cols-2">
-      <div className="flex h-[100vh] items-center justify-center bg-muted px-6 py-12">
+    <div className="h-full w-full items-center justify-center lg:grid lg:grid-cols-2">
+      <div className="flex h-screen items-center justify-center px-6 py-12">
         <div className="mx-auto grid w-[500px] gap-6">
           <div className="grid gap-2">
-            <Sfund />
-            <h1 className="font-jakarta text-xl font-bold">Hey, Hello 👋</h1>
+            <Sfund className="h-[100px] w-[100px]" />
             <p className="text-balance text-muted-foreground">
               Enter your account bellow to login to your SFUND account
             </p>
@@ -20,13 +19,13 @@ export default function Login() {
           </div>
         </div>
       </div>
-      <div className="hidden p-6 lg:block">
+      <div className="hidden h-full px-8 lg:flex lg:items-end lg:justify-center">
         <Image
           src={welcomeImg}
           alt="Image"
-          width="1920"
-          height="1080"
-          className="h-full w-full object-cover dark:brightness-[0.2] dark:grayscale"
+          layout="contain"
+          objectFit="contain"
+          className="dark:brightness-[0.2] dark:grayscale"
         />
       </div>
     </div>
