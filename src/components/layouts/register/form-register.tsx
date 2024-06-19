@@ -2,7 +2,6 @@
 
 import { zodResolver } from '@hookform/resolvers/zod';
 import { AvatarIcon, EyeClosedIcon, EyeOpenIcon } from '@radix-ui/react-icons';
-import { useMutation } from '@tanstack/react-query';
 import { Loader2Icon, MailIcon } from 'lucide-react';
 import { useState, useTransition } from 'react';
 import { useForm } from 'react-hook-form';
@@ -46,15 +45,10 @@ const FormRegister = () => {
 
   const { handleSubmit, control, reset } = form;
 
-  const mutation = useMutation((newUser: Inputs) => {
-    return axiosInstance.post('/api/auth/register', newUser);
-  });
-
   const onSubmit = async (data: Inputs) => {
     console.log(data);
 
     try {
-      startTransition(await mutation.mutateAsync(data));
       reset();
     } catch (error) {
       // Handle registration error
