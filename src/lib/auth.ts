@@ -1,60 +1,76 @@
-// lib/auth.ts
-// import { cookies } from 'next/headers';
 import { NextAuthOptions } from 'next-auth';
 import CredentialsProvider from 'next-auth/providers/credentials';
+import { PrismaAdapter } from '@next-auth/prisma-adapter';
+import { compare } from 'bcrypt';
 
-import axiosInstance from './axios';
+import prisma from '@/lib/prisma';
 
 export const authOptions: NextAuthOptions = {
   providers: [
     CredentialsProvider({
-      name: 'credentials',
+      name: 'Credentials',
       credentials: {
         username: { label: 'Username', type: 'text' },
         password: { label: 'Password', type: 'password' },
       },
-      async authorize(credentials, req) {
+      async authorize(credentials) {
         if (!credentials?.username || !credentials?.password) {
           throw new Error('Missing credentials');
         }
 
-        try {
-          const res = await axiosInstance.post(
-            process.env.BE_URL + 'auth/login',
-            {
-              username: credentials.username,
-              password: credentials.password,
-            }
-          );
+        const user = await prisma.users.findFirst({
+          where: { username: credentials.username },
+        });
 
-          // console.log(res, 'DATAAA RESPONSEEE ASLIIII');
-
-          const token = res.data;
-          //
-          //           cookies().set({
-          //             name: 'access_token',
-          //             value: token,
-          //             httpOnly: true,
-          //           });
-
-          if (token) {
-            return token;
-          } else {
-            return null;
-          }
-        } catch (error) {
-          console.error('Authorization error:', error);
-          return null;
+        if (!user) {
+          throw new Error('Invalid username or password');
         }
+
+        const passwordMatch = await compare(
+          credentials.password,
+          user.password
+        );
+
+        if (!passwordMatch) {
+          throw new Error('Invalid username or password');
+        }
+
+        return {
+          id: user.id,
+          username: user.username,
+          email: user.email,
+          user_type: user.user_type,
+        };
       },
     }),
   ],
+  adapter: PrismaAdapter(prisma),
   pages: {
     signIn: '/login',
   },
-  secret: process.env.AUTH_SECRET,
   session: {
     strategy: 'jwt',
   },
+  callbacks: {
+    async jwt({ token, user }) {
+      if (user) {
+        token.id = user.id;
+        token.username = user.username;
+        token.email = user.email;
+        token.user_type = user.user_type;
+      }
+      return token;
+    },
+    async session({ session, token }) {
+      if (token) {
+        session.user.id = token.id as string;
+        session.user.username = token.username as string;
+        session.user.email = token.email as string;
+        session.user.user_type = token.user_type as string;
+      }
+      return session;
+    },
+  },
+  secret: process.env.AUTH_SECRET,
   debug: process.env.NODE_ENV !== 'production',
 };

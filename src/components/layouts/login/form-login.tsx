@@ -22,8 +22,8 @@ import {
 import { Input } from '@/components/ui/input';
 
 const formSchema = z.object({
-  username: z.string().min(1, { message: 'username is required' }),
-  password: z.string().min(1, { message: 'password is required' }),
+  username: z.string().min(1, { message: 'Username is required' }),
+  password: z.string().min(1, { message: 'Password is required' }),
 });
 
 type Inputs = z.infer<typeof formSchema>;
@@ -43,8 +43,6 @@ const FormLogin = () => {
   const { handleSubmit, control } = form;
 
   function onSubmit(data: Inputs) {
-    // console.log(data);
-
     startTransition(async () => {
       const res = await signIn('credentials', {
         username: data?.username,
@@ -52,19 +50,17 @@ const FormLogin = () => {
         redirect: false,
       });
 
-      // console.log(res, 'RESSSSPONSEEEEE');
-
       if (res?.ok) {
         toast.success('Login Successful');
         router.push('/dashboard');
-      } else if (!res?.ok) {
-        toast.error('Login Vailed');
+      } else if (res?.error) {
+        toast.error(res.error);
       }
     });
   }
 
-  function tooglePassword() {
-    setShow((next) => !next);
+  function togglePassword() {
+    setShow((prev) => !prev);
   }
 
   return (
@@ -84,7 +80,7 @@ const FormLogin = () => {
               </FormLabel>
               <FormControl>
                 <div className="relative flex items-center font-sans">
-                  <Input type="text" placeholder="enter username" {...field} />
+                  <Input type="text" placeholder="Enter username" {...field} />
                   <AvatarIcon className="absolute right-4 h-5 w-5 text-azure-600" />
                 </div>
               </FormControl>
@@ -104,18 +100,18 @@ const FormLogin = () => {
                 <div className="relative flex items-center font-sans">
                   <Input
                     type={show ? 'text' : 'password'}
-                    placeholder="enter password"
+                    placeholder="Enter password"
                     {...field}
                   />
                   {show ? (
                     <EyeClosedIcon
                       className="absolute right-4 h-5 w-5 cursor-pointer text-azure-600"
-                      onClick={tooglePassword}
+                      onClick={togglePassword}
                     />
                   ) : (
                     <EyeOpenIcon
                       className="absolute right-4 h-5 w-5 cursor-pointer text-azure-600"
-                      onClick={tooglePassword}
+                      onClick={togglePassword}
                     />
                   )}
                 </div>
