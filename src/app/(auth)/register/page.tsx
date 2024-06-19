@@ -11,6 +11,7 @@ import {
   CardHeader,
 } from '@/components/ui/card';
 import { Separator } from '@/components/ui/separator';
+
 const Register = async () => {
   const sessions = await getServerSession();
 

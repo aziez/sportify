@@ -1,7 +1,8 @@
-
-import {  User2Icon } from 'lucide-react';
+import { User2Icon } from 'lucide-react';
 import { getServerSession } from 'next-auth';
+
 import { authOptions } from '@/lib/auth';
+
 import { ThemeToggle } from '../../toogle-theme';
 import { Avatar, AvatarFallback, AvatarImage } from '../../ui/avatar';
 import { Button } from '../../ui/button';

@@ -1,16 +1,23 @@
+/* eslint-disable prettier/prettier */
+
 {
+  "root": true,
   "parser": "@typescript-eslint/parser",
   "parserOptions": {
     "ecmaVersion": 2021,
     "sourceType": "module",
+
     "ecmaFeatures": {
       "jsx": true
     },
+    "tsconfigRootDir": "__dirname",
     "project": "./tsconfig.json"
   },
   "extends": [
+    "next",
     "eslint:recommended",
     "next/core-web-vitals",
+    "plugin:@next/next/recommended",
     "plugin:@typescript-eslint/recommended",
     "plugin:react/recommended",
     "plugin:react-hooks/recommended",
@@ -30,6 +37,9 @@
     "simple-import-sort"
   ],
   "rules": {
+    "react/no-unescaped-entities": "off",
+    "@next/next/no-page-custom-font": "off",
+    "@next/next/no-html-link-for-pages": "off",
     "prettier/prettier": [
       "error",
       {
@@ -42,8 +52,11 @@
       "error",
       { "argsIgnorePattern": "^_" }
     ],
-    "simple-import-sort/imports": "error",
-    "simple-import-sort/exports": "error",
+    "simple-import-sort/imports": "off",
+    "simple-import-sort/exports": "off",
+    "import/first": "error",
+    "import/newline-after-import": "error",
+    "import/no-duplicates": "error",
     "import/order": [
       "error",
       {
@@ -56,8 +69,8 @@
     ]
   },
   "settings": {
-    "react": {
-      "version": "detect"
+    "next": {
+      "rootDir": "packages/*/"
     }
   }
 }

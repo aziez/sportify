@@ -5,6 +5,9 @@
   "trailingComma": "es5",
   "tabWidth": 2,
   "endOfLine": "auto",
+  "importOrder": ["^@core/(.*)$", "^@server/(.*)$", "^@ui/(.*)$", "^[./]"],
+  "importOrderSeparation": false,
+  " jsxBracketSameLine": true,
 
   "plugins": ["prettier-plugin-tailwindcss"]
 }
