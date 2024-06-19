@@ -24,7 +24,7 @@ const formSchema = z.object({
   username: z.string().min(1, { message: 'Username is required' }),
   email: z.string().email({ message: 'Email must be valid' }),
   password: z.string().min(1, { message: 'Password is required' }),
-  tipe: z.string().min(1, { message: 'User type is required' }),
+  user_type: z.string().min(1, { message: 'User type is required' }),
 });
 
 type Inputs = z.infer<typeof formSchema>;
@@ -39,22 +39,34 @@ const FormRegister = () => {
       username: '',
       email: '',
       password: '',
-      tipe: '',
+      user_type: '',
     },
   });
 
   const { handleSubmit, control, reset } = form;
 
   const onSubmit = async (data: Inputs) => {
-    console.log(data);
+    console.log('Form data:', data);
 
-    try {
-      reset();
-    } catch (error) {
-      // Handle registration error
-      console.error('Registration failed:', error);
-    }
+    startTransition(async () => {
+      await axiosInstance
+        .post('/api/auth/register', data)
+        .then((response) => {
+          toast.success('Registration successful!');
+
+          reset();
+        })
+        .catch((error) => {
+          console.error('Registration failed:', error);
+          console.error('Response data:', error.response?.data);
+          toast.error(
+            'Registration failed: ' + error.response?.data?.message ||
+              error.message
+          );
+        });
+    });
   };
+
   function togglePassword() {
     setShow((next) => !next);
   }
@@ -136,16 +148,16 @@ const FormRegister = () => {
         />
         <FormField
           control={control}
-          name="tipe"
+          name="user_type"
           render={({ field }) => (
             <FormItem>
-              <FormLabel htmlFor="tipe" className="mb-2 font-medium">
+              <FormLabel htmlFor="user_type" className="mb-2 font-medium">
                 User type
               </FormLabel>
               <FormControl>
                 <div className="relative flex items-center font-sans">
                   <select
-                    id="tipe"
+                    id="user_type"
                     className="select select-bordered select-sm w-full"
                     {...field}
                   >
