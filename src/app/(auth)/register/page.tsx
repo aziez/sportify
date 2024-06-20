@@ -12,7 +12,7 @@ import {
 } from '@/components/ui/card';
 import { Separator } from '@/components/ui/separator';
 
-const Register = async () => {
+export default async function Register() {
   const sessions = await getServerSession();
 
   if (sessions) {
@@ -255,6 +255,4 @@ const Register = async () => {
       {/* End Hero */}
     </>
   );
-};
-
-export default Register;
+}
