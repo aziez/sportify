@@ -19,12 +19,14 @@ import {
 } from '@/components/ui/dropdown-menu';
 import { Label } from '@/components/ui/label';
 
-interface menuProps {
-  label: string;
-  link: string;
-}
-
-const Navbar = ({ menus }: menuProps) => {
+const Navbar = ({
+  menus,
+}: {
+  menus: {
+    label: string;
+    link: string;
+  }[];
+}) => {
   const { data: session } = useSession();
 
   return (
