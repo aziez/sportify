@@ -68,7 +68,7 @@ const Navbar = ({
             </Button>
           </DropdownMenuTrigger>
           <DropdownMenuContent align="end">
-            {menus.map((menu: menuProps, i: number) => (
+            {menus.map((menu: an, i: number) => (
               <DropdownMenuItem key={i}>
                 <Button variant={'linkHover1'}>
                   <Link href={menu.link}>{menu.label}</Link>
