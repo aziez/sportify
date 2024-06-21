@@ -10,7 +10,6 @@ import AuthProvider from '@/provider/auth-provider';
 import LayoutProvider from '@/provider/layout-provider';
 import { ThemeProvider } from '@/provider/theme-provider';
 import { fontJakarta } from '@/styles/font';
-import { QueryClient } from '@tanstack/react-query';
 import QueryProviders from '@/provider/query-provider';
 
 const fontSans = FontSans({
@@ -32,7 +31,6 @@ export default async function RootLayout({
   children: React.ReactNode;
 }>) {
   const session = await getServerSession(authOptions);
-  const queryClient = new QueryClient();
 
   return (
     <html lang="en">

@@ -21,15 +21,15 @@ export const ChartItem = () => {
           className="indicator rounded-full"
           size={'icon'}
         >
+          <Badge
+            variant={'outline'}
+            className="indicator-item border-none bg-none text-white dark:text-black"
+          >
+            8
+          </Badge>
           <span className="sr-only">Chart list</span>
           <div className="indicator">
-            <Badge
-              variant={'outline'}
-              className="indicator-item border-none bg-none text-white dark:text-black"
-            >
-              8
-            </Badge>
-            <ShoppingCartIcon className="h-5 w-5" />
+            <ShoppingCartIcon className="h-[1.2rem] w-[1.2rem] transition-all" />
             {/* <span className="badge indicator-item badge-sm">8</span> */}
           </div>
         </Button>

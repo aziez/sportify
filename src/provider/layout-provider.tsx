@@ -3,6 +3,7 @@
 import { motion } from 'framer-motion';
 import { usePathname } from 'next/navigation';
 import { FC, ReactNode } from 'react';
+import NextTopLoader from 'nextjs-toploader';
 
 import LayoutLoader from '@/components/layout-loader';
 import { useMounted } from '@/hooks/use-mounted';
@@ -31,6 +32,19 @@ const LayoutProvider: FC<ProviderProps> = ({ children }) => {
         }}
         transition={{ type: 'tween', ease: 'easeInOut', duration: 0.5 }}
       >
+        <NextTopLoader
+          color="#2299DD"
+          initialPosition={0.08}
+          crawlSpeed={200}
+          height={3}
+          crawl={true}
+          showSpinner={true}
+          easing="ease"
+          speed={200}
+          shadow="0 0 10px #2299DD,0 0 5px #2299DD"
+          zIndex={1600}
+          showAtBottom={true}
+        />
         <main>{children}</main>
       </motion.div>
     );

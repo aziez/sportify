@@ -1,69 +1,105 @@
-import { User2Icon } from 'lucide-react';
-import { getServerSession } from 'next-auth';
+'use client';
 
-import { authOptions } from '@/lib/auth';
+import { signOut, useSession } from 'next-auth/react';
+import Link from 'next/link';
+import { useRouter } from 'next/navigation';
+import Image from 'next/image';
 
 import { ThemeToggle } from '../../toogle-theme';
 import { Avatar, AvatarFallback, AvatarImage } from '../../ui/avatar';
 import { Button } from '../../ui/button';
 import { ChartItem } from './chart-items';
+import {
+  DropdownMenu,
+  DropdownMenuContent,
+  DropdownMenuItem,
+  DropdownMenuLabel,
+  DropdownMenuSeparator,
+  DropdownMenuTrigger,
+} from '@/components/ui/dropdown-menu';
+import { Label } from '@/components/ui/label';
 
-const Navbar = async () => {
-  const session = await getServerSession(authOptions);
+interface menuProps {
+  label: string;
+  link: string;
+}
+
+const Navbar = ({ menus }: menuProps) => {
+  const { data: session } = useSession();
 
   return (
-    <div className="navbar bg-primary/100">
+    <div className="navbar sticky top-0 z-50 bg-primary/50">
       <div className="navbar-start">
-        <div className="dropdown">
-          <div tabIndex={0} role="button" className="btn btn-ghost lg:hidden">
-            <svg
-              xmlns="http://www.w3.org/2000/svg"
-              className="h-5 w-5"
-              fill="none"
-              viewBox="0 0 24 24"
-              stroke="currentColor"
-            >
-              <path
-                strokeLinecap="round"
-                strokeLinejoin="round"
-                strokeWidth="2"
-                d="M4 6h16M4 12h8m-8 6h16"
-              />
-            </svg>
-          </div>
-          <ul
-            tabIndex={0}
-            className="menu dropdown-content menu-sm z-[1] mt-3 w-52 rounded-box bg-base-100 p-2 shadow"
+        <DropdownMenu>
+          <DropdownMenuTrigger
+            asChild
+            className="bg-none lg:hidden xl:hidden 2xl:hidden"
           >
-            <li>
-              <a>Store</a>
-            </li>
-            <li>
-              <a>Booking</a>
-            </li>
-            <li>
-              <a>Tracking</a>
-            </li>
-            <li>
-              <a>Forun</a>
-            </li>
-            {/* <li>
-              <a>Parent</a>
-              <ul className="p-2">
-                <li>
-                  <a>Submenu 1</a>
-                </li>
-                <li>
-                  <a>Submenu 2</a>
-                </li>
-              </ul>
-            </li> */}
-            <li>
-              <a>Events</a>
-            </li>
-          </ul>
-        </div>
-        <a className="btn btn-ghost text-xl">Sportify</a>
+            <Button variant={'ghost'}>
+              <Label className="swap swap-rotate">
+                <input type="checkbox" />
+
+                <svg
+                  className="3-5 swap-off h-5 fill-current"
+                  xmlns="http://www.w3.org/2000/svg"
+                  fill="none"
+                  viewBox="0 0 24 24"
+                  stroke="currentColor"
+                >
+                  <path
+                    strokeLinecap="round"
+                    strokeLinejoin="round"
+                    strokeWidth="2"
+                    d="M4 6h16M4 12h8m-8 6h16"
+                  />
+                </svg>
+
+                {/* close icon */}
+                <svg
+                  className="swap-on h-5 w-5 fill-current"
+                  xmlns="http://www.w3.org/2000/svg"
+                  viewBox="0 0 512 512"
+                >
+                  <polygon points="400 145.49 366.51 112 256 222.51 145.49 112 112 145.49 222.51 256 112 366.51 145.49 400 256 289.49 366.51 400 400 366.51 289.49 256 400 145.49" />
+                </svg>
+              </Label>
+            </Button>
+          </DropdownMenuTrigger>
+          <DropdownMenuContent align="end">
+            {menus.map((menu: menuProps, i: number) => (
+              <DropdownMenuItem key={i}>
+                <Button variant={'linkHover1'}>
+                  <Link href={menu.link}>{menu.label}</Link>
+                </Button>
+              </DropdownMenuItem>
+            ))}
+            {session === null && (
+              <div className="flex md:hidden lg:hidden xl:hidden 2xl:hidden">
+                <DropdownMenuItem>
+                  <Button variant={'linkHover2'}>
+                    <Link href="/register">Daftar</Link>
+                  </Button>
+                </DropdownMenuItem>
+                <DropdownMenuItem>
+                  <Button variant={'ringHover'}>
+                    <Link href="/login">Masuk</Link>
+                  </Button>
+                </DropdownMenuItem>
+              </div>
+            )}
+          </DropdownMenuContent>
+        </DropdownMenu>
+        <Button variant={'linkHover2'}>
+          <Link href="/">
+            <Image
+              alt="logo"
+              width={500}
+              height={500}
+              className="h-[42px] w-auto"
+              src={'/logo.webp'}
+            />
+          </Link>
+        </Button>
       </div>
       <div className="navbar-center hidden lg:flex">
         <ul className="menu menu-horizontal px-1">
@@ -98,40 +134,40 @@ const Navbar = async () => {
       <div className="navbar-end space-x-4">
         <ChartItem />
         <ThemeToggle />
-        {session !== null ? (
-          <Button variant={'gooeyRight'} className="rounded-full border">
-            <User2Icon className="h-5 w-5" />
-            <p>{session?.user?.name} Username</p>
-          </Button>
+        {session === null ? (
+          <div className="hidden md:flex">
+            <Button variant={'ringHover'} className="rounded-full">
+              <Link href="/login">Masuk</Link>
+            </Button>
+            <Button variant={'linkHover2'}>
+              <Link href="/register">Daftar</Link>
+            </Button>
+          </div>
         ) : (
           <div className="dropdown dropdown-end">
-            <Button
-              className="btn-circle rounded-full border"
-              variant={'ringHover'}
-              size={'icon'}
-            >
-              <Avatar className="h-8 w-8">
-                <AvatarImage src="https://github.com/shadcn.png" />
-                <AvatarFallback>CN</AvatarFallback>
-              </Avatar>
-            </Button>
-            <ul
-              tabIndex={0}
-              className="menu dropdown-content menu-sm z-[1] mt-3 w-52 rounded-box bg-base-100 p-2 shadow"
-            >
-              <li>
-                <a className="justify-between">
-                  Profile
-                  <span className="badge">New</span>
-                </a>
-              </li>
-              <li>
-                <a>Settings</a>
-              </li>
-              <li>
-                <a>Logout</a>
-              </li>
-            </ul>
+            <DropdownMenu>
+              <DropdownMenuTrigger asChild>
+                <Button
+                  className="btn-circle rounded-full border"
+                  variant={'ringHover'}
+                  size={'icon'}
+                >
+                  <Avatar className="h-8 w-8">
+                    <AvatarImage src="https://github.com/shadcn.png" />
+                    <AvatarFallback>CN</AvatarFallback>
+                  </Avatar>
+                </Button>
+              </DropdownMenuTrigger>
+              <DropdownMenuContent align="end">
+                <DropdownMenuLabel>{session?.user.username}</DropdownMenuLabel>
+                <DropdownMenuSeparator />
+                <DropdownMenuItem>Profile</DropdownMenuItem>
+                <DropdownMenuItem>Setting</DropdownMenuItem>
+                <DropdownMenuItem onClick={() => signOut()}>
+                  Logout
+                </DropdownMenuItem>
+              </DropdownMenuContent>
+            </DropdownMenu>
           </div>
         )}
       </div>

@@ -3,7 +3,6 @@
 import { BentoGrid } from '@/components/ui/bento-grid';
 import { ContainerScroll } from '@/components/ui/container-scroll-animation';
 import { ScrollArea } from '@/components/ui/scroll-area';
-
 import { FeatureCard } from './farmui/feature-card';
 
 const FeatureSection = ({
@@ -16,8 +15,6 @@ const FeatureSection = ({
     description: string;
   }[];
 }) => {
-  console.log(features);
-
   return (
     <ContainerScroll
       titleComponent={
