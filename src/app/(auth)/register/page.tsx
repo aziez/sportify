@@ -1,6 +1,4 @@
 import Link from 'next/link';
-import { redirect } from 'next/navigation';
-import { getServerSession } from 'next-auth';
 
 import FormRegister from '@/components/layouts/register/form-register';
 import { Button } from '@/components/ui/button';
@@ -12,13 +10,7 @@ import {
 } from '@/components/ui/card';
 import { Separator } from '@/components/ui/separator';
 
-export default async function Register() {
-  const sessions = await getServerSession();
-
-  if (sessions) {
-    redirect('/dashboard');
-  }
-
+export default function Register() {
   return (
     <>
       {/* Hero */}
@@ -104,15 +96,13 @@ export default async function Register() {
             </div>
             {/* End Col */}
           </div>
-          {/* End Grid */}
-          {/* Clients Section */}
+
           <div className="mt-6 flex items-center gap-x-1.5 py-3 text-sm text-muted-foreground after:ms-6 after:flex-[1_1_0%] after:border-t after:border-t-muted-foreground/50 md:mt-12">
             <span className="bg-gradient-to-l from-blue-600 to-violet-500 bg-clip-text font-semibold text-transparent dark:from-blue-400 dark:to-violet-400">
               50,000
             </span>
             individuals and companies trust Cloud Unleashed
           </div>
-          {/* Clients */}
           <div className="flex flex-wrap gap-x-6 sm:gap-x-12 lg:gap-x-24">
             <svg
               className="h-auto w-16 py-3 text-muted-foreground md:w-20 lg:w-24 lg:py-5"
