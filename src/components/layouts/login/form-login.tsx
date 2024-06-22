@@ -3,9 +3,8 @@
 import { zodResolver } from '@hookform/resolvers/zod';
 import { AvatarIcon, EyeClosedIcon, EyeOpenIcon } from '@radix-ui/react-icons';
 import { Loader2Icon } from 'lucide-react';
-import { useRouter } from 'next/navigation';
 import { signIn } from 'next-auth/react';
-import { useState, useTransition } from 'react';
+import { useTransition } from 'react';
 import { useForm } from 'react-hook-form';
 import toast, { Toaster } from 'react-hot-toast';
 import { z } from 'zod';
@@ -29,7 +28,6 @@ const formSchema = z.object({
 type Inputs = z.infer<typeof formSchema>;
 
 const FormLogin = () => {
-  const router = useRouter();
   const [show, setShow] = useState(false);
   const [pending, startTransition] = useTransition();
   const form = useForm<Inputs>({
@@ -52,7 +50,7 @@ const FormLogin = () => {
 
       if (res?.ok) {
         toast.success('Login Successful');
-        router.push('/dashboard');
+        window.location.href('/dashboard');
       } else if (res?.error) {
         toast.error(res.error);
       }
