@@ -48,6 +48,7 @@ const FormLogin = () => {
         username: data?.username,
         password: data?.password,
         redirect: true,
+        callbackUrl: `${window.location.origin}/dashboard`,
       });
 
       if (res?.ok) {
