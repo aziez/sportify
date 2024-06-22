@@ -1,4 +1,3 @@
-/* eslint-disable @typescript-eslint/no-explicit-any */
 'use client';
 
 import { signOut, useSession } from 'next-auth/react';
@@ -70,7 +69,7 @@ const Navbar = ({
           <DropdownMenuContent align="end">
             {menus.map((menu: any, i: number) => (
               <DropdownMenuItem key={i}>
-                <Button variant={'linkHover1'}>
+                <Button variant={'linkHover2'}>
                   <Link href={menu.link}>{menu.label}</Link>
                 </Button>
               </DropdownMenuItem>
@@ -104,33 +103,14 @@ const Navbar = ({
         </Button>
       </div>
       <div className="navbar-center hidden lg:flex">
-        <ul className="menu menu-horizontal px-1">
-          <li>
-            <a>Store</a>
-          </li>
-          <li>
-            <a>Booking</a>
-          </li>
-          <li>
-            <a>Tracking</a>
-          </li>
-          <li>
-            <a>Forun</a>
-          </li>
-          {/* <li>
-              <a>Parent</a>
-              <ul className="p-2">
-                <li>
-                  <a>Submenu 1</a>
-                </li>
-                <li>
-                  <a>Submenu 2</a>
-                </li>
-              </ul>
-            </li> */}
-          <li>
-            <a>Events</a>
-          </li>
+        <ul className="menu menu-horizontal px-1 text-secondary">
+          {menus.map((menu: any, i: number) => (
+            <li key={i}>
+              <Button variant={'linkHover2'}>
+                <Link href={menu.link}>{menu.label}</Link>
+              </Button>
+            </li>
+          ))}
         </ul>
       </div>
       <div className="navbar-end space-x-4">

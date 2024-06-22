@@ -47,8 +47,6 @@ const FormLogin = () => {
       const res = await signIn('credentials', {
         username: data?.username,
         password: data?.password,
-        redirect: true,
-        callbackUrl: `${window.location.origin}/dashboard`,
       });
 
       if (res?.ok) {
