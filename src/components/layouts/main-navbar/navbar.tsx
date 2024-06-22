@@ -1,8 +1,8 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
 'use client';
 
 import { signOut, useSession } from 'next-auth/react';
 import Link from 'next/link';
-import { useRouter } from 'next/navigation';
 import Image from 'next/image';
 
 import { ThemeToggle } from '../../toogle-theme';
@@ -68,7 +68,7 @@ const Navbar = ({
             </Button>
           </DropdownMenuTrigger>
           <DropdownMenuContent align="end">
-            {menus.map((menu: an, i: number) => (
+            {menus.map((menu: any, i: number) => (
               <DropdownMenuItem key={i}>
                 <Button variant={'linkHover1'}>
                   <Link href={menu.link}>{menu.label}</Link>
