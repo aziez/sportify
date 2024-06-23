@@ -71,6 +71,6 @@ export const authOptions: NextAuthOptions = {
       return session;
     },
   },
-  secret: process.env.AUTH_SECRET,
+  secret: process.env.NEXT_PUBLIC_AUTH_SECRET,
   debug: process.env.NODE_ENV !== 'production',
 };
