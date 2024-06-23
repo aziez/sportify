@@ -1,3 +1,6 @@
+import Image from 'next/image';
+import { Star } from 'lucide-react';
+
 import { Button } from '@/components/ui/button';
 import {
   Select,
@@ -80,7 +83,7 @@ export default function Component() {
         </div>
         <div className="grid grid-cols-1 gap-6 sm:grid-cols-2 lg:grid-cols-3">
           <Card>
-            <img
+            <Image
               src="/placeholder.svg"
               width={400}
               height={300}
@@ -91,7 +94,7 @@ export default function Component() {
               <div className="flex items-center justify-between">
                 <h3 className="text-lg font-semibold">Basketball Court</h3>
                 <div className="flex items-center gap-1 text-muted-foreground">
-                  <StarIcon className="h-4 w-4 fill-primary" />
+                  <Star className="h-4 w-4 fill-primary" />
                   <span>4.8</span>
                 </div>
               </div>
@@ -105,7 +108,7 @@ export default function Component() {
             </CardContent>
           </Card>
           <Card>
-            <img
+            <Image
               src="/placeholder.svg"
               width={400}
               height={300}
@@ -116,7 +119,7 @@ export default function Component() {
               <div className="flex items-center justify-between">
                 <h3 className="text-lg font-semibold">Soccer Field</h3>
                 <div className="flex items-center gap-1 text-muted-foreground">
-                  <StarIcon className="h-4 w-4 fill-primary" />
+                  <Star className="h-4 w-4 fill-primary" />
                   <span>4.6</span>
                 </div>
               </div>
@@ -130,7 +133,7 @@ export default function Component() {
             </CardContent>
           </Card>
           <Card>
-            <img
+            <Image
               src="/placeholder.svg"
               width={400}
               height={300}
@@ -141,7 +144,7 @@ export default function Component() {
               <div className="flex items-center justify-between">
                 <h3 className="text-lg font-semibold">Swimming Pool</h3>
                 <div className="flex items-center gap-1 text-muted-foreground">
-                  <StarIcon className="h-4 w-4 fill-primary" />
+                  <Star className="h-4 w-4 fill-primary" />
                   <span>4.9</span>
                 </div>
               </div>
@@ -155,7 +158,7 @@ export default function Component() {
             </CardContent>
           </Card>
           <Card>
-            <img
+            <Image
               src="/placeholder.svg"
               width={400}
               height={300}
@@ -166,7 +169,7 @@ export default function Component() {
               <div className="flex items-center justify-between">
                 <h3 className="text-lg font-semibold">Fitness Center</h3>
                 <div className="flex items-center gap-1 text-muted-foreground">
-                  <StarIcon className="h-4 w-4 fill-primary" />
+                  <Star className="h-4 w-4 fill-primary" />
                   <span>4.7</span>
                 </div>
               </div>
@@ -180,7 +183,7 @@ export default function Component() {
             </CardContent>
           </Card>
           <Card>
-            <img
+            <Image
               src="/placeholder.svg"
               width={400}
               height={300}
@@ -191,7 +194,7 @@ export default function Component() {
               <div className="flex items-center justify-between">
                 <h3 className="text-lg font-semibold">Tennis Courts</h3>
                 <div className="flex items-center gap-1 text-muted-foreground">
-                  <StarIcon className="h-4 w-4 fill-primary" />
+                  <Star className="h-4 w-4 fill-primary" />
                   <span>4.5</span>
                 </div>
               </div>
@@ -205,7 +208,7 @@ export default function Component() {
             </CardContent>
           </Card>
           <Card>
-            <img
+            <Image
               src="/placeholder.svg"
               width={400}
               height={300}
@@ -216,7 +219,7 @@ export default function Component() {
               <div className="flex items-center justify-between">
                 <h3 className="text-lg font-semibold">Volleyball Court</h3>
                 <div className="flex items-center gap-1 text-muted-foreground">
-                  <StarIcon className="h-4 w-4 fill-primary" />
+                  <Star className="h-4 w-4 fill-primary" />
                   <span>4.3</span>
                 </div>
               </div>
@@ -232,24 +235,5 @@ export default function Component() {
         </div>
       </div>
     </div>
-  );
-}
-
-function StarIcon(props) {
-  return (
-    <svg
-      {...props}
-      xmlns="http://www.w3.org/2000/svg"
-      width="24"
-      height="24"
-      viewBox="0 0 24 24"
-      fill="none"
-      stroke="currentColor"
-      strokeWidth="2"
-      strokeLinecap="round"
-      strokeLinejoin="round"
-    >
-      <polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2" />
-    </svg>
   );
 }
