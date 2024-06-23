@@ -47,6 +47,7 @@ const FormLogin = () => {
       const res = await signIn('credentials', {
         username: data?.username,
         password: data?.password,
+        redirect: false,
       });
 
       if (res?.ok) {
