@@ -22,7 +22,7 @@ import {
 import { Input } from '@/components/ui/input';
 
 const formSchema = z.object({
-  username: z.string().min(1, { message: 'Username is required' }),
+  email: z.string().email().min(1, { message: 'email is required' }),
   password: z.string().min(1, { message: 'Password is required' }),
 });
 
@@ -35,7 +35,7 @@ const FormLogin = () => {
   const form = useForm<Inputs>({
     resolver: zodResolver(formSchema),
     defaultValues: {
-      username: '',
+      email: '',
       password: '',
     },
   });
@@ -45,7 +45,7 @@ const FormLogin = () => {
   function onSubmit(data: Inputs) {
     startTransition(async () => {
       const res = await signIn('credentials', {
-        username: data?.username,
+        email: data?.email,
         password: data?.password,
         redirect: false,
       });
@@ -72,15 +72,15 @@ const FormLogin = () => {
       >
         <FormField
           control={control}
-          name="username"
+          name="email"
           render={({ field }) => (
             <FormItem>
-              <FormLabel htmlFor="username" className="mb-2 font-medium">
-                Username
+              <FormLabel htmlFor="email" className="mb-2 font-medium">
+                Email
               </FormLabel>
               <FormControl>
                 <div className="relative flex items-center font-sans">
-                  <Input type="text" placeholder="Enter username" {...field} />
+                  <Input type="email" placeholder="Enter email" {...field} />
                   <AvatarIcon className="absolute right-4 h-5 w-5 text-azure-600" />
                 </div>
               </FormControl>

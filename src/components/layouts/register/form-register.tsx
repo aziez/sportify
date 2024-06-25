@@ -19,12 +19,19 @@ import {
 } from '@/components/ui/form';
 import { Input } from '@/components/ui/input';
 import axiosInstance from '@/lib/axios';
+import {
+  Select,
+  SelectContent,
+  SelectItem,
+  SelectTrigger,
+  SelectValue,
+} from '@/components/ui/select';
 
 const formSchema = z.object({
-  username: z.string().min(1, { message: 'Username is required' }),
+  displayName: z.string().min(1, { message: 'Username is required' }),
   email: z.string().email({ message: 'Email must be valid' }),
   password: z.string().min(1, { message: 'Password is required' }),
-  user_type: z.string().min(1, { message: 'User type is required' }),
+  role: z.string().min(1, { message: 'User type is required' }),
 });
 
 type Inputs = z.infer<typeof formSchema>;
@@ -36,10 +43,10 @@ const FormRegister = () => {
   const form = useForm<Inputs>({
     resolver: zodResolver(formSchema),
     defaultValues: {
-      username: '',
+      displayName: '',
       email: '',
       password: '',
-      user_type: '',
+      role: '',
     },
   });
 
@@ -51,7 +58,9 @@ const FormRegister = () => {
     startTransition(async () => {
       await axiosInstance
         .post('/api/auth/register', data)
-        .then((response) => {
+        .then(() => {
+          // console.log(response);
+
           toast.success('Registration successful!');
 
           reset();
@@ -80,7 +89,7 @@ const FormRegister = () => {
       >
         <FormField
           control={control}
-          name="username"
+          name="displayName"
           render={({ field }) => (
             <FormItem>
               <FormLabel htmlFor="username" className="mb-2 font-medium">
@@ -148,25 +157,26 @@ const FormRegister = () => {
         />
         <FormField
           control={control}
-          name="user_type"
+          name="role"
           render={({ field }) => (
             <FormItem>
-              <FormLabel htmlFor="user_type" className="mb-2 font-medium">
+              <FormLabel htmlFor="role" className="mb-2 font-medium">
                 User type
               </FormLabel>
               <FormControl>
                 <div className="relative flex items-center font-sans">
-                  <select
-                    id="user_type"
-                    className="select select-bordered select-sm w-full"
-                    {...field}
+                  <Select
+                    onValueChange={field.onChange}
+                    defaultValue={field.value}
                   >
-                    <option value="" disabled selected>
-                      User Type
-                    </option>
-                    <option value="vendor">Vendor</option>
-                    <option value="customer">Customer</option>
-                  </select>
+                    <SelectTrigger>
+                      <SelectValue placeholder="Tipe User" />
+                    </SelectTrigger>
+                    <SelectContent {...field}>
+                      <SelectItem value="vendor">Vendor</SelectItem>
+                      <SelectItem value="customer">Customer</SelectItem>
+                    </SelectContent>
+                  </Select>
                 </div>
               </FormControl>
               <FormMessage />

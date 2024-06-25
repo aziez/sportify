@@ -10,61 +10,61 @@ datasource db {
 
 
 model Role {
-  id  String @id @default(uuid())
-  name  String
-  users User[]
-  vendor Vendor[]
+  id              String @id @default(uuid())
+  name            String @unique
+  users           User[]
 }
 
 model User {
   id              String         @id @default(uuid())
-  displayName     String
-  email           String
+  displayName     String         @unique
+  password        String        
+  email           String         @unique
+  emailVerifToken String?        @db.VarChar(255)
+  emailVerifiedAt DateTime? 
   rolesId         String
-  roles           Role           @relation(fields: [rolesId], references: [id])
+  role            Role           @relation(fields: [rolesId], references: [id])
+  phone           String?         @unique
+  address         String?
+  imageUrl        String?
   bookings        Booking[]
+  products        Product[]
   notifications   Notification[]
-}
-
-model Vendor {
-  id                      String         @id @default(uuid())
-  displayName             String
-  email                   String
-  phone                   String
-  address                 String
-  rolesId                 String
-  roles                   Role           @relation(fields: [rolesId], references: [id])
-  products                Product[]
-  notifications           Notification[]
 }
 
 
 model Notification {
   id        String      @id @default(uuid())
   userId    String
-  vendorId  String
   message   String
   createdAt DateTime
-  user      User        @relation(fields: [userId], references: [id])
-  vendor    Vendor      @relation(fields: [vendorId], references: [id])
+  user      User?        @relation(fields: [userId], references: [id])
   bookings  Booking[]
 }
 
 
 model Product {
   id          String    @id @default(uuid())
-  vendorId    String
+  userId      String
   name        String
-  category    String
-  location    String
-  address     String
-  facilities  String
+  categoryId    String    
+  location    String?
+  address     String?
+  facilities  String?
   pricePerHour Float
   pricePerDay  Float
   description String
   imageUrl    String
-  vendor      Vendor    @relation(fields: [vendorId], references: [id])
+  user        User    @relation(fields: [userId], references: [id])
+  category    Categories @relation(fields: [categoryId], references: [id])
   bookings    Booking[]
+
+}
+
+model Categories {
+  id          String @id @default(uuid())
+  name        String
+  Products    Product[]
 }
 
 

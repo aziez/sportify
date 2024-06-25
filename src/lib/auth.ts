@@ -10,20 +10,20 @@ export const authOptions: NextAuthOptions = {
     CredentialsProvider({
       name: 'Credentials',
       credentials: {
-        username: { label: 'Username', type: 'text' },
+        email: { label: 'email', type: 'email' },
         password: { label: 'Password', type: 'password' },
       },
       async authorize(credentials) {
-        if (!credentials?.username || !credentials?.password) {
+        if (!credentials?.email || !credentials?.password) {
           throw new Error('Missing credentials');
         }
 
-        const user = await prisma.users.findFirst({
-          where: { username: credentials.username },
+        const user = await prisma.user.findFirst({
+          where: { email: credentials.email },
         });
 
         if (!user) {
-          throw new Error('Invalid username or password');
+          throw new Error('Invalid email or password');
         }
 
         const passwordMatch = await compare(
@@ -32,14 +32,14 @@ export const authOptions: NextAuthOptions = {
         );
 
         if (!passwordMatch) {
-          throw new Error('Invalid username or password');
+          throw new Error('Invalid password');
         }
 
         return {
           id: user.id,
-          username: user.username,
+          displayName: user.displayName,
           email: user.email,
-          user_type: user.user_type,
+          role: user.rolesId,
         };
       },
     }),
@@ -55,18 +55,18 @@ export const authOptions: NextAuthOptions = {
     async jwt({ token, user }) {
       if (user) {
         token.id = user.id;
-        token.username = user.username;
+        token.displayName = user.displayName;
         token.email = user.email;
-        token.user_type = user.user_type;
+        token.role = user.role;
       }
       return token;
     },
     async session({ session, token }) {
       if (token) {
         session.user.id = token.id as string;
-        session.user.username = token.username as string;
+        session.user.displayName = token.displayName as string;
         session.user.email = token.email as string;
-        session.user.user_type = token.user_type as string;
+        session.user.role = token.role as string;
       }
       return session;
     },
