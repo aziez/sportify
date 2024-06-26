@@ -7,6 +7,7 @@ import { useState, useTransition } from 'react';
 import { useForm } from 'react-hook-form';
 import toast, { Toaster } from 'react-hot-toast';
 import { z } from 'zod';
+import { useRouter } from 'next/navigation';
 
 import { Button } from '@/components/ui/button';
 import {
@@ -39,6 +40,7 @@ type Inputs = z.infer<typeof formSchema>;
 const FormRegister = () => {
   const [show, setShow] = useState(false);
   const [isPending, startTransition] = useTransition();
+  const router = useRouter();
 
   const form = useForm<Inputs>({
     resolver: zodResolver(formSchema),
@@ -58,10 +60,9 @@ const FormRegister = () => {
     startTransition(async () => {
       await axiosInstance
         .post('/api/auth/register', data)
-        .then(() => {
-          // console.log(response);
-
+        .then((response) => {
           toast.success('Registration successful!');
+          router.push(response?.data?.url);
 
           reset();
         })

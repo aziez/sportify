@@ -1,27 +1,48 @@
-import Sfund from 'public/logo.svg';
+'use client';
+import { MailOpenIcon } from 'lucide-react';
+import { useSearchParams } from 'next/navigation';
+
+import { Button } from '@/components/ui/button';
+import { resendVerificationEmail } from '@/lib/email';
 
 export default function Send() {
+  const searchParams = useSearchParams();
+  const email = searchParams.get('email') || '';
+  //
+  const handleResendVerify = () => {
+    try {
+      const response = resendVerificationEmail(email);
+      console.log(response);
+      // You can add additional logic here to show a message to the user
+    } catch (error) {
+      console.error('Failed to resend verification email:', error);
+      // Handle the error appropriately
+    }
+  };
+
   return (
-    <div className="h-full w-full items-center justify-center lg:grid lg:grid-cols-2">
-      <div className="flex h-screen items-center justify-center px-6 py-12">
-        <div className="mx-auto grid w-[500px] gap-6">
-          <div className="grid gap-2">
-            <Sfund className="h-[100px] w-[100px]" />
-            <p className="text-balance text-muted-foreground">
-              Link verified has been send
+    <div className="flex min-h-screen flex-col items-center justify-center bg-background px-4 py-12 sm:px-6 lg:px-8">
+      <div className="mx-auto w-full max-w-md space-y-6">
+        <div className="flex flex-col items-center justify-center space-y-4">
+          <MailOpenIcon className="h-12 w-12" />
+          <div className="space-y-2 text-center">
+            <h1 className="text-3xl font-bold">Verify Your Email</h1>
+            <p className="text-bold text-xl">{email}</p>
+            <p className="text-muted-foreground">
+              We've sent a verification link to your email address. Please check
+              your inbox and click the link to verify your account.
             </p>
           </div>
+          <Button
+            variant={'shine'}
+            className="w-full bg-primary-foreground"
+            onClick={() => handleResendVerify()}
+          >
+            Resend Verification Email
+          </Button>
+          {/* <SendForm /> */}
         </div>
       </div>
-      {/* <div className="hidden h-full px-8 lg:flex lg:items-end lg:justify-center">
-        <Image
-          src={welcomeImg}
-          alt="Image"
-          layout="contain"
-          objectFit="contain"
-          className="dark:brightness-[0.2] dark:grayscale"
-        />
-      </div> */}
     </div>
   );
 }
