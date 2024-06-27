@@ -141,7 +141,9 @@ const Navbar = ({
                 </Button>
               </DropdownMenuTrigger>
               <DropdownMenuContent align="end">
-                <DropdownMenuLabel>{session?.user.username}</DropdownMenuLabel>
+                <DropdownMenuLabel>
+                  {session?.user?.displayName}
+                </DropdownMenuLabel>
                 <DropdownMenuSeparator />
                 <DropdownMenuItem>Profile</DropdownMenuItem>
                 <DropdownMenuItem>Setting</DropdownMenuItem>
