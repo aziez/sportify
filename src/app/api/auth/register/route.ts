@@ -51,7 +51,7 @@ async function registerHandle(
 
   try {
     const hashedPassword = await hash(password, 10);
-    const verificationToken = generateEmailVerificationToken();
+    const verificationToken = await generateEmailVerificationToken();
 
     const isEmailExist = await checkIsExits(email);
     if (isEmailExist) {
