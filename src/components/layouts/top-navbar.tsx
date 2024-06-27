@@ -1,7 +1,5 @@
 'use client';
 import {
-  Bell,
-  CircleUser,
   Home,
   LineChart,
   Menu,
@@ -12,7 +10,7 @@ import {
   Users,
 } from 'lucide-react';
 import Link from 'next/link';
-import { getSession, signOut, useSession } from 'next-auth/react';
+import { signOut, useSession } from 'next-auth/react';
 
 import { Badge } from '@/components/ui/badge';
 import { Button } from '@/components/ui/button';
@@ -145,7 +143,7 @@ const TopNavbar = () => {
           </Button>
         </DropdownMenuTrigger>
         <DropdownMenuContent align="end">
-          <DropdownMenuLabel>{session?.user.username}</DropdownMenuLabel>
+          <DropdownMenuLabel>{session?.user.displayName}</DropdownMenuLabel>
           <DropdownMenuSeparator />
           <DropdownMenuItem>Settings</DropdownMenuItem>
           <DropdownMenuItem>Support</DropdownMenuItem>
