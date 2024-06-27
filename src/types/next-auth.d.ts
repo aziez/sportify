@@ -7,6 +7,7 @@ declare module 'next-auth' {
       displayName: string;
       email: string;
       role: string;
+      isVerified: boolean;
     } & DefaultSession['user'];
   }
 
@@ -15,5 +16,6 @@ declare module 'next-auth' {
     displayName: string;
     email: string;
     role: string;
+    isVerified: boolean;
   }
 }

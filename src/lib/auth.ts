@@ -26,6 +26,8 @@ export const authOptions: NextAuthOptions = {
           throw new Error('Invalid email or password');
         }
 
+        const isVerified = user.emailVerifToken === null;
+
         const passwordMatch = await compare(
           credentials.password,
           user.password
@@ -40,6 +42,7 @@ export const authOptions: NextAuthOptions = {
           displayName: user.displayName,
           email: user.email,
           role: user.rolesId,
+          isVerified,
         };
       },
     }),
@@ -58,6 +61,7 @@ export const authOptions: NextAuthOptions = {
         token.displayName = user.displayName;
         token.email = user.email;
         token.role = user.role;
+        token.isVerified = user.isVerified;
       }
       return token;
     },
@@ -67,6 +71,7 @@ export const authOptions: NextAuthOptions = {
         session.user.displayName = token.displayName as string;
         session.user.email = token.email as string;
         session.user.role = token.role as string;
+        session.user.isVerified = token.isVerified as boolean;
       }
       return session;
     },
