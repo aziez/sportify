@@ -5,7 +5,7 @@ import React from 'react';
 
 const LayoutLoader = () => {
   return (
-    <div className="dark:bg-dot-white/[0.2] bg-dot-black/[0.2] relative flex h-[50rem] w-full flex-col items-center justify-center bg-white dark:bg-black">
+    <div className="relative flex h-[50rem] w-full flex-col items-center justify-center bg-white bg-dot-black/[0.2] dark:bg-black dark:bg-dot-white/[0.2]">
       {/* Radial gradient for the container to give a faded look */}
       <div className="pointer-events-none absolute inset-0 flex items-center justify-center bg-white [mask-image:radial-gradient(ellipse_at_center,transparent_20%,black)] dark:bg-black"></div>
       <div className="absolute right-4 top-4 rounded-full bg-primary p-2">

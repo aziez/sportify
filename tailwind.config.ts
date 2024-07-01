@@ -3,8 +3,6 @@ import { fontFamily } from 'tailwindcss/defaultTheme';
 import svgToTinyDataUri from 'mini-svg-data-uri';
 import flattenColorPalette from 'tailwindcss/lib/util/flattenColorPalette';
 
-/** @type {import('tailwindcss').Config} */
-
 const config: Config = {
   darkMode: ['class'],
   content: [
