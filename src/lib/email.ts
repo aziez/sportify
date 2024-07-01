@@ -2,8 +2,11 @@
 import { randomBytes } from 'crypto';
 import nodemailer from 'nodemailer';
 import { NextResponse } from 'next/server';
+import { render } from '@react-email/components';
+import { headers } from 'next/headers';
 
 import prisma from './prisma';
+import EmailTemplateVerify from '../components/emails/verify-template';
 
 export const sendVerificationEmail = async (email: string, token: string) => {
   const transporter = nodemailer.createTransport({
@@ -15,26 +18,30 @@ export const sendVerificationEmail = async (email: string, token: string) => {
     },
   });
 
-  const emailData = {
-    from: '"Blog Nextjs Auth" <verification@test.com>',
+  const headersList = headers();
+  const domain = headersList.get('host');
+
+  const magicLink = `${domain}/email/verify?email=${email}&token=${token}`;
+
+  const emailHtml = await render(EmailTemplateVerify({ magicLink: magicLink }));
+
+  const mailOptions = {
+    from: process.env.NEXT_PUBLIC_MAIL_FROM, // Specify the sender's email address
     to: email,
-    subject: 'Email Verification',
-    html: `
-      <p>Click the link below to verify your email:</p>
-      <a href="http://localhost:3000/email/verify?email=${email}&token=${token}">Verify Email</a>
-    `,
+    subject: 'Verify your email address',
+    html: emailHtml,
   };
 
   try {
-    await transporter.sendMail(emailData);
+    await transporter.sendMail(mailOptions);
+    return NextResponse.json(
+      { message: 'Email verify send successfully', email: email },
+      { status: 200 }
+    );
   } catch (error) {
     console.error('Failed to send email:', error);
     throw error;
   }
-  return NextResponse.json(
-    { message: 'Email verify send succesfully', email: email },
-    { status: 200 }
-  );
 };
 
 export const resendVerificationEmail = async (email: string) => {
@@ -59,9 +66,6 @@ export const resendVerificationEmail = async (email: string) => {
 
 // Function to generate an email verification token
 export const generateEmailVerificationToken = () => {
-  // generates a buffer containing 32 random bytes.
-  // The 32 indicates the number of bytes to generate, and it is commonly used
-  // for creating secure tokens or identifiers.
   return randomBytes(32).toString('hex');
 };
 

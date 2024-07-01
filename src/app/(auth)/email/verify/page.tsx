@@ -2,9 +2,10 @@
 'use client';
 
 // Importing necessary actions and components
-import Link from 'next/link';
-import { useSearchParams } from 'next/navigation';
+import { useRouter, useSearchParams } from 'next/navigation';
 import { useEffect, useState } from 'react';
+import Link from 'next/link';
+import toast, { Toaster } from 'react-hot-toast';
 
 import { findUserByEmail, verifyEmail } from '@/lib/email';
 import { Button } from '@/components/ui/button';
@@ -23,6 +24,7 @@ export default function VerifyEmail() {
 
   const email = searchParams.get('email');
   const token = searchParams.get('token');
+  const router = useRouter();
 
   // State for managing loading state and result message
   const [isLoading, setIsLoading] = useState(true);
@@ -30,6 +32,27 @@ export default function VerifyEmail() {
 
   // Effect hook for handling email verification process
   useEffect(() => {
+    const checkIsVerified = async () => {
+      try {
+        if (!email || !token) {
+          throw new Error('Missing required fields');
+        }
+
+        const user = await findUserByEmail(email);
+
+        console.log(user, 'DATA USERRRRRRRRR');
+
+        if (user?.emailVerifToken !== null) {
+          await emailVerification();
+        } else {
+          setIsLoading(false);
+          toast.success('Your email have been verified !');
+          router.push('/login');
+        }
+      } catch (error) {
+        console.error('Error verifying email:', error);
+      }
+    };
     const emailVerification = async () => {
       try {
         // Checking if required fields are present
@@ -48,7 +71,10 @@ export default function VerifyEmail() {
           throw new Error('Invalid verification token');
         }
 
+        console.log(user, 'DATAA USERRRR');
+
         // Updating user verification status in the database
+
         await verifyEmail(user.email);
 
         // Updating result message and indicating loading completion
@@ -60,12 +86,14 @@ export default function VerifyEmail() {
     };
 
     // Initiating the email verification process
-    emailVerification();
-  }, [email, token]);
+    checkIsVerified();
+  }, [email, token, isLoading, router]);
 
   // Rendering the Email Verification Component
   return (
     <div className="relative flex h-[50rem] w-full items-center justify-center bg-white bg-grid-black/[0.2] dark:bg-black dark:bg-grid-white/[0.2]">
+      <Toaster />
+
       {/* Radial gradient for the container to give a faded look */}
       <div className="pointer-events-none absolute inset-0 flex items-center justify-center bg-white [mask-image:radial-gradient(ellipse_at_center,transparent_20%,black)] dark:bg-black"></div>
       {/* <div className="absolute inset-0 h-full w-full scale-[0.80] transform rounded-full bg-red-500 bg-gradient-to-r from-blue-500 to-teal-500 blur-3xl" /> */}
@@ -86,7 +114,7 @@ export default function VerifyEmail() {
 
         <CardFooter>
           <Button variant={'shine'} className="w-full">
-            Login
+            <Link href={'/login'}>Back to login</Link>
           </Button>
         </CardFooter>
 

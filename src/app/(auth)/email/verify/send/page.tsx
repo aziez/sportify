@@ -1,6 +1,7 @@
 'use client';
 import { MailOpenIcon } from 'lucide-react';
 import { useSearchParams } from 'next/navigation';
+import { useState } from 'react';
 
 import { Button } from '@/components/ui/button';
 import { resendVerificationEmail } from '@/lib/email';
@@ -8,12 +9,17 @@ import { resendVerificationEmail } from '@/lib/email';
 export default function Send() {
   const searchParams = useSearchParams();
   const email = searchParams.get('email') || '';
+  const [loading, setLoading] = useState(false);
   //
-  const handleResendVerify = () => {
+  const handleResendVerify = async () => {
     try {
-      const response = resendVerificationEmail(email);
+      setLoading(true);
+      const response = await resendVerificationEmail(email);
       console.log(response);
+
       // You can add additional logic here to show a message to the user
+      const data = await response.json();
+      console.log(data);
     } catch (error) {
       console.error('Failed to resend verification email:', error);
       // Handle the error appropriately
@@ -40,6 +46,9 @@ export default function Send() {
             className="w-full bg-primary-foreground"
             onClick={() => handleResendVerify()}
           >
+            {loading && (
+              <span className="loading loading-dots loading-xs"></span>
+            )}
             Resend Verification Email
           </Button>
           {/* <SendForm /> */}
