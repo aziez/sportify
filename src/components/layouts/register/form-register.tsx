@@ -52,8 +52,6 @@ const FormRegister = () => {
     },
   });
 
-  const { handleSubmit, control, reset } = form;
-
   const onSubmit = async (data: Inputs) => {
     console.log('Form data:', data);
 
@@ -64,7 +62,7 @@ const FormRegister = () => {
           toast.success('Registration successful!');
           router.push(response?.data?.url);
 
-          reset();
+          form.reset();
         })
         .catch((error) => {
           console.error('Registration failed:', error);
@@ -85,11 +83,11 @@ const FormRegister = () => {
     <Form {...form}>
       <Toaster />
       <form
-        onSubmit={handleSubmit(onSubmit)}
+        onSubmit={form.handleSubmit(onSubmit)}
         className="2x:mt-7 mt-5 space-y-6"
       >
         <FormField
-          control={control}
+          control={form.control}
           name="displayName"
           render={({ field }) => (
             <FormItem>
@@ -107,7 +105,7 @@ const FormRegister = () => {
           )}
         />
         <FormField
-          control={control}
+          control={form.control}
           name="email"
           render={({ field }) => (
             <FormItem>
@@ -125,7 +123,7 @@ const FormRegister = () => {
           )}
         />
         <FormField
-          control={control}
+          control={form.control}
           name="password"
           render={({ field }) => (
             <FormItem>
@@ -157,7 +155,7 @@ const FormRegister = () => {
           )}
         />
         <FormField
-          control={control}
+          control={form.control}
           name="role"
           render={({ field }) => (
             <FormItem>
