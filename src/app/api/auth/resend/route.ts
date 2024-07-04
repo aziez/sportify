@@ -1,24 +1,35 @@
-import { NextApiRequest, NextApiResponse } from 'next';
+import { NextRequest, NextResponse } from 'next/server';
 
 import { resendVerificationEmail } from '@/lib/email';
 
-export default async function handler(
-  req: NextApiRequest,
-  res: NextApiResponse
-) {
+export interface ResendVerify {
+  email: string;
+}
+
+export async function POST(req: NextRequest) {
   if (req.method !== 'POST') {
-    return res.status(405).json({ message: 'Method not allowed' });
+    return NextResponse.json(
+      { message: 'Method not allowed' },
+      { status: 405 } // Use 405 for method not allowed
+    );
   }
 
-  const { email } = req.body;
-
   try {
+    const requestData: ResendVerify = await req.json();
+    const { email } = requestData;
+
+    console.log(email, 'EMAIL');
+
     await resendVerificationEmail(email);
-    return res
-      .status(200)
-      .json({ message: 'Verification email resent successfully' });
+    return NextResponse.json(
+      { message: `Resend verify successfully to ${email}` },
+      { status: 200 }
+    );
   } catch (error) {
     console.error('Failed to resend verification email:', error);
-    return res.status(500).json({ message: 'Internal server error' });
+    return NextResponse.json(
+      { message: 'Internal server error' },
+      { status: 500 }
+    );
   }
 }

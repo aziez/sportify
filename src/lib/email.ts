@@ -45,7 +45,7 @@ export const sendVerificationEmail = async (email: string, token: string) => {
 };
 
 export const resendVerificationEmail = async (email: string) => {
-  const emailVerificationToken = generateEmailVerificationToken();
+  const emailVerificationToken = await generateEmailVerificationToken();
 
   try {
     await prisma.user.update({
