@@ -3,7 +3,6 @@ import { randomBytes } from 'crypto';
 import nodemailer from 'nodemailer';
 import { NextResponse } from 'next/server';
 import { render } from '@react-email/components';
-import { headers } from 'next/headers';
 
 import prisma from './prisma';
 import EmailTemplateVerify from '../components/emails/verify-template';
@@ -18,10 +17,7 @@ export const sendVerificationEmail = async (email: string, token: string) => {
     },
   });
 
-  const headersList = headers();
-  const domain = headersList.get('host');
-
-  const magicLink = `${domain}/email/verify?email=${email}&token=${token}`;
+  const magicLink = `email=${email}&token=${token}`;
 
   const emailHtml = await render(EmailTemplateVerify({ magicLink: magicLink }));
 
