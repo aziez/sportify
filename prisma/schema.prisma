@@ -50,7 +50,7 @@ model Product {
   categoryId    String    
   location    String?
   address     String?
-  facilities  String?
+  facilities  String[]
   pricePerHour Float
   pricePerDay  Float
   description String
