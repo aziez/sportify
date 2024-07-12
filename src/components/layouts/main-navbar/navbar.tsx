@@ -3,7 +3,6 @@
 import { signOut, useSession } from 'next-auth/react';
 import Link from 'next/link';
 import Image from 'next/image';
-import { useRouter } from 'next/navigation';
 
 import { ThemeToggle } from '../../toogle-theme';
 import { Avatar, AvatarFallback, AvatarImage } from '../../ui/avatar';
@@ -28,7 +27,7 @@ const Navbar = ({
   }[];
 }) => {
   const { data: session } = useSession();
-  const router = useRouter();
+
   return (
     <div className="navbar sticky top-0 z-50 bg-primary/50">
       <div className="navbar-start">
@@ -146,9 +145,8 @@ const Navbar = ({
                   {session?.user?.displayName}
                 </DropdownMenuLabel>
                 <DropdownMenuSeparator />
-                <DropdownMenuItem onClick={() => router.push('/dashboard')}>
-                  Profile
-                </DropdownMenuItem>
+                <DropdownMenuItem>Profile</DropdownMenuItem>
+                <DropdownMenuItem>Setting</DropdownMenuItem>
                 <DropdownMenuItem onClick={() => signOut()}>
                   Logout
                 </DropdownMenuItem>

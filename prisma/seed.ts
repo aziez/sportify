@@ -1,5 +1,4 @@
 import { PrismaClient } from '@prisma/client';
-import { faker } from '@faker-js/faker';
 
 const prisma = new PrismaClient();
 
@@ -31,7 +30,7 @@ const createProduct = (userId: string, categoryId: string) => ({
   pricePerHour: parseFloat(faker.commerce.price(10, 100)),
   pricePerDay: parseFloat(faker.commerce.price(100, 1000)),
   description: faker.lorem.paragraph(),
-  imageUrl: 'https://loremflickr.com/320/240/sport?random=100',
+  imageUrl: faker.image.sports(),
 });
 
 const main = async () => {
