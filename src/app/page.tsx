@@ -50,8 +50,8 @@ export default async function Home() {
   return (
     <>
       <Navbar menus={menus} />
-      {/* <HeroParallax /> */}
-      <Hero />
+      <HeroParallax />
+      {/* <Hero /> */}
       {/* <FeatureSection features={features} /> */}
       <Footer />
     </>
