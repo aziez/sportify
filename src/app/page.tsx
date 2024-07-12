@@ -1,6 +1,5 @@
 import Footer from '@/components/layouts/footer';
 import FeatureSection from '@/components/layouts/landing-page/feature-section';
-import Hero from '@/components/layouts/landing-page/Hero';
 import { HeroParallax } from '@/components/layouts/landing-page/hero-section';
 import Navbar from '@/components/layouts/main-navbar/navbar';
 
@@ -51,8 +50,7 @@ export default async function Home() {
     <>
       <Navbar menus={menus} />
       <HeroParallax />
-      {/* <Hero /> */}
-      {/* <FeatureSection features={features} /> */}
+      <FeatureSection features={features} />
       <Footer />
     </>
   );
