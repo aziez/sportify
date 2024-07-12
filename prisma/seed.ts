@@ -1,4 +1,5 @@
 import { PrismaClient } from '@prisma/client';
+import { faker } from '@faker-js/faker';
 
 const prisma = new PrismaClient();
 
@@ -39,72 +40,26 @@ const main = async () => {
   // Create roles
   const vendorRole = await prisma.role.create({
     data: {
-      name: 'Vendor',
+      name: 'vendor',
+      users: {},
     },
   });
-
-  const customerRole = await prisma.role.create({
+  const customer = await prisma.role.create({
     data: {
-      name: 'Customer',
+      name: 'customer',
+      users: {},
     },
   });
-
-  // Create sample vendors
-  const vendors = [];
-  for (let i = 0; i < 5; i++) {
-    const vendor = await prisma.user.create({
-      data: {
-        displayName: faker.name.fullName(),
-        email: faker.internet.email(),
-        password: faker.internet.password(),
-        rolesId: vendorRole.id,
-      },
-    });
-    vendors.push(vendor);
-  }
-
-  // Create sample customers
-  for (let i = 0; i < 5; i++) {
-    await prisma.user.create({
-      data: {
-        displayName: faker.name.fullName(),
-        email: faker.internet.email(),
-        password: faker.internet.password(),
-        rolesId: customerRole.id,
-      },
-    });
-  }
-
-  // Create sample categories
-  const categories = [];
-  for (let i = 0; i < 3; i++) {
-    const category = await prisma.categories.create({
-      data: {
-        name: `Category ${i + 1}`,
-      },
-    });
-    categories.push(category);
-  }
-
-  // Create products for each vendor
-  for (const vendor of vendors) {
-    for (const category of categories) {
-      for (let i = 0; i < 3; i++) {
-        await prisma.product.create({
-          data: createProduct(vendor.id, category.id),
-        });
-      }
-    }
-  }
-
-  console.log('Seeding finished.');
+  console.log(vendorRole);
+  console.log(customer);
 };
 
 main()
-  .catch((e) => {
-    console.error(e);
-    process.exit(1);
-  })
-  .finally(async () => {
+  .then(async () => {
     await prisma.$disconnect();
+  })
+  .catch(async (e) => {
+    console.error(e);
+    await prisma.$disconnect();
+    process.exit(1);
   });
