@@ -44,10 +44,10 @@ model Notification {
 
 
 model Product {
-  id          String    @id @default(uuid())
   userId      String
+  id          String    @id @default(uuid())
   name        String
-  categoryId    String    
+  categoryId  String    
   location    String?
   address     String?
   facilities  String[]

@@ -1,27 +1,48 @@
 'use client';
 import { MailOpenIcon } from 'lucide-react';
 import { useSearchParams } from 'next/navigation';
-import { useTransition } from 'react';
+import { useTransition, useState, useEffect } from 'react';
 import toast, { Toaster } from 'react-hot-toast';
 
 import { Button } from '@/components/ui/button';
-import axiosInstance from '@/lib/axios';
+import useAsync from '@/hooks/use-async';
+import { emailApi } from '@/stores/api/api';
 
 export default function Send() {
   const searchParams = useSearchParams();
   const email = searchParams.get('email') || '';
   const [isPending, startTransition] = useTransition();
-  //
-  const handleResendVerify = async () => {
-    console.log(email);
+  const [resend] = useAsync(emailApi.resend);
+
+  const [timer, setTimer] = useState(60); // 1 minute countdown
+  const [isButtonDisabled, setIsButtonDisabled] = useState(false);
+
+  useEffect(() => {
+    let countdown: any;
+    if (isButtonDisabled) {
+      countdown = setInterval(() => {
+        setTimer((prevTimer) => {
+          if (prevTimer <= 1) {
+            clearInterval(countdown);
+            setIsButtonDisabled(false);
+            return 60; // reset timer
+          }
+          return prevTimer - 1;
+        });
+      }, 1000);
+    }
+    return () => clearInterval(countdown);
+  }, [isButtonDisabled]);
+
+  const handleResendVerify = () => {
+    // console.log(email);
 
     try {
       startTransition(async () => {
-        const response = await axiosInstance.post('/api/auth/resend', {
-          email,
+        await resend(email).then((res) => {
+          toast.success(res.data.message);
+          setIsButtonDisabled(true); // Disable the button after resending
         });
-        console.log(response);
-        toast.success(response.data.message);
       });
     } catch (error) {
       console.error('Failed to resend verification email:', error);
@@ -50,14 +71,16 @@ export default function Send() {
           <Button
             variant={'shine'}
             className="w-full bg-primary-foreground"
-            onClick={() => handleResendVerify()}
+            disabled={isButtonDisabled || isPending}
+            onClick={handleResendVerify}
           >
             {isPending && (
-              <span className="loading loading-dots loading-xs"></span>
+              <span className="loading-xl loading loading-dots mr-4"></span>
             )}
-            Resend Verification Email
+            {isButtonDisabled
+              ? `Resend in ${timer}s`
+              : 'Resend Verification Email'}
           </Button>
-          {/* <SendForm /> */}
         </div>
       </div>
     </div>

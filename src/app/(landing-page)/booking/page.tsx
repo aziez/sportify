@@ -1,3 +1,4 @@
+'use client';
 import Image from 'next/image';
 import { Star } from 'lucide-react';
 
@@ -11,8 +12,16 @@ import {
 } from '@/components/ui/select';
 import { Card, CardContent } from '@/components/ui/card';
 import { Checkbox } from '@/components/ui/checkbox';
+import { useCategories } from '@/hooks/categories/use-categories';
 
 export default function Component() {
+  const { data, error, isLoading } = useCategories();
+
+  if (isLoading) return <p>Loading...</p>;
+  if (error) return <p>Error loading products</p>;
+
+  console.log(data?.data);
+
   return (
     <div className="flex min-h-[100dvh] flex-col">
       <section className="w-full bg-gradient-to-r from-primary to-primary/90 py-12 md:py-24 lg:py-32">
@@ -82,156 +91,34 @@ export default function Component() {
           </div>
         </div>
         <div className="grid grid-cols-1 gap-6 sm:grid-cols-2 lg:grid-cols-3">
-          <Card>
-            <Image
-              src="/placeholder.svg"
-              width={400}
-              height={300}
-              alt="Sports Station"
-              className="aspect-video rounded-t-lg object-cover"
-            />
-            <CardContent className="flex flex-col gap-2 p-4">
-              <div className="flex items-center justify-between">
-                <h3 className="text-lg font-semibold">Basketball Court</h3>
-                <div className="flex items-center gap-1 text-muted-foreground">
-                  <Star className="h-4 w-4 fill-primary" />
-                  <span>4.8</span>
+          {data?.data?.map((product: any) => (
+            // <li key={product.id}>{product.name}</li>
+            <Card key={product.id}>
+              <Image
+                src={product?.imageUrl}
+                width={400}
+                height={300}
+                alt="Sports Station"
+                className="aspect-video rounded-t-lg object-cover"
+              />
+              <CardContent className="flex flex-col gap-2 p-4">
+                <div className="flex items-center justify-between">
+                  <h3 className="text-lg font-semibold">{product?.name}</h3>
+                  <div className="flex items-center gap-1 text-muted-foreground">
+                    <Star className="h-4 w-4 fill-primary" />
+                    <span>4.8</span>
+                  </div>
                 </div>
-              </div>
-              <p className="text-muted-foreground">
-                Regulation-size basketball court with adjustable hoops.
-              </p>
-              <div className="mt-auto flex items-center justify-between">
-                <span className="text-lg font-semibold">$50/hr</span>
-                <Button size="sm">Book Now</Button>
-              </div>
-            </CardContent>
-          </Card>
-          <Card>
-            <Image
-              src="/placeholder.svg"
-              width={400}
-              height={300}
-              alt="Sports Station"
-              className="aspect-video rounded-t-lg object-cover"
-            />
-            <CardContent className="flex flex-col gap-2 p-4">
-              <div className="flex items-center justify-between">
-                <h3 className="text-lg font-semibold">Soccer Field</h3>
-                <div className="flex items-center gap-1 text-muted-foreground">
-                  <Star className="h-4 w-4 fill-primary" />
-                  <span>4.6</span>
+                <p className="text-muted-foreground">{product?.description}</p>
+                <div className="mt-auto flex items-center justify-between">
+                  <span className="text-lg font-semibold">
+                    ${product.pricePerHour}
+                  </span>
+                  <Button size="sm">Book Now</Button>
                 </div>
-              </div>
-              <p className="text-muted-foreground">
-                Full-size soccer field with artificial turf.
-              </p>
-              <div className="mt-auto flex items-center justify-between">
-                <span className="text-lg font-semibold">$75/hr</span>
-                <Button size="sm">Book Now</Button>
-              </div>
-            </CardContent>
-          </Card>
-          <Card>
-            <Image
-              src="/placeholder.svg"
-              width={400}
-              height={300}
-              alt="Sports Station"
-              className="aspect-video rounded-t-lg object-cover"
-            />
-            <CardContent className="flex flex-col gap-2 p-4">
-              <div className="flex items-center justify-between">
-                <h3 className="text-lg font-semibold">Swimming Pool</h3>
-                <div className="flex items-center gap-1 text-muted-foreground">
-                  <Star className="h-4 w-4 fill-primary" />
-                  <span>4.9</span>
-                </div>
-              </div>
-              <p className="text-muted-foreground">
-                25-meter lap pool with diving board and locker rooms.
-              </p>
-              <div className="mt-auto flex items-center justify-between">
-                <span className="text-lg font-semibold">$100/hr</span>
-                <Button size="sm">Book Now</Button>
-              </div>
-            </CardContent>
-          </Card>
-          <Card>
-            <Image
-              src="/placeholder.svg"
-              width={400}
-              height={300}
-              alt="Sports Station"
-              className="aspect-video rounded-t-lg object-cover"
-            />
-            <CardContent className="flex flex-col gap-2 p-4">
-              <div className="flex items-center justify-between">
-                <h3 className="text-lg font-semibold">Fitness Center</h3>
-                <div className="flex items-center gap-1 text-muted-foreground">
-                  <Star className="h-4 w-4 fill-primary" />
-                  <span>4.7</span>
-                </div>
-              </div>
-              <p className="text-muted-foreground">
-                Fully equipped gym with cardio and strength training equipment.
-              </p>
-              <div className="mt-auto flex items-center justify-between">
-                <span className="text-lg font-semibold">$80/hr</span>
-                <Button size="sm">Book Now</Button>
-              </div>
-            </CardContent>
-          </Card>
-          <Card>
-            <Image
-              src="/placeholder.svg"
-              width={400}
-              height={300}
-              alt="Sports Station"
-              className="aspect-video rounded-t-lg object-cover"
-            />
-            <CardContent className="flex flex-col gap-2 p-4">
-              <div className="flex items-center justify-between">
-                <h3 className="text-lg font-semibold">Tennis Courts</h3>
-                <div className="flex items-center gap-1 text-muted-foreground">
-                  <Star className="h-4 w-4 fill-primary" />
-                  <span>4.5</span>
-                </div>
-              </div>
-              <p className="text-muted-foreground">
-                Two regulation-size tennis courts with lighting.
-              </p>
-              <div className="mt-auto flex items-center justify-between">
-                <span className="text-lg font-semibold">$60/hr</span>
-                <Button size="sm">Book Now</Button>
-              </div>
-            </CardContent>
-          </Card>
-          <Card>
-            <Image
-              src="/placeholder.svg"
-              width={400}
-              height={300}
-              alt="Sports Station"
-              className="aspect-video rounded-t-lg object-cover"
-            />
-            <CardContent className="flex flex-col gap-2 p-4">
-              <div className="flex items-center justify-between">
-                <h3 className="text-lg font-semibold">Volleyball Court</h3>
-                <div className="flex items-center gap-1 text-muted-foreground">
-                  <Star className="h-4 w-4 fill-primary" />
-                  <span>4.3</span>
-                </div>
-              </div>
-              <p className="text-muted-foreground">
-                Regulation-size volleyball court with net and lighting.
-              </p>
-              <div className="mt-auto flex items-center justify-between">
-                <span className="text-lg font-semibold">$55/hr</span>
-                <Button size="sm">Book Now</Button>
-              </div>
-            </CardContent>
-          </Card>
+              </CardContent>
+            </Card>
+          ))}
         </div>
       </div>
     </div>

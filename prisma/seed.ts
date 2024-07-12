@@ -3,15 +3,6 @@ import { faker } from '@faker-js/faker';
 
 const prisma = new PrismaClient();
 
-// const sportTypes = [
-//   'Football',
-//   'Basketball',
-//   'Tennis',
-//   'Swimming',
-//   'Badminton',
-//   'Volleyball',
-//   'Gymnastics',
-// ];
 const facilities = [
   'Parking',
   'Changing Rooms',
@@ -40,7 +31,7 @@ const createProduct = (userId: string, categoryId: string) => ({
   pricePerHour: parseFloat(faker.commerce.price(10, 100)),
   pricePerDay: parseFloat(faker.commerce.price(100, 1000)),
   description: faker.lorem.paragraph(),
-  imageUrl: faker.image.sports(),
+  imageUrl: 'https://loremflickr.com/320/240/sport?random=100',
 });
 
 const main = async () => {

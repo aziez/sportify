@@ -48,9 +48,11 @@ export const ProductCard = ({
   translate,
 }: {
   product: {
-    title: string;
-    link: string;
-    thumbnail: string;
+    id: string;
+    name: string;
+    description: string;
+    imageUrl: string;
+    pricePerHour: number;
     sale?: boolean;
     rating?: number;
   };
@@ -64,14 +66,14 @@ export const ProductCard = ({
       whileHover={{
         y: -20,
       }}
-      key={product.title}
+      key={product.id}
       className="group/product relative h-96 w-[20rem] flex-shrink-0"
     >
       <Card className="overflow-hidden rounded-lg bg-white shadow-md dark:bg-gray-950">
         <div className="relative">
           <Image
-            src={product.thumbnail}
-            alt={product.title}
+            src={product?.imageUrl}
+            alt={product.id}
             className="h-64 w-full object-cover"
             width={600}
             height={400}
@@ -84,7 +86,7 @@ export const ProductCard = ({
         </div>
         <CardContent className="space-y-4 p-6">
           <div className="flex items-center justify-between">
-            <h3 className="text-lg font-bold">{product.title}</h3>
+            <h3 className="text-lg font-bold">{product.name}</h3>
             <div className="flex items-center space-x-1 text-yellow-500">
               <Rating value={product.rating ?? 3} />
               <span className="text-sm text-gray-500 dark:text-gray-400">
@@ -93,13 +95,12 @@ export const ProductCard = ({
             </div>
           </div>
           <p className="text-sm text-gray-500 dark:text-gray-400">
-            Crafted with premium fleece, this hoodie is perfect for cozy days
-            and chilly nights.
+            {product?.description}
           </p>
           <div className="flex items-center justify-between">
-            <h2 className="text-2xl font-bold">$49.99</h2>
+            <h2 className="text-2xl font-bold">${product.pricePerHour}</h2>
             <h3 className="text-lg font-bold text-red-500 line-through">
-              $69.99
+              ${(product.pricePerHour * 25) / 10}
             </h3>
           </div>
         </CardContent>

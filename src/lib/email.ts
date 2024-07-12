@@ -40,7 +40,7 @@ export const sendVerificationEmail = async (email: string, token: string) => {
   }
 };
 
-export const resendVerificationEmail = async (email: string) => {
+export const resendVerificationEmail = async (email: any) => {
   const emailVerificationToken = await generateEmailVerificationToken();
 
   try {

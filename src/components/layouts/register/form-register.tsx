@@ -19,7 +19,6 @@ import {
   FormMessage,
 } from '@/components/ui/form';
 import { Input } from '@/components/ui/input';
-import axiosInstance from '@/lib/axios';
 import {
   Select,
   SelectContent,
@@ -27,6 +26,8 @@ import {
   SelectTrigger,
   SelectValue,
 } from '@/components/ui/select';
+import { authApi } from '@/stores/api/api';
+import useAsync from '@/hooks/use-async';
 
 const formSchema = z.object({
   displayName: z.string().min(1, { message: 'Username is required' }),
@@ -41,6 +42,7 @@ const FormRegister = () => {
   const [show, setShow] = useState(false);
   const [isPending, startTransition] = useTransition();
   const router = useRouter();
+  const [register] = useAsync(authApi.register);
 
   const form = useForm<Inputs>({
     resolver: zodResolver(formSchema),
@@ -56,8 +58,7 @@ const FormRegister = () => {
     console.log('Form data:', data);
 
     startTransition(async () => {
-      await axiosInstance
-        .post('/api/auth/register', data)
+      await register(data)
         .then((response) => {
           toast.success('Registration successful!');
           router.push(response?.data?.url);
