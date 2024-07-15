@@ -17,6 +17,7 @@ import {
   DropdownMenuTrigger,
 } from '@/components/ui/dropdown-menu';
 import { Label } from '@/components/ui/label';
+import ProfileMenu from './profile-items';
 
 const Navbar = ({
   menus,
@@ -127,31 +128,7 @@ const Navbar = ({
           </div>
         ) : (
           <div className="dropdown dropdown-end">
-            <DropdownMenu>
-              <DropdownMenuTrigger asChild>
-                <Button
-                  className="btn-circle rounded-full border"
-                  variant={'ringHover'}
-                  size={'icon'}
-                >
-                  <Avatar className="h-8 w-8">
-                    <AvatarImage src="https://github.com/shadcn.png" />
-                    <AvatarFallback>CN</AvatarFallback>
-                  </Avatar>
-                </Button>
-              </DropdownMenuTrigger>
-              <DropdownMenuContent align="end">
-                <DropdownMenuLabel>
-                  {session?.user?.displayName}
-                </DropdownMenuLabel>
-                <DropdownMenuSeparator />
-                <DropdownMenuItem>Profile</DropdownMenuItem>
-                <DropdownMenuItem>Setting</DropdownMenuItem>
-                <DropdownMenuItem onClick={() => signOut()}>
-                  Logout
-                </DropdownMenuItem>
-              </DropdownMenuContent>
-            </DropdownMenu>
+            <ProfileMenu />
           </div>
         )}
       </div>

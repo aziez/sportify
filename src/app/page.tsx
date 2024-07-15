@@ -1,8 +1,10 @@
 /* eslint-disable @typescript-eslint/no-unused-vars */
 import Footer from '@/components/layouts/footer';
+import About from '@/components/layouts/landing-page/about';
 import Hero from '@/components/layouts/landing-page/hero';
 import InfoSection from '@/components/layouts/landing-page/info-section';
 import Team from '@/components/layouts/landing-page/team';
+import MainNavbar from '@/components/layouts/main-navbar';
 import Navbar from '@/components/layouts/main-navbar/navbar';
 
 export default async function Home() {
@@ -50,10 +52,12 @@ export default async function Home() {
 
   return (
     <div>
-      <Navbar menus={menus} />
+      {/* <Navbar menus={menus} /> */}
+      <MainNavbar />
       <Hero />
       <InfoSection />
       <Team />
+      <About />
       {/* <HeroParallax /> */}
       {/* <FeatureSection features={features} /> */}
       <Footer />
