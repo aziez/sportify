@@ -1,4 +1,5 @@
 import Footer from '@/components/layouts/footer';
+import MainNavbar from '@/components/layouts/main-navbar';
 import Navbar from '@/components/layouts/main-navbar/navbar';
 
 export default async function RootLayout({
@@ -27,9 +28,8 @@ export default async function RootLayout({
 
   return (
     <>
-      <Navbar menus={menus} />
+      <MainNavbar />
       {children}
-      <Footer />
     </>
   );
 }

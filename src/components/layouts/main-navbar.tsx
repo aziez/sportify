@@ -11,22 +11,58 @@ import ProfileMenu from './main-navbar/profile-items';
 import Fb from 'public/social/fb.svg';
 import Ig from 'public/social/ig.svg';
 import Tw from 'public/social/x.svg';
+import Navbar from './main-navbar/navbar';
+import { ThemeToggle } from '../toogle-theme';
 
 const MainNavbar = () => {
   const { data: session } = useSession();
+  const menus = [
+    {
+      label: 'Home',
+      link: '/',
+    },
+    {
+      label: 'Syarat dan Cara Sewa',
+      link: '/terms-conditions',
+    },
+    {
+      label: 'Contact Info',
+      link: '/contact',
+    },
+    {
+      label: 'Review',
+      link: '/review',
+    },
+    {
+      label: 'Categories',
+      link: '/categories',
+    },
+  ];
 
   return (
     <>
       <div className="navbar bg-gray-600">
         <div className="navbar-start space-x-4">
-          <Button variant={'outline'} size={'icon'} className="rounded-full">
-            <Fb className="h-5 w-5" />
+          <Button
+            variant={'outline'}
+            size={'icon'}
+            className="h-8 w-8 rounded-full"
+          >
+            <Fb className="h-4 w-4" />
           </Button>
-          <Button variant={'outline'} size={'icon'} className="rounded-full">
+          <Button
+            variant={'outline'}
+            size={'icon'}
+            className="h-8 w-8 rounded-full"
+          >
             <Tw className="h-5 w-5" />
           </Button>
-          <Button variant={'outline'} size={'icon'} className="rounded-full">
-            <Ig className="h-5 w-5" />
+          <Button
+            variant={'outline'}
+            size={'icon'}
+            className="h-8 w-8 rounded-full"
+          >
+            <Ig className="h-4 w-4" />
           </Button>
         </div>
         <div className="navbar-center">
@@ -58,12 +94,9 @@ const MainNavbar = () => {
           )}
         </div>
       </div>
-      <div className="navbar sticky top-0 z-50 bg-black text-neutral-content">
-        <Button variant={'linkHover1'}>Home</Button>
-        <Button variant={'linkHover2'}>Syarat dan Cara Sewa</Button>
-        <Button variant={'linkHover2'}>Contact Info</Button>
-        <Button variant={'linkHover2'}>Review</Button>
-        <Button variant={'linkHover2'}>Categories</Button>
+      <div className="navbar sticky top-0 z-50 flex items-baseline justify-between bg-black text-neutral-content">
+        <Navbar menus={menus} />
+        <ThemeToggle />
       </div>
     </>
   );

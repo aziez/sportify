@@ -17,7 +17,6 @@ import {
   DropdownMenuTrigger,
 } from '@/components/ui/dropdown-menu';
 import { Label } from '@/components/ui/label';
-import ProfileMenu from './profile-items';
 
 const Navbar = ({
   menus,
@@ -30,79 +29,66 @@ const Navbar = ({
   const { data: session } = useSession();
 
   return (
-    <div className="navbar sticky top-0 z-50 bg-primary/50">
-      <div className="navbar-start">
-        <DropdownMenu>
-          <DropdownMenuTrigger
-            asChild
-            className="bg-none lg:hidden xl:hidden 2xl:hidden"
-          >
-            <Button variant={'ghost'}>
-              <Label className="swap swap-rotate">
-                <input type="checkbox" />
+    <div className="navbar-start">
+      <DropdownMenu>
+        <DropdownMenuTrigger
+          asChild
+          className="bg-none lg:hidden xl:hidden 2xl:hidden"
+        >
+          <Button variant={'ghost'}>
+            <Label className="swap swap-rotate">
+              <input type="checkbox" />
 
-                <svg
-                  className="3-5 swap-off h-5 fill-current"
-                  xmlns="http://www.w3.org/2000/svg"
-                  fill="none"
-                  viewBox="0 0 24 24"
-                  stroke="currentColor"
-                >
-                  <path
-                    strokeLinecap="round"
-                    strokeLinejoin="round"
-                    strokeWidth="2"
-                    d="M4 6h16M4 12h8m-8 6h16"
-                  />
-                </svg>
+              <svg
+                className="3-5 swap-off h-5 fill-current"
+                xmlns="http://www.w3.org/2000/svg"
+                fill="none"
+                viewBox="0 0 24 24"
+                stroke="currentColor"
+              >
+                <path
+                  strokeLinecap="round"
+                  strokeLinejoin="round"
+                  strokeWidth="2"
+                  d="M4 6h16M4 12h8m-8 6h16"
+                />
+              </svg>
 
-                {/* close icon */}
-                <svg
-                  className="swap-on h-5 w-5 fill-current"
-                  xmlns="http://www.w3.org/2000/svg"
-                  viewBox="0 0 512 512"
-                >
-                  <polygon points="400 145.49 366.51 112 256 222.51 145.49 112 112 145.49 222.51 256 112 366.51 145.49 400 256 289.49 366.51 400 400 366.51 289.49 256 400 145.49" />
-                </svg>
-              </Label>
-            </Button>
-          </DropdownMenuTrigger>
-          <DropdownMenuContent align="end">
-            {menus.map((menu: any, i: number) => (
-              <DropdownMenuItem key={i}>
+              {/* close icon */}
+              <svg
+                className="swap-on h-5 w-5 fill-current"
+                xmlns="http://www.w3.org/2000/svg"
+                viewBox="0 0 512 512"
+              >
+                <polygon points="400 145.49 366.51 112 256 222.51 145.49 112 112 145.49 222.51 256 112 366.51 145.49 400 256 289.49 366.51 400 400 366.51 289.49 256 400 145.49" />
+              </svg>
+            </Label>
+          </Button>
+        </DropdownMenuTrigger>
+        <DropdownMenuContent align="end">
+          {menus.map((menu: any, i: number) => (
+            <DropdownMenuItem key={i}>
+              <Button variant={'linkHover2'}>
+                <Link href={menu.link}>{menu.label}</Link>
+              </Button>
+            </DropdownMenuItem>
+          ))}
+          {session === null && (
+            <div className="flex md:hidden lg:hidden xl:hidden 2xl:hidden">
+              <DropdownMenuItem>
                 <Button variant={'linkHover2'}>
-                  <Link href={menu.link}>{menu.label}</Link>
+                  <Link href="/register">Daftar</Link>
                 </Button>
               </DropdownMenuItem>
-            ))}
-            {session === null && (
-              <div className="flex md:hidden lg:hidden xl:hidden 2xl:hidden">
-                <DropdownMenuItem>
-                  <Button variant={'linkHover2'}>
-                    <Link href="/register">Daftar</Link>
-                  </Button>
-                </DropdownMenuItem>
-                <DropdownMenuItem>
-                  <Button variant={'ringHover'}>
-                    <Link href="/login">Masuk</Link>
-                  </Button>
-                </DropdownMenuItem>
-              </div>
-            )}
-          </DropdownMenuContent>
-        </DropdownMenu>
-        <Button variant={'linkHover2'}>
-          <Link href="/">
-            <Image
-              alt="logo"
-              width={500}
-              height={500}
-              className="h-[42px] w-auto"
-              src={'/logo.webp'}
-            />
-          </Link>
-        </Button>
-      </div>
+              <DropdownMenuItem>
+                <Button variant={'ringHover'}>
+                  <Link href="/login">Masuk</Link>
+                </Button>
+              </DropdownMenuItem>
+            </div>
+          )}
+        </DropdownMenuContent>
+      </DropdownMenu>
       <div className="navbar-center hidden lg:flex">
         <ul className="menu menu-horizontal px-1 text-secondary">
           {menus.map((menu: any, i: number) => (
@@ -113,24 +99,6 @@ const Navbar = ({
             </li>
           ))}
         </ul>
-      </div>
-      <div className="navbar-end space-x-4">
-        <ChartItem />
-        <ThemeToggle />
-        {session === null ? (
-          <div className="hidden md:flex">
-            <Button variant={'ringHover'} className="rounded-full">
-              <Link href="/login">Masuk</Link>
-            </Button>
-            <Button variant={'linkHover2'}>
-              <Link href="/register">Daftar</Link>
-            </Button>
-          </div>
-        ) : (
-          <div className="dropdown dropdown-end">
-            <ProfileMenu />
-          </div>
-        )}
       </div>
     </div>
   );

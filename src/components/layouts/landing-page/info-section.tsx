@@ -4,6 +4,7 @@ import { ArrowRightCircleIcon } from 'lucide-react';
 import Image from 'next/image';
 
 import { Button } from '@/components/ui/button';
+import Link from 'next/link';
 
 const InfoSection = () => {
   return (
@@ -38,12 +39,14 @@ const InfoSection = () => {
               <img src="/img/lapangan.png" />
             </div>
           </div>
-          <Button
-            variant={'outline'}
-            className="rounded-fll mt-12 w-[50%] rounded-full border-black"
-          >
-            Sewa Sekarang <ArrowRightCircleIcon className="ml-4" />
-          </Button>
+          <Link href={'/futsal-day'}>
+            <Button
+              variant={'outline'}
+              className="rounded-fll mt-12 w-[50%] rounded-full border-black"
+            >
+              Sewa Sekarang <ArrowRightCircleIcon className="ml-4" />
+            </Button>
+          </Link>
         </div>
         <div className="flex items-center justify-center">
           <Image
