@@ -53,14 +53,14 @@ export default async function Home() {
   return (
     <div>
       {/* <Navbar menus={menus} /> */}
-      <MainNavbar />
+      {/* <MainNavbar /> */}
       <Hero />
       <InfoSection />
       <Team />
       <About />
       {/* <HeroParallax /> */}
       {/* <FeatureSection features={features} /> */}
-      <Footer />
+      {/* <Footer /> */}
     </div>
   );
 }

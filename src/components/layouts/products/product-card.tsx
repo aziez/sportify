@@ -1,38 +1,52 @@
+'use client';
 import { Card, CardContent } from '@/components/ui/card';
 import { Button } from '@/components/ui/button';
+import { motion, MotionValue } from 'framer-motion';
 
-export default function CardProduct() {
+export default function CardProduct({ product }: { product: any }) {
   return (
-    <Card className="w-full max-w-sm overflow-hidden">
-      <div className="group relative">
-        <img
-          src="/sample/futsal/b1.png"
-          alt="Product Image"
-          width={600}
-          height={600}
-          className="aspect-square w-full rounded-lg object-cover transition-opacity group-hover:opacity-80"
-        />
-        <Button
-          variant="outline"
-          size="sm"
-          className="absolute right-4 top-4 z-10 opacity-0 transition-opacity group-hover:opacity-100"
-        >
-          <ShoppingCartIcon className="h-4 w-4" />
-          <span className="sr-only">Add to cart</span>
-        </Button>
-      </div>
-      <CardContent className="p-4 md:p-6">
-        <div className="grid gap-2">
-          <h3 className="text-lg font-semibold">Proteam Bola Futsal Warrior</h3>
-          <p className="text-sm text-muted-foreground">Rp. 5000/jam</p>
-          <div className="flex items-center justify-end">
-            {/* <span className="text-2xl font-bold">$99</span> */}
-            {/* <Button size="sm">Add to cart</Button> */}
-            <div className="badge badge-info p-4 text-white">Best Seller</div>
-          </div>
+    <motion.div
+      whileHover={{
+        scale: 0.9,
+      }}
+      key={product?.id}
+      className="group/product"
+    >
+      <Card className="w-full max-w-sm overflow-hidden">
+        <div className="group relative">
+          <img
+            src={product?.img}
+            alt="Product Image"
+            width={600}
+            height={600}
+            className="aspect-square rounded-lg object-cover transition-opacity group-hover:opacity-80"
+          />
+          <Button
+            variant="outline"
+            size="sm"
+            className="absolute right-4 top-4 z-10 opacity-0 transition-opacity group-hover:opacity-100"
+          >
+            <ShoppingCartIcon className="h-4 w-4" />
+            <span className="sr-only">Add to cart</span>
+          </Button>
         </div>
-      </CardContent>
-    </Card>
+        <CardContent className="p-4 md:p-6">
+          <div className="grid gap-2">
+            <h3 className="text-lg font-semibold">{product?.title}</h3>
+            <p className="text-sm text-muted-foreground">{product?.harga}</p>
+            {product?.badge ? (
+              <div className="flex items-center justify-end">
+                <div className="badge badge-info p-4 text-white">
+                  {product?.badge}
+                </div>
+              </div>
+            ) : (
+              <></>
+            )}
+          </div>
+        </CardContent>
+      </Card>
+    </motion.div>
   );
 }
 
