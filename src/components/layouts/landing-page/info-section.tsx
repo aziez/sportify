@@ -5,16 +5,22 @@ import Image from 'next/image';
 
 import { Button } from '@/components/ui/button';
 import Link from 'next/link';
+import {
+  Carousel,
+  CarouselContent,
+  CarouselItem,
+} from '@/components/ui/carousel';
+import { Separator } from '@/components/ui/separator';
 
 const InfoSection = () => {
   return (
-    <>
-      <div className="grid p-12 md:grid-cols-2">
-        <div className="h-full">
-          <h1 className="text-xl font-bold text-black dark:text-white md:text-6xl">
+    <div className="gap-4">
+      <div className="mt-4 grid w-full items-center justify-center text-center md:grid-cols-2 md:text-start">
+        <div className="order-last h-full md:order-first">
+          <h1 className="text-xl font-bold text-black dark:text-white md:text-5xl">
             Pesan Sekarang, <br /> Main Futsal Kapan Saja!
           </h1>
-          <p className="my-8 text-wrap font-jakarta text-lg">
+          <p className="my-8 font-jakarta text-lg">
             Penyewaan bola futsal dengan proses yang mudah dan cepat. Pesan
             online, dan bola siap digunakan kapan pun Anda butuhkan.Dapatkan
             bola futsal terbaik untuk permainan yang lebih menyenangkan.
@@ -25,20 +31,35 @@ const InfoSection = () => {
           >
             Info Lainya <ArrowRightCircleIcon className="ml-4" />
           </Button>
-          <div className="flex snap-x snap-mandatory items-center gap-x-3 overflow-x-auto p-4">
-            <div className="grid w-32 shrink-0 snap-center snap-always">
-              <img src="/img/bola1.png" />
-            </div>
-            <div className="grid w-32 shrink-0 snap-center snap-always">
-              <img src="/img/rompi.png" />
-            </div>
-            <div className="grid w-32 shrink-0 snap-center snap-always">
-              <img src="/img/bola2.png" />
-            </div>
-            <div className="grid w-32 shrink-0 snap-center snap-always">
-              <img src="/img/lapangan.png" />
-            </div>
-          </div>
+          <Carousel className="my-4 w-full">
+            <CarouselContent>
+              <CarouselItem className="basis-1/4">
+                <img
+                  src="/img/bola1.png"
+                  className="aspect-square rounded-lg object-cover transition-opacity group-hover:opacity-80"
+                />
+              </CarouselItem>
+              <CarouselItem className="basis-1/4">
+                <img
+                  src="/img/rompi.png"
+                  className="aspect-square rounded-lg object-cover transition-opacity group-hover:opacity-80"
+                />
+              </CarouselItem>
+              <CarouselItem className="basis-1/4">
+                <img
+                  src="/img/bola2.png"
+                  className="aspect-square rounded-lg object-cover transition-opacity group-hover:opacity-80"
+                />
+              </CarouselItem>
+              <CarouselItem className="basis-1/4">
+                <img
+                  src="/img/lapangan.png"
+                  className="aspect-square rounded-lg object-cover transition-opacity group-hover:opacity-80"
+                />
+              </CarouselItem>
+            </CarouselContent>
+          </Carousel>
+
           <Link href={'/futsal-day'}>
             <Button
               variant={'outline'}
@@ -54,22 +75,23 @@ const InfoSection = () => {
             width={9000}
             alt="footbal"
             src="/img/fo1.png"
-            className="max-h-[640px] w-auto"
+            className="aspect-square h-auto object-cover object-top"
           />
         </div>
       </div>
-      <div className="grid p-12 md:grid-cols-2">
+      <Separator className="mb-8 hidden h-1 md:flex" />
+      <div className="grid w-full items-center justify-center text-center md:grid-cols-2 md:text-start">
         <div className="flex items-center justify-center">
           <Image
             height={9000}
             width={9000}
             alt="footbal"
             src="/img/po1.png"
-            className="max-h-[640px] w-auto"
+            className="aspect-square h-auto object-contain object-top"
           />
         </div>
         <div className="h-full">
-          <h1 className="text-xl font-bold text-black dark:text-white md:text-6xl">
+          <h1 className="text-xl font-bold text-black dark:text-white md:text-5xl">
             Cari Peralatan Volly dengan lebih mudah!
           </h1>
           <p className="my-8 text-wrap font-jakarta text-lg">
@@ -84,20 +106,34 @@ const InfoSection = () => {
           >
             Info Lainya <ArrowRightCircleIcon className="ml-4" />
           </Button>
-          <div className="flex snap-x snap-mandatory items-center gap-x-3 overflow-x-auto p-4">
-            <div className="grid w-32 shrink-0 snap-center snap-always">
-              <img src="/img/poli1.png" />
-            </div>
-            <div className="grid w-32 shrink-0 snap-center snap-always">
-              <img src="/img/poli2.png" />
-            </div>
-            <div className="grid w-32 shrink-0 snap-center snap-always">
-              <img src="/img/poli3.png" />
-            </div>
-            <div className="grid w-32 shrink-0 snap-center snap-always">
-              <img src="/img/poli4.png" />
-            </div>
-          </div>
+          <Carousel className="my-4 w-full">
+            <CarouselContent>
+              <CarouselItem className="basis-1/4">
+                <img
+                  src="/img/poli1.png"
+                  className="aspect-square rounded-lg object-cover transition-opacity group-hover:opacity-80"
+                />
+              </CarouselItem>
+              <CarouselItem className="basis-1/4">
+                <img
+                  src="/img/poli2.png"
+                  className="aspect-square rounded-lg object-cover transition-opacity group-hover:opacity-80"
+                />
+              </CarouselItem>
+              <CarouselItem className="basis-1/4">
+                <img
+                  src="/img/poli3.png"
+                  className="aspect-square rounded-lg object-cover transition-opacity group-hover:opacity-80"
+                />
+              </CarouselItem>
+              <CarouselItem className="basis-1/4">
+                <img
+                  src="/img/poli4.png"
+                  className="aspect-square rounded-lg object-cover transition-opacity group-hover:opacity-80"
+                />
+              </CarouselItem>
+            </CarouselContent>
+          </Carousel>
           <Button
             variant={'outline'}
             className="rounded-fll mt-12 w-[50%] rounded-full border-black"
@@ -106,9 +142,10 @@ const InfoSection = () => {
           </Button>
         </div>
       </div>
-      <div className="grid p-12 md:grid-cols-2">
-        <div className="h-full">
-          <h1 className="text-xl font-bold text-black dark:text-white md:text-6xl">
+      <Separator className="mb-8 hidden h-1 md:flex" />
+      <div className="grid w-full items-center justify-center text-center md:grid-cols-2 md:text-start">
+        <div className="order-last h-full md:order-first">
+          <h1 className="text-xl font-bold text-black dark:text-white md:text-5xl">
             Pengalaman Bermain Bulutangkis Tanpa Hambatan!
           </h1>
           <p className="my-8 text-wrap font-jakarta text-lg">
@@ -123,20 +160,34 @@ const InfoSection = () => {
           >
             Info Lainya <ArrowRightCircleIcon className="ml-4" />
           </Button>
-          <div className="flex snap-x snap-mandatory items-center gap-x-3 overflow-x-auto p-4">
-            <div className="grid w-32 shrink-0 snap-center snap-always">
-              <img src="/img/raket1.png" />
-            </div>
-            <div className="grid w-32 shrink-0 snap-center snap-always">
-              <img src="/img/raket2.png" />
-            </div>
-            <div className="grid w-32 shrink-0 snap-center snap-always">
-              <img src="/img/raket3.png" />
-            </div>
-            <div className="grid w-32 shrink-0 snap-center snap-always">
-              <img src="/img/raket4.png" />
-            </div>
-          </div>
+          <Carousel className="my-4 w-full">
+            <CarouselContent>
+              <CarouselItem className="basis-1/4">
+                <img
+                  src="/img/raket1.png"
+                  className="aspect-square rounded-lg object-cover transition-opacity group-hover:opacity-80"
+                />
+              </CarouselItem>
+              <CarouselItem className="basis-1/4">
+                <img
+                  src="/img/raket2.png"
+                  className="aspect-square rounded-lg object-cover transition-opacity group-hover:opacity-80"
+                />
+              </CarouselItem>
+              <CarouselItem className="basis-1/4">
+                <img
+                  src="/img/raket3.png"
+                  className="aspect-square rounded-lg object-cover transition-opacity group-hover:opacity-80"
+                />
+              </CarouselItem>
+              <CarouselItem className="basis-1/4">
+                <img
+                  src="/img/raket4.png"
+                  className="aspect-square rounded-lg object-cover transition-opacity group-hover:opacity-80"
+                />
+              </CarouselItem>
+            </CarouselContent>
+          </Carousel>
           <Button
             variant={'outline'}
             className="rounded-fll mt-12 w-[50%] rounded-full border-black"
@@ -150,11 +201,12 @@ const InfoSection = () => {
             width={9000}
             alt="footbal"
             src="/img/pb1.png"
-            className="max-h-[640px] w-auto"
+            className="aspect-square h-auto object-contain object-top"
           />
         </div>
       </div>
-    </>
+      <Separator className="mb-8 hidden h-1 md:flex" />
+    </div>
   );
 };
 

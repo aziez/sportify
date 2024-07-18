@@ -14,6 +14,13 @@ export default function Footer() {
             className="aspect-auto object-cover transition-opacity group-hover:opacity-80"
           />
           <img
+            src="/simbelmawa.png"
+            alt="Product Image"
+            width={64}
+            height={60}
+            className="aspect-auto object-cover transition-opacity group-hover:opacity-80"
+          />
+          <img
             src="/kampus-merdeka.png"
             alt="Product Image"
             width={64}
