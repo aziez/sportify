@@ -2,9 +2,9 @@ import { Button } from '@/components/ui/button';
 
 const Hero = () => {
   return (
-    <section className="hero h-full">
-      <div className="hero-overlay rounded-lg bg-opacity-60 bg-top-hero bg-cover"></div>
-      <div className="hero-content text-center text-neutral-content md:text-start">
+    <section className="hero min-h-screen bg-top-hero bg-cover">
+      <div className="hero-overlay bg-opacity-60"></div>
+      <div className="hero-content text-neutral-content md:text-start">
         <div className="grid md:grid-cols-2">
           <div className="my-10 space-y-3 text-pretty">
             <h1 className="mb-4 text-2xl font-bold text-white md:text-7xl">

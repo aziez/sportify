@@ -51,16 +51,18 @@ export default async function Home() {
   ];
 
   return (
-    <div className="p-12">
+    <>
       {/* <Navbar menus={menus} /> */}
       {/* <MainNavbar /> */}
       <Hero />
-      <InfoSection />
-      <Team />
-      <About />
+      <main className="p-12">
+        <InfoSection />
+        <Team />
+        <About />
+      </main>
       {/* <HeroParallax /> */}
       {/* <FeatureSection features={features} /> */}
       {/* <Footer /> */}
-    </div>
+    </>
   );
 }
