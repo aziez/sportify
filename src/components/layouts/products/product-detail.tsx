@@ -1,30 +1,20 @@
 'use client';
 import { Button } from '@/components/ui/button';
-import { Calendar } from '@/components/ui/calendar';
 import {
   Carousel,
   CarouselApi,
   CarouselContent,
   CarouselItem,
 } from '@/components/ui/carousel';
-import { DateRangePicker } from '@/components/ui/date-range-picker';
-import {
-  Popover,
-  PopoverContent,
-  PopoverTrigger,
-} from '@/components/ui/popover';
+
 import { Separator } from '@/components/ui/separator';
-import { cn } from '@/lib/utils';
-import { format } from 'date-fns';
-import { CalendarIcon } from 'lucide-react';
+
 import { useCallback, useEffect, useState } from 'react';
+import FormSewa from './form-sewa';
 
 export default function ProductDetail({ product }: { product: any }) {
   const [api, setApi] = useState<CarouselApi>();
   const [data, setData] = useState(product);
-  const [date, setDate] = useState<Date>();
-
-  console.log(product, 'Lemparan Parent');
 
   const onThumbClick = useCallback(
     (index: number) => {
@@ -46,30 +36,30 @@ export default function ProductDetail({ product }: { product: any }) {
   console.log(data, 'DATAAAA');
 
   return (
-    <div className="mx-auto grid max-w-6xl items-start gap-6 px-4 py-6 md:grid-cols-2 lg:gap-12">
-      <div className="max-h-lg grid items-start gap-4">
-        <Carousel setApi={setApi}>
+    <div className="mx-auto grid items-center gap-6 px-4 py-6 md:grid-cols-2 lg:gap-12">
+      <div className="grid items-start gap-4">
+        <Carousel setApi={setApi} className="mx-auto">
           <CarouselContent>
             {data.map((prod: any) => (
-              <CarouselItem>
+              <CarouselItem key={prod.id}>
                 <img
                   src={prod.img}
                   alt="Product Image"
-                  width={600}
-                  height={600}
-                  className="aspect-square overflow-hidden rounded-lg border border-gray-400 bg-gray-400 object-cover"
+                  className="aspect-square max-h-[420px] overflow-hidden bg-gray-400 object-cover"
                 />
               </CarouselItem>
             ))}
           </CarouselContent>
+          <p className="mt-4 text-base font-semibold">Variant</p>
           <div className="mt-2 flex items-start gap-2">
             {data.map((thumb: any, index: number) => (
               <img
+                key={index}
                 onClick={() => onThumbClick(index)}
                 width={50}
                 height={50}
                 alt="thumbnails"
-                className="aspect-square w-[calc(15%-0.5rem)] rounded-md border object-cover object-top"
+                className="aspect-square w-[calc(15%-0.5rem)] cursor-pointer rounded-md border object-cover object-top"
                 src={thumb?.img}
               />
             ))}
@@ -82,13 +72,12 @@ export default function ProductDetail({ product }: { product: any }) {
             Proteam Bola Futsal Warrior
           </h1>
           <Button
-            variant={'ringHover'}
-            size={'lg'}
+            variant="ringHover"
             className="mt-4 flex w-full items-center justify-between rounded-full bg-[#ffa800] hover:bg-[#ffaa008c]"
           >
             <p className="text-base">Promo Semarang 20%</p>
             <p>
-              Berakhir dalam <br />{' '}
+              Berakhir dalam <br />
               <span className="text-sm font-bold">01.20.30</span>
             </p>
           </Button>
@@ -99,59 +88,19 @@ export default function ProductDetail({ product }: { product: any }) {
             </h3>
           </div>
           <Separator className="h-1" />
-          <div className="mt-8 flex w-full justify-between rounded">
-            <div>
-              <p>Pengambilan</p>
-              <Popover>
-                <PopoverTrigger asChild>
-                  <Button
-                    variant={'outline'}
-                    className={cn(
-                      'w-[280px] justify-start text-left font-normal',
-                      !date && 'text-muted-foreground'
-                    )}
-                  >
-                    <CalendarIcon className="mr-2 h-4 w-4" />
-                    {date ? format(date, 'PPP') : <span>Pick a date</span>}
-                  </Button>
-                </PopoverTrigger>
-                <PopoverContent className="w-auto p-0">
-                  <Calendar
-                    mode="single"
-                    selected={date}
-                    onSelect={setDate}
-                    initialFocus
-                  />
-                </PopoverContent>
-              </Popover>
-            </div>
-            <div>
-              <p>Hari</p>
-            </div>
-            <div>
-              <p>Pengembalian</p>
-              <Popover>
-                <PopoverTrigger asChild>
-                  <Button
-                    variant={'outline'}
-                    className={cn(
-                      'w-[280px] justify-start text-left font-normal',
-                      !date && 'text-muted-foreground'
-                    )}
-                  >
-                    <CalendarIcon className="mr-2 h-4 w-4" />
-                    {date ? format(date, 'PPP') : <span>Pick a date</span>}
-                  </Button>
-                </PopoverTrigger>
-                <PopoverContent className="w-auto p-0">
-                  <Calendar
-                    mode="single"
-                    selected={date}
-                    onSelect={setDate}
-                    initialFocus
-                  />
-                </PopoverContent>
-              </Popover>
+          <FormSewa />
+          <div className="card my-8 w-full bg-slate-500 text-primary-content">
+            <div className="card-body">
+              <h2 className="card-title text-base font-bold">
+                WARRANTY & SATISFACTION GUARANTEE
+              </h2>
+              <p>
+                Gratis penukaran produk atau upgrade produk cuma-cuma atau
+                jaminan refund penuh jika barang yang diterima tidak sesuai,
+                tidak layak.
+              </p>
+              <Separator className="my-2" />
+              <p>Bisa cancel, ganti alat atau tanggal kapanpun</p>
             </div>
           </div>
         </div>
