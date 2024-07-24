@@ -8,101 +8,120 @@ datasource db {
   directUrl = env("DIRECT_URL")
 }
 
-
 model Role {
-  id              String @id @default(uuid())
-  name            String @unique
-  users           User[]
+  id    String @id @default(uuid())
+  name  String @unique
+  users User[]
+}
+
+model Notification {
+  id        String    @id @default(uuid())
+  userId    String
+  message   String
+  createdAt DateTime
+  bookings  Booking[]
+  user      User      @relation(fields: [userId], references: [id])
 }
 
 model User {
   id              String         @id @default(uuid())
   displayName     String         @unique
-  password        String        
+  password        String
   email           String         @unique
   emailVerifToken String?        @db.VarChar(255)
-  emailVerifiedAt DateTime? 
-  rolesId         String
-  role            Role           @relation(fields: [rolesId], references: [id])
-  phone           String?         @unique
+  emailVerifiedAt DateTime?
+  phone           String?        @unique
   address         String?
   imageUrl        String?
+  rolesId         String
   bookings        Booking[]
-  products        Product[]
   notifications   Notification[]
+  venue           Venue?
+  roles           Role           @relation(fields: [rolesId], references: [id])
 }
 
 
-model Notification {
-  id        String      @id @default(uuid())
-  userId    String
-  message   String
-  createdAt DateTime
-  user      User?        @relation(fields: [userId], references: [id])
-  bookings  Booking[]
+model Venue {
+  id       String   @id @default(uuid())
+  userId   String   @unique
+  name     String
+  logo     String
+  location String
+  lat      String
+  long     String
+  products Product[]
+  user     User     @relation(fields: [userId], references: [id])
 }
-
 
 model Product {
-  userId      String
-  id          String    @id @default(uuid())
-  name        String
-  categoryId  String    
-  location    String?
-  address     String?
-  facilities  String?
-  pricePerHour Float
-  pricePerDay  Float
-  description String
-  imageUrl    String
-  user        User    @relation(fields: [userId], references: [id])
-  category    Categories @relation(fields: [categoryId], references: [id])
-  bookings    Booking[]
-
+  id            String        @id @default(uuid())
+  name          String
+  userId        String
+  venueId       String
+  categoryId    String
+  subcategoryId String
+  facilities    String[]
+  pricePerHour  Float
+  pricePerDay   Float
+  description   String
+  imageUrl      String
+  bookings      Booking[]
+  category      Categories      @relation(fields: [categoryId], references: [id])
+  subcategory   Subcategories   @relation(fields: [subcategoryId], references: [id])
+  venue         Venue         @relation(fields: [venueId], references: [id])
+  
+}
+model Categories {
+  id            String    @id @default(uuid())
+  name          String
+  Subcategories Subcategories[]
+  Products      Product[]
 }
 
-model Categories {
-  id          String @id @default(uuid())
+model Subcategories {
+  id          String    @id @default(uuid())
+  categoryId  String
   name        String
-  Products    Product[]
+  product     Product[]
+  category    Categories @relation(fields: [categoryId], references: [id])
 }
 
 
 model Booking {
-  id             String        @id @default(uuid())
+  id             String       @id @default(uuid())
   userId         String
   productId      String
   paymentId      String
   notificationId String
   bookingDate    DateTime
   duration       Float
-  user           User          @relation(fields: [userId], references: [id])
-  product        Product       @relation(fields: [productId], references: [id])
-  payment        Payment       @relation(fields: [paymentId], references: [id])
-  notification   Notification  @relation(fields: [notificationId], references: [id])
+  notification   Notification @relation(fields: [notificationId], references: [id])
+  payment        Payment      @relation(fields: [paymentId], references: [id])
+  product        Product      @relation(fields: [productId], references: [id])
+  user           User         @relation(fields: [userId], references: [id])
 }
 
 model Payment {
-  id             String        @id @default(uuid())
-  amount         Float
-  method         String
-  transactionId  String
-  transaction    Transaction   @relation(fields: [transactionId], references: [id])
-  booking        Booking[]
+  id            String      @id @default(uuid())
+  amount        Float
+  method        String
+  transactionId String
+  booking       Booking[]
+  transaction   Transaction @relation(fields: [transactionId], references: [id])
 }
 
 model Transaction {
-  id        String             @id @default(uuid())
+  id        String            @id @default(uuid())
   statusId  String
   amount    Float
   createdAt DateTime
-  status    TransactionStatus  @relation(fields: [statusId], references: [id])
   payments  Payment[]
+  status    TransactionStatus @relation(fields: [statusId], references: [id])
 }
 
 model TransactionStatus {
-  id            String         @id @default(uuid())
-  status        String
-  transactions  Transaction[]
+  id           String        @id @default(uuid())
+  status       String
+  transactions Transaction[]
 }
 

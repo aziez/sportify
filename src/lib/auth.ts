@@ -19,7 +19,7 @@ export const authOptions: NextAuthOptions = {
           throw new Error('Missing credentials');
         }
 
-        const user = await prisma.user.findFirst({
+        const user = await prisma.user.findUnique({
           where: { email: credentials.email },
         });
 
@@ -27,7 +27,12 @@ export const authOptions: NextAuthOptions = {
           throw new Error('Invalid email or password');
         }
 
-        const isVerified = user.emailVerifToken === null;
+        const isVerified =
+          user.emailVerifToken === null || user.emailVerifiedAt !== null;
+
+        const role = await prisma.role.findUnique({
+          where: { id: user?.rolesId },
+        });
 
         const passwordMatch = await compare(
           credentials.password,
@@ -42,7 +47,7 @@ export const authOptions: NextAuthOptions = {
           id: user.id,
           displayName: user.displayName,
           email: user.email,
-          role: user.rolesId,
+          role: role.name,
           isVerified,
         };
       },

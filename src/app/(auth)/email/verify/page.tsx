@@ -2,7 +2,7 @@
 'use client';
 
 // Importing necessary actions and components
-import { useRouter, useSearchParams } from 'next/navigation';
+import { redirect, useRouter, useSearchParams } from 'next/navigation';
 import { useEffect, useState } from 'react';
 import Link from 'next/link';
 import toast, { Toaster } from 'react-hot-toast';
@@ -16,6 +16,7 @@ import {
   CardTitle,
 } from '@/components/ui/card';
 import { Meteors } from '@/components/ui/meteors';
+import { useSession } from 'next-auth/react';
 
 // Defining the Email Verification Component
 export default function VerifyEmail() {
@@ -25,6 +26,7 @@ export default function VerifyEmail() {
   const email = searchParams.get('email');
   const token = searchParams.get('token');
   const router = useRouter();
+  const session = useSession();
 
   // State for managing loading state and result message
   const [isLoading, setIsLoading] = useState(true);
@@ -37,17 +39,15 @@ export default function VerifyEmail() {
         if (!email || !token) {
           throw new Error('Missing required fields');
         }
-
+        
         const user = await findUserByEmail(email);
-
-        console.log(user, 'DATA USERRRRRRRRR');
 
         if (user?.emailVerifToken !== null) {
           await emailVerification();
         } else {
           setIsLoading(false);
           toast.success('Your email have been verified !');
-          router.push('/login');
+          redirect('/login');
         }
       } catch (error) {
         console.error('Error verifying email:', error);
@@ -65,19 +65,16 @@ export default function VerifyEmail() {
         if (!user) {
           throw new Error('Invalid verification token');
         }
-
-        // Validating the verification token
         if (token !== user.emailVerifToken) {
           throw new Error('Invalid verification token');
         }
 
         console.log(user, 'DATAA USERRRR');
+        console.log(session, 'DATAA SESSSION');
 
         // Updating user verification status in the database
 
         await verifyEmail(user.email);
-
-        // Updating result message and indicating loading completion
         setResult('Email verified successfully. Please relogin.');
         setIsLoading(false);
       } catch (error) {
@@ -104,19 +101,24 @@ export default function VerifyEmail() {
 
         <CardDescription className="mb-4 text-base font-normal">
           <p className="font-jakarta text-lg text-white">
-            {isLoading
-              ? 'Please wait while we verify your account information.'
-              : result}
+            {isLoading ? (
+              <>
+                <p>Please wait while we verify your account information</p>
+                <span className="loading loading-infinity loading-lg text-white"></span>
+              </>
+            ) : (
+              result
+            )}
           </p>
-
-          <span className="loading loading-infinity loading-lg text-white"></span>
         </CardDescription>
 
-        <CardFooter>
-          <Button variant={'shine'} className="w-full">
-            <Link href={'/login'}>Back to login</Link>
-          </Button>
-        </CardFooter>
+        {!isLoading && (
+          <CardFooter>
+            <Button variant={'shine'} className="w-full" size="lg">
+              <Link href={'/login'}>Back to login</Link>
+            </Button>
+          </CardFooter>
+        )}
 
         {/* Meaty part - Meteor effect */}
         <Meteors number={50} />
