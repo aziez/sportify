@@ -2,8 +2,10 @@
 import { Card, CardContent } from '@/components/ui/card';
 import { Button } from '@/components/ui/button';
 import { motion, MotionValue } from 'framer-motion';
+import Link from 'next/link';
 
 export default function CardProduct({ product }: { product: any }) {
+  const link = `futsal-day/${product?.link}`;
   return (
     <motion.div
       whileHover={{
@@ -26,8 +28,10 @@ export default function CardProduct({ product }: { product: any }) {
             size="sm"
             className="absolute right-4 top-4 z-10 opacity-0 transition-opacity group-hover:opacity-100"
           >
-            <ShoppingCartIcon className="h-4 w-4" />
-            <span className="sr-only">Add to cart</span>
+            <Link href={link}>
+              <ShoppingCartIcon className="h-4 w-4" />
+              <span className="sr-only">Add to cart</span>
+            </Link>
           </Button>
         </div>
         <CardContent className="p-4 md:p-6">

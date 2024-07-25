@@ -13,9 +13,11 @@ import {
 } from '@/components/ui/dropdown-menu';
 import { Avatar, AvatarFallback, AvatarImage } from '@/components/ui/avatar';
 import { signOut, useSession } from 'next-auth/react';
+import { useRouter } from 'next/navigation';
 
 export const ProfileMenu = () => {
   const { data: session } = useSession();
+  const router = useRouter();
 
   return (
     <DropdownMenu>
@@ -34,7 +36,9 @@ export const ProfileMenu = () => {
       <DropdownMenuContent align="end">
         <DropdownMenuLabel>{session?.user?.displayName}</DropdownMenuLabel>
         <DropdownMenuSeparator />
-        <DropdownMenuItem>Profile</DropdownMenuItem>
+        <DropdownMenuItem onClick={() => router.push('/dashboard')}>
+          Profile
+        </DropdownMenuItem>
         <DropdownMenuItem>Setting</DropdownMenuItem>
         <DropdownMenuItem onClick={() => signOut()}>Logout</DropdownMenuItem>
       </DropdownMenuContent>
