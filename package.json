@@ -38,6 +38,7 @@
     "@tanstack/react-query-devtools": "^5.51.11",
     "@types/bcrypt": "^5.0.2",
     "@types/nodemailer": "^6.4.15",
+    "@uploadcare/react-uploader": "^0.6.1",
     "axios": "^1.7.2",
     "bcrypt": "^5.1.1",
     "class-variance-authority": "^0.7.0",

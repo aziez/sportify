@@ -2,10 +2,15 @@ generator client {
   provider = "prisma-client-js"
 }
 
+// datasource db {
+//   provider  = "postgresql"
+//   url       = env("DATABASE_URL")
+//   directUrl = env("DIRECT_URL")
+// }
 datasource db {
-  provider  = "postgresql"
+  provider  = "mysql"
   url       = env("DATABASE_URL")
-  directUrl = env("DIRECT_URL")
+  // directUrl = env("DIRECT_URL")
 }
 
 model Role {
@@ -47,8 +52,8 @@ model Venue {
   name     String
   logo     String
   location String
-  lat      String
-  long     String
+  lat      Float
+  lng      Float
   products Product[]
   user     User     @relation(fields: [userId], references: [id])
 }
@@ -60,7 +65,6 @@ model Product {
   venueId       String
   categoryId    String
   subcategoryId String
-  facilities    String[]
   pricePerHour  Float
   pricePerDay   Float
   description   String

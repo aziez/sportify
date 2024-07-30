@@ -17,13 +17,14 @@ import {
   FormMessage,
 } from '@/components/ui/form';
 import { Input } from '@/components/ui/input';
-import { Label } from '@/components/ui/label';
 import { Textarea } from '@/components/ui/textarea';
 import { zodResolver } from '@hookform/resolvers/zod';
-import { useEffect, useState } from 'react';
+import { useEffect, useState, useTransition } from 'react';
 import { useForm } from 'react-hook-form';
 import { z } from 'zod';
 import VanueMaps from './vanue-map';
+import UploadsLogo from './venue-uploads';
+import { vanueApi } from '@/stores/api/api';
 
 const FormSchema = z.object({
   name: z.string().min(2, {
@@ -32,9 +33,15 @@ const FormSchema = z.object({
   location: z.string().min(2, {
     message: 'Vanue location is required',
   }),
-  logo: z.string().optional(),
-  lat: z.number().optional(),
-  lng: z.number().optional(),
+  logo: z.string().min(2, {
+    message: 'Vanue logo is required',
+  }),
+  lat: z.number({
+    invalid_type_error: 'Latitude is required',
+  }),
+  lng: z.number({
+    invalid_type_error: 'Longitude is required',
+  }),
 });
 
 const VanueForm = () => {
@@ -42,6 +49,8 @@ const VanueForm = () => {
   const [position, setPosition] = useState<{ lat: number; lng: number } | null>(
     null
   );
+
+  const [pending, start] = useTransition();
 
   const form = useForm<z.infer<typeof FormSchema>>({
     resolver: zodResolver(FormSchema),
@@ -51,6 +60,15 @@ const VanueForm = () => {
     },
   });
 
+  const handleUploadsLogo = (item) => {
+    if (item.allEntries[0].status === 'success') {
+      const urls = item.allEntries.map((entry) => entry.cdnUrl);
+      form.setValue('logo', urls[0]);
+    } else {
+      console.log('File upload in progress');
+    }
+  };
+
   useEffect(() => {
     if (position) {
       form.setValue('lat', position.lat);
@@ -59,8 +77,16 @@ const VanueForm = () => {
   }, [position, form]);
 
   function onSubmit(data: z.infer<typeof FormSchema>) {
-    console.log(data);
-    setEdited(false); // Reset edited state after form submission
+    try {
+      start(async () => {
+        await vanueApi.addVanue(data).then((res) => {
+          console.log(res, 'RESPONSEEEE');
+          setEdited(false); // Reset edited state after form submission
+        });
+      });
+    } catch (error) {
+      console.log(error, 'ERRRORE');
+    }
   }
 
   return (
@@ -68,7 +94,7 @@ const VanueForm = () => {
       <CardHeader className="flex flex-row items-center justify-between">
         <div className="grid gap-2">
           <CardTitle>Vanue</CardTitle>
-          <CardDescription>Your vanues store information.</CardDescription>
+          <CardDescription>Your vanue store information.</CardDescription>
         </div>
         <div className="flex gap-2">
           <Button variant="outline" onClick={() => setEdited(!edited)}>
@@ -120,14 +146,12 @@ const VanueForm = () => {
                 name="logo"
                 render={({ field }) => (
                   <FormItem className="flex w-full flex-col">
-                    <FormLabel>Vanue logo</FormLabel>
+                    <FormLabel>Vanue Logo</FormLabel>
                     <FormControl>
-                      <Input
-                        type="file"
-                        disabled={!edited}
-                        className="file-input file-input-bordered file-input-info w-full"
-                        {...field}
-                      />
+                      <>
+                        <Input type="hidden" {...field} />
+                        <UploadsLogo handleChangeEvenet={handleUploadsLogo} />
+                      </>
                     </FormControl>
                     <FormMessage />
                   </FormItem>
@@ -140,17 +164,15 @@ const VanueForm = () => {
                   name="lat"
                   render={({ field }) => (
                     <FormItem className="flex w-full flex-col">
-                      {/* <FormLabel>Latitude</FormLabel> */}
                       <FormControl>
                         <Input
                           readOnly
                           type="hidden"
                           placeholder="lat..."
-                          value={setPosition ? position?.lng : null}
+                          value={position ? position.lat : ''}
                           {...field}
                         />
                       </FormControl>
-                      <FormMessage />
                     </FormItem>
                   )}
                 />
@@ -159,17 +181,15 @@ const VanueForm = () => {
                   name="lng"
                   render={({ field }) => (
                     <FormItem className="flex w-full flex-col">
-                      {/* <FormLabel>Longitude</FormLabel> */}
                       <FormControl>
                         <Input
                           readOnly
                           type="hidden"
-                          placeholder="long..."
-                          value={setPosition ? position?.lng : null}
+                          placeholder="lng..."
+                          value={position ? position.lng : ''}
                           {...field}
                         />
                       </FormControl>
-                      <FormMessage />
                     </FormItem>
                   )}
                 />
@@ -182,9 +202,19 @@ const VanueForm = () => {
                 <FormMessage />
               </FormItem>
             </div>
-            <Button variant="ringHover" type="submit" className="mt-8 w-full">
-              Save Vanue
-            </Button>
+            {edited && (
+              <Button
+                disabled={pending}
+                variant="ringHover"
+                type="submit"
+                className="mt-8 w-full"
+              >
+                {pending && (
+                  <span className="loading-xl loading loading-dots mr-4"></span>
+                )}
+                Save Vanue
+              </Button>
+            )}
           </form>
         </Form>
       </CardContent>
@@ -193,58 +223,3 @@ const VanueForm = () => {
 };
 
 export default VanueForm;
-
-//
-// <div className="grid gap-2">
-//                 <Label htmlFor="name">Name</Label>
-//                 <Input
-//                   disabled={!edited}
-//                   id="name"
-//                   defaultValue="The Venue"
-//                   {...form.register('name')}
-//                 />
-//               </div>
-//               <div className="grid gap-2">
-//                 <Label htmlFor="logo">Logo</Label>
-//                 <Input disabled={!edited} id="logo" type="file" />
-//               </div>
-//               <div className="grid gap-2">
-//                 <Label htmlFor="location">Location</Label>
-//                 <Input
-//                   disabled={!edited}
-//                   id="location"
-//                   defaultValue="123 Main St, Anytown USA"
-//                   {...form.register('location')}
-//                 />
-//               </div>
-//               <div className="grid grid-cols-2 gap-4">
-//                 <div className="grid gap-2">
-//                   <Label htmlFor="latitude">Latitude</Label>
-//                   <Input
-//                     disabled={!edited}
-//                     id="latitude"
-//                     type="number"
-//                     defaultValue="40.730610"
-//                   />
-//                 </div>
-//                 <div className="grid gap-2">
-//                   <Label htmlFor="longitude">Longitude</Label>
-//                   <Input
-//                     disabled={!edited}
-//                     id="longitude"
-//                     type="number"
-//                     defaultValue="-73.935242"
-//                   />
-//                 </div>
-//               </div>
-//               <div className="grid gap-2">
-//                 <Label htmlFor="map">Map</Label>
-//                 <div className="relative w-full">
-//                   <img
-//                     src="/placeholder.svg"
-//                     alt="Map"
-//                     height={250}
-//                     className="aspect-video w-full rounded-md object-cover"
-//                   />
-//                 </div>
-//               </div>

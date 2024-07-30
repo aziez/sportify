@@ -8,11 +8,27 @@ import prisma from './prisma';
 import EmailTemplateVerify from '../components/emails/verify-template';
 
 export const sendVerificationEmail = async (email: string, token: string) => {
+  // const transporter = nodemailer.createTransport({
+  //   service: 'gmail',
+  //   host: process.env.NEXT_PUBLIC_MAIL_HOST,
+  //   secure: true,
+  //   port: Number(process.env.NEXT_PUBLIC_MAIL_PORT) || 465,
+  //   auth: {
+  //     user: process.env.NEXT_PUBLIC_MAIL_FROM,
+  //     pass: process.env.NEXT_PUBLIC_MAIL_PASSWORD,
+  //   },
+  // });
   const transporter = nodemailer.createTransport({
     host: process.env.NEXT_PUBLIC_MAIL_HOST,
-    port: Number(process.env.NEXT_PUBLIC_MAIL_PORT) || 0,
+    secure: true,
+    port: Number(process.env.NEXT_PUBLIC_MAIL_PORT) || 465,
+    tls: {
+      ciphers: 'SSLv3',
+    },
+    debug: true,
+    connectionTimeout: 10000,
     auth: {
-      user: process.env.NEXT_PUBLIC_MAIL_USERNAME,
+      user: process.env.NEXT_PUBLIC_MAIL_FROM,
       pass: process.env.NEXT_PUBLIC_MAIL_PASSWORD,
     },
   });

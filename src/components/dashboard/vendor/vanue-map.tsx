@@ -9,7 +9,14 @@ import {
   useMapEvents,
 } from 'react-leaflet';
 
+import L from 'leaflet';
+
 const LocationMarker = ({ position, setPosition }) => {
+  const mapIcon = L.icon({
+    iconUrl: '/svg/mappin.svg',
+    iconSize: [32, 32],
+    iconAnchor: [16, 32],
+  });
   const map = useMapEvents({
     click() {
       map.locate();
@@ -21,7 +28,7 @@ const LocationMarker = ({ position, setPosition }) => {
   });
 
   return position === null ? null : (
-    <Marker position={position}>
+    <Marker position={position} icon={mapIcon}>
       <Popup>You are here</Popup>
     </Marker>
   );
