@@ -26,7 +26,7 @@ export const sendVerificationEmail = async (email: string, token: string) => {
       ciphers: 'SSLv3',
     },
     debug: true,
-    connectionTimeout: 10000,
+    connectionTimeout: 100000,
     auth: {
       user: process.env.NEXT_PUBLIC_MAIL_FROM,
       pass: process.env.NEXT_PUBLIC_MAIL_PASSWORD,

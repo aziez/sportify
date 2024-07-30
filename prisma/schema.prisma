@@ -30,13 +30,11 @@ model Notification {
 
 model User {
   id              String         @id @default(uuid())
-  displayName     String         @unique
+  displayName     String         
   password        String
   email           String         @unique
   emailVerifToken String?        @db.VarChar(255)
   emailVerifiedAt DateTime?
-  phone           String?        @unique
-  address         String?
   imageUrl        String?
   rolesId         String
   bookings        Booking[]

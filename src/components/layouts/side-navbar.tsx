@@ -65,7 +65,7 @@ const SideNavbar = () => {
               <Users className="h-4 w-4" />
               Customers
             </Link>
-            {session?.user?.role === 'vendor' && (
+            {session?.user?.role.toLowerCase() === 'vendor' && (
               <Link
                 href="/dashboard/vanues"
                 className={`flex items-center gap-3 rounded-lg px-3 py-2 transition-all ${pathname === '/dashboard/vanues' ? 'bg-muted text-primary' : 'text-muted-foreground hover:text-primary'}`}

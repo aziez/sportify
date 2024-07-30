@@ -40,13 +40,13 @@ const main = async () => {
   // Create roles
   const vendorRole = await prisma.role.create({
     data: {
-      name: 'vendor',
+      name: 'Vendor',
       users: {},
     },
   });
   const customer = await prisma.role.create({
     data: {
-      name: 'customer',
+      name: 'Customer',
       users: {},
     },
   });
