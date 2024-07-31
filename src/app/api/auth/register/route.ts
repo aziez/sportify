@@ -54,6 +54,7 @@ async function registerHandle(
     const verificationToken = await generateEmailVerificationToken();
 
     const isEmailExist = await checkIsExits(email);
+
     if (isEmailExist) {
       return NextResponse.json(
         { message: 'Email already exists' },
@@ -91,15 +92,6 @@ async function registerHandle(
     );
   } catch (e) {
     console.error('Error in registration:', e);
-    if (
-      e instanceof Prisma.PrismaClientKnownRequestError &&
-      e.code === 'P2002'
-    ) {
-      return NextResponse.json(
-        { message: 'Email is already registered' },
-        { status: 400 }
-      );
-    }
     return NextResponse.json(
       { message: 'Something went wrong. Please try again later.' },
       { status: 500 }
