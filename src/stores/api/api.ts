@@ -10,6 +10,7 @@ export const emailApi = {
 
 export const vanueApi = {
   addVanue: (data: any) => axiosInstance.post('/api/vanue', data),
+  uploadLogo: (data: any) => axiosInstance.post('/api/uploads/logo', data),
 };
 
 export const productsApi = {

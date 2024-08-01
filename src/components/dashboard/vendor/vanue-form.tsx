@@ -25,6 +25,8 @@ import { z } from 'zod';
 import VanueMaps from './vanue-map';
 import UploadsLogo from './venue-uploads';
 import { vanueApi } from '@/stores/api/api';
+import axiosInstance from '@/lib/axios';
+import FileUploader from '@/components/uploads/file-uploader';
 
 const FormSchema = z.object({
   name: z.string().min(2, {
@@ -60,13 +62,22 @@ const VanueForm = () => {
     },
   });
 
-  const handleUploadsLogo = (item) => {
-    if (item.allEntries[0].status === 'success') {
-      const urls = item.allEntries.map((entry) => entry.cdnUrl);
-      form.setValue('logo', urls[0]);
-    } else {
-      console.log('File upload in progress');
-    }
+  const handleUploadsLogo = async (fileInfo: any) => {
+    const fileUrl = fileInfo.cdnUrl;
+    const fileName = fileInfo.name;
+
+    console.log(fileInfo, 'INFOOO FILEEEE');
+
+    const response = await vanueApi.uploadLogo({ fileUrl, fileName });
+
+    console.log(response, 'RESPONSE UPLOADSSSSS');
+
+    // if (item.allEntries[0].status === 'success') {
+    //   const urls = item.allEntries.map((entry) => entry.cdnUrl);
+    //   form.setValue('logo', urls[0]);
+    // } else {
+    //   console.log('File upload in progress');
+    // }
   };
 
   useEffect(() => {
@@ -150,7 +161,8 @@ const VanueForm = () => {
                     <FormControl>
                       <>
                         <Input type="hidden" {...field} />
-                        <UploadsLogo handleChangeEvenet={handleUploadsLogo} />
+                        {/* <UploadsLogo handleChangeEvenet={handleUploadsLogo} /> */}
+                        <FileUploader destination="/sportify/logo" />
                       </>
                     </FormControl>
                     <FormMessage />
