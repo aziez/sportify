@@ -1,24 +1,30 @@
 'use client';
 import { Card, CardContent } from '@/components/ui/card';
 import { Button } from '@/components/ui/button';
-import { motion, MotionValue } from 'framer-motion';
+import { motion } from 'framer-motion';
 import Link from 'next/link';
 
-export default function CardProduct({ product }: { product: any }) {
-  const link = `futsal-day/${product?.link}`;
+type Product = {
+  title: string;
+  img: string;
+  harga: number;
+  link: string;
+  badge?: string;
+};
+
+export default function CardProduct({ product }: { product: Product }) {
+  const link = `/${product?.link}`; // Menyesuaikan link dengan path yang sesuai
   return (
     <motion.div
-      whileHover={{
-        scale: 0.9,
-      }}
-      key={product?.id}
+      whileHover={{ scale: 0.95 }}
+      key={product?.title}
       className="group/product"
     >
       <Card className="w-full max-w-sm overflow-hidden">
         <div className="group relative">
           <img
             src={product?.img}
-            alt="Product Image"
+            alt={product?.title}
             width={600}
             height={600}
             className="aspect-square rounded-lg object-cover transition-opacity group-hover:opacity-80"
@@ -38,14 +44,12 @@ export default function CardProduct({ product }: { product: any }) {
           <div className="grid gap-2">
             <h3 className="text-lg font-semibold">{product?.title}</h3>
             <p className="text-sm text-muted-foreground">{product?.harga}</p>
-            {product?.badge ? (
+            {product?.badge && (
               <div className="flex items-center justify-end">
                 <div className="badge badge-info p-4 text-white">
                   {product?.badge}
                 </div>
               </div>
-            ) : (
-              <></>
             )}
           </div>
         </CardContent>
