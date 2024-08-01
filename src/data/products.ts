@@ -35,10 +35,10 @@ type Product = {
     },
     volly: {
       bola: [
-        { title: 'Basketball Nike Elite', img: '/sample/volly/b1.png', harga: 7000, link: 'nikeelite', badge: 'Best Seller' },
-        { title: 'Basketball Spalding TF-1000', img: '/sample/volly/b2.png', harga: 8000, link: 'spaldingtf1000', badge: 'New Arrivals' },
-        { title: 'Basketball Wilson Evolution', img: '/sample/volly/b3.png', harga: 7500, link: 'wilsonevolution', badge: 'Best Seller' },
-        { title: 'Basketball Molten GG7X', img: '/sample/volly/b4.png', harga: 7200, link: 'moltengg7x', badge: 'Best Seller' },
+        { title: 'Bola volly PSYCHE Outdor Beach', img: '/sample/volly/b1.png', harga: 7000, link: 'nikeelite', badge: 'Best Seller' },
+        { title: 'Bola volly AGNITE No 5 PVC indoor', img: '/sample/volly/b2.png', harga: 8000, link: 'spaldingtf1000', badge: 'New Arrivals' },
+        { title: 'Bola volly MIKASA 2200 Supergold', img: '/sample/volly/b3.png', harga: 7500, link: 'wilsonevolution', badge: 'Best Seller' },
+        { title: 'Bola volly MIKASA 330 HOLOGRAM', img: '/sample/volly/b4.png', harga: 7200, link: 'moltengg7x', badge: 'Best Seller' },
       ],
       jersey: [
         { title: 'Basketball Jersey Nike', img: '/sample/volly/jersey1.png', harga: 6000, link: '#' },
@@ -60,6 +60,8 @@ type Product = {
       ],
     },
   };
+
+  
   
   export default products;
   
