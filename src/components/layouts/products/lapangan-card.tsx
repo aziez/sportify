@@ -4,9 +4,9 @@ import { Button } from '@/components/ui/button';
 import { ArrowRightCircleIcon } from 'lucide-react';
 
 type Product = {
-  title: string;
-  img: string;
-  harga: number;
+  name: string;
+  imageUrl: string;
+  price: number;
   link: string;
 };
 
@@ -15,8 +15,8 @@ export default function CardLapangan({ product }: { product: Product }) {
     <Card className="w-full overflow-hidden">
       <div className="group relative">
         <img
-          src={product?.img}
-          alt={product?.title}
+          src={product?.imageUrl}
+          alt={product?.name}
           width={6000}
           height={600}
           className="aspect-video object-cover transition-opacity group-hover:opacity-80"
@@ -32,9 +32,9 @@ export default function CardLapangan({ product }: { product: Product }) {
       </div>
       <CardContent className="p-4 md:p-6">
         <div className="grid gap-2">
-          <h3 className="text-lg font-semibold">{product?.title}</h3>
+          <h3 className="text-lg font-semibold">{product?.name}</h3>
           <p className="text-sm text-muted-foreground">
-            {product?.harga} / jam
+            {product?.price} / jam
           </p>
           <div className="flex items-center justify-between">
             <Button

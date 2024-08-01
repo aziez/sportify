@@ -5,9 +5,9 @@ import { motion } from 'framer-motion';
 import Link from 'next/link';
 
 type Product = {
-  title: string;
-  img: string;
-  harga: number;
+  name: string;
+  imageUrl: string;
+  price: number;
   link: string;
   badge?: string;
 };
@@ -17,14 +17,14 @@ export default function CardProduct({ product }: { product: Product }) {
   return (
     <motion.div
       whileHover={{ scale: 0.95 }}
-      key={product?.title}
+      key={product?.name}
       className="group/product"
     >
       <Card className="w-full max-w-sm overflow-hidden">
         <div className="group relative">
           <img
-            src={product?.img}
-            alt={product?.title}
+            src={product?.imageUrl}
+            alt={product?.name}
             width={600}
             height={600}
             className="aspect-square rounded-lg object-cover transition-opacity group-hover:opacity-80"
@@ -42,8 +42,8 @@ export default function CardProduct({ product }: { product: Product }) {
         </div>
         <CardContent className="p-4 md:p-6">
           <div className="grid gap-2">
-            <h3 className="text-lg font-semibold">{product?.title}</h3>
-            <p className="text-sm text-muted-foreground">{product?.harga}</p>
+            <h3 className="text-lg font-semibold">{product?.name}</h3>
+            <p className="text-sm text-muted-foreground">{product?.price}</p>
             {product?.badge && (
               <div className="flex items-center justify-end">
                 <div className="badge badge-info p-4 text-white">

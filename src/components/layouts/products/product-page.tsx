@@ -11,9 +11,9 @@ import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
 
 type Product = {
-  title: string;
-  img: string;
-  harga: number;
+  name: string;
+  imageUrl: string;
+  price: number;
   link: string;
   badge?: string;
 };
