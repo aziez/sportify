@@ -22,6 +22,14 @@ const MainNavbar = () => {
       link: '/',
     },
     {
+      label: 'Lapangan',
+      link: '/venue'
+    },
+    {
+      label: 'Sewa Perlengkapan',
+      link: '/rental'
+    },
+    {
       label: 'Syarat dan Cara Sewa',
       link: '/terms-conditions',
     },
