@@ -23,8 +23,8 @@ enum SubCategoryType {
 }
 
 enum RoleType {
-  VENDOR
-  CUSTOMER
+  Vendor
+  Customer
 }
 
 enum VarianType {
