@@ -1,15 +1,22 @@
 'use client';
 import { Card, CardContent } from '@/components/ui/card';
 import { Button } from '@/components/ui/button';
-import {  ArrowRightCircleIcon } from 'lucide-react';
+import { ArrowRightCircleIcon } from 'lucide-react';
 
-export default function CardLapangan({ product }: { product: any }) {
+type Product = {
+  name: string;
+  imageUrl: string;
+  price: number;
+  link: string;
+};
+
+export default function CardLapangan({ product }: { product: Product }) {
   return (
     <Card className="w-full overflow-hidden">
       <div className="group relative">
         <img
-          src={product?.img}
-          alt="Product Image"
+          src={product?.imageUrl}
+          alt={product?.name}
           width={6000}
           height={600}
           className="aspect-video object-cover transition-opacity group-hover:opacity-80"
@@ -25,15 +32,11 @@ export default function CardLapangan({ product }: { product: any }) {
       </div>
       <CardContent className="p-4 md:p-6">
         <div className="grid gap-2">
-          <h3 className="text-lg font-semibold">{product?.title}</h3>
+          <h3 className="text-lg font-semibold">{product?.name}</h3>
           <p className="text-sm text-muted-foreground">
-            Lorem ipsum dolor sit amet, consectetur adipisicing elit. Nesciunt
-            ab, doloribus dolore officia eaque nam.
+            {product?.price} / jam
           </p>
           <div className="flex items-center justify-between">
-            <p className="text-sm text-muted-foreground">
-              {product?.harga} / jam
-            </p>
             <Button
               variant={'outline'}
               size={'default'}

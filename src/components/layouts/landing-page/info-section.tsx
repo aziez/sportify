@@ -60,7 +60,7 @@ const InfoSection = () => {
             </CarouselContent>
           </Carousel>
 
-          <Link href={'/futsal-day'}>
+          <Link href={'/futsal'}>
             <Button
               variant={'outline'}
               className="rounded-fll mt-12 w-[50%] rounded-full border-black"
@@ -134,12 +134,14 @@ const InfoSection = () => {
               </CarouselItem>
             </CarouselContent>
           </Carousel>
-          <Button
-            variant={'outline'}
-            className="rounded-fll mt-12 w-[50%] rounded-full border-black"
-          >
-            Sewa Sekarang <ArrowRightCircleIcon className="ml-4" />
-          </Button>
+          <Link href={'/volly'}>
+            <Button
+              variant={'outline'}
+              className="rounded-fll mt-12 w-[50%] rounded-full border-black"
+            >
+              Sewa Sekarang <ArrowRightCircleIcon className="ml-4" />
+            </Button>
+          </Link>
         </div>
       </div>
       <Separator className="mb-8 hidden h-1 md:flex" />
@@ -188,12 +190,14 @@ const InfoSection = () => {
               </CarouselItem>
             </CarouselContent>
           </Carousel>
-          <Button
-            variant={'outline'}
-            className="rounded-fll mt-12 w-[50%] rounded-full border-black"
-          >
-            Sewa Sekarang <ArrowRightCircleIcon className="ml-4" />
-          </Button>
+          <Link href={'/badminton'}>
+            <Button
+              variant={'outline'}
+              className="rounded-fll mt-12 w-[50%] rounded-full border-black"
+            >
+              Sewa Sekarang <ArrowRightCircleIcon className="ml-4" />
+            </Button>
+          </Link>
         </div>
         <div className="flex items-center justify-center">
           <Image
