@@ -13,6 +13,7 @@ import {
   BreadcrumbSeparator,
 } from '@/components/ui/breadcrumb';
 import { HomeIcon } from 'lucide-react';
+import SideBar from '@/components/dashboard/sidebar/sidebar-bar';
 
 export default function Dashboard({ children }) {
   const { data: session } = useSession();
@@ -30,7 +31,7 @@ export default function Dashboard({ children }) {
 
   return (
     <div className="grid min-h-screen w-full md:grid-cols-[220px_1fr] lg:grid-cols-[280px_1fr]">
-      <SideNavbar />
+      <SideBar />
       <div className="flex flex-col">
         <TopNavbar />
         <main className="flex flex-1 flex-col gap-4 p-4 lg:gap-6 lg:p-6">

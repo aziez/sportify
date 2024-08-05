@@ -4,9 +4,9 @@ import prisma from '@/lib/prisma';
 
 export async function GET(
   req: NextRequest,
-  { params }: { params: { userId: string } }
+  { params }: { params: { id: string } }
 ) {
-  const userId = params.userId;
+  const userId = params.id;
 
   console.log(userId, 'DATA IDDD');
 

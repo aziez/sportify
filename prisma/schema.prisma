@@ -108,7 +108,7 @@ model Variant {
 model Field {
   id             String       @id @default(uuid())
   name           String
-  venueId        String
+  venueId        String       @unique
   fieldType      CategoryType
   categoriesId   String
   availableStock Int
@@ -116,8 +116,6 @@ model Field {
   pricePerDay    Float
   description    String
   imageUrl       String
-  lat            String
-  lng            String
   location       String
   createdAt      DateTime     @default(now())
   bookings       Booking[]

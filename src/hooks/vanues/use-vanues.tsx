@@ -1,19 +1,16 @@
+/* eslint-disable react-hooks/rules-of-hooks */
 'use client';
 
+import { useMutation, useQuery, useQueryClient } from '@tanstack/react-query';
+
 import { vanueApi } from '@/stores/api/api';
-import {
-  QueryClient,
-  useMutation,
-  useQuery,
-  useQueryClient,
-} from '@tanstack/react-query';
 
 interface VanueInterface {
-  name: String;
-  localtion: String;
-  logo: String;
-  lat: Number;
-  lng: Number;
+  name: string;
+  localtion: string;
+  logo: string;
+  lat: number;
+  lng: number;
 }
 
 const fetchVanue = async (userId: string) => {

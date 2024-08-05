@@ -19,4 +19,5 @@ export const productsApi = {
 };
 export const categoriesApi = {
   allCategories: () => axiosInstance.get('/api/categories'),
+  // allCategories: () => axiosInstance.get('/api/categories'),
 };

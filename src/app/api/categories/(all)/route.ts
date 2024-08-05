@@ -16,9 +16,11 @@ export async function GET(req: NextRequest) {
       select: {
         id: true,
         name: true,
+        Subcategories: true,
         Products: true,
+        Fields: true,
         _count: {
-          select: { Products: true },
+          select: { Products: true, Fields: true },
         },
       },
     });

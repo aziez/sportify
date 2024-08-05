@@ -12,10 +12,25 @@ export async function GET(req: NextRequest) {
   }
 
   try {
-    const products = await prisma.product.findMany();
+    const fields = await prisma.field.findMany({
+      select: {
+        id: true,
+        name: true,
+        venueId: true,
+        venue: true,
+        fieldType: true,
+        Categories: true,
+        availableStock: true,
+        pricePerHour: true,
+        pricePerDay: true,
+        description: true,
+        imageUrl: true,
+        location: true,
+      },
+    });
 
     return NextResponse.json(
-      { message: `Successfully get data products`, data: products },
+      { message: `Successfully get data fields`, data: fields },
       { status: 200 }
     );
   } catch (error) {

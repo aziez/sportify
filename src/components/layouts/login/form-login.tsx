@@ -65,7 +65,6 @@ const FormLogin = () => {
 
   return (
     <Form {...form}>
-      <Toaster />
       <form
         onSubmit={handleSubmit(onSubmit)}
         className="2x:mt-7 mt-5 space-y-6">
