@@ -6,67 +6,64 @@ import CardProduct from '@/components/layouts/products/product-card';
 const Product = {
   futsal: [
     {
-      name: 'Bola Futsal',
-      imageUrl: '/sample/futsal/b1.png',
-      price: 50000,
+      title: 'Bola Futsal',
+      img: '/sample/futsal/b1.png',
+      harga: 50000,
       link: '/futsal-bola',
     },
     {
-      name: 'Bola Futsal',
-      imageUrl: '/sample/futsal/b2.png',
-      price: 30000,
-      link: '/futsal-vest'
+      title: 'Bola Futsal',
+      img: '/sample/futsal/b2.png',
+      harga: 30000,
+      link: '/futsal-vest',
     },
     {
-      name: 'Bola Futsal',
-      imageUrl: '/sample/futsal/b3.png',
-      price: 30000,
-      link: '/futsal-vest'
+      title: 'Bola Futsal',
+      img: '/sample/futsal/b3.png',
+      harga: 30000,
+      link: '/futsal-vest',
     },
   ],
   volly: [
     {
-      name: 'Bola Volley',
-      imageUrl: '/sample/volly/b1.png',
-      price: 40000,
+      title: 'Bola Volley',
+      img: '/sample/volly/b1.png',
+      harga: 40000,
       link: '/volley-ball',
     },
     {
-      name: 'Bola Volley',
-      imageUrl: '/sample/volly/b2.png',
-      price: 60000,
-      link: '/volley-jersey'
+      title: 'Bola Volley',
+      img: '/sample/volly/b2.png',
+      harga: 60000,
+      link: '/volley-jersey',
     },
     {
-      name: 'Bola Volley',
-      imageUrl: '/sample/volly/b3.png',
-      price: 60000,
-      link: '/volley-jersey'
+      title: 'Bola Volley',
+      img: '/sample/volly/b3.png',
+      harga: 60000,
+      link: '/volley-jersey',
     },
-
   ],
   badminton: [
     {
-      name: 'Raket Badminton',
-      imageUrl: '/sample/volly/b1.png',
-      price: 70000,
+      title: 'Raket Badminton',
+      img: '/sample/volly/b1.png',
+      harga: 70000,
       link: '/badminton-racket',
-     
     },
     {
-      name: 'Shuttlecock',
-      imageUrl: '/sample/volly/b1.png',
-      price: 20000,
-      link: '/shuttlecock'
+      title: 'Shuttlecock',
+      img: '/sample/volly/b1.png',
+      harga: 20000,
+      link: '/shuttlecock',
     },
-    
-  ]
+  ],
 };
 
 type Product = {
-  name: string;
-  imageUrl: string;
-  price: number;
+  title: string;
+  img: string;
+  harga: number;
   link: string;
   badge?: string;
 };
@@ -91,8 +88,8 @@ const CategoryPage: React.FC<Props> = ({ params }) => {
         Sewa Perlengkapan {category.charAt(0).toUpperCase() + category.slice(1)}
       </h1>
       <div className="container">
-        <div className="grid gap-4 grid-cols-1 md:grid-cols-2 lg:grid-cols-3">
-          {productList.map(product => (
+        <div className="grid grid-cols-1 gap-4 md:grid-cols-2 lg:grid-cols-3">
+          {productList.map((product) => (
             <CardProduct key={product.link} product={product} />
           ))}
         </div>
@@ -102,7 +99,7 @@ const CategoryPage: React.FC<Props> = ({ params }) => {
 };
 
 export async function generateStaticParams() {
-  return Object.keys(Product).map(category => ({ category }));
+  return Object.keys(Product).map((category) => ({ category }));
 }
 
 export default CategoryPage;
