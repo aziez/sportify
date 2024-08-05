@@ -15,7 +15,7 @@ export interface RegisterRequestData {
   displayName: string;
   email: string;
   password: string;
-  role: string;
+  role: any;
 }
 
 export async function POST(request: Request) {
@@ -105,8 +105,8 @@ async function checkIsExits(email: string) {
   });
 }
 
-async function checkRole(role: string) {
-  return prisma.role.findUnique({
+async function checkRole(role: any) {
+  return prisma.role.findFirst({
     where: { name: role },
   });
 }
