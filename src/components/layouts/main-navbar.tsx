@@ -37,14 +37,6 @@ const MainNavbar = () => {
       label: 'Contact Info',
       link: '/contact',
     },
-    {
-      label: 'Review',
-      link: '/review',
-    },
-    {
-      label: 'Categories',
-      link: '/categories',
-    },
   ];
 
   return (
