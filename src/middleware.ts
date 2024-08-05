@@ -26,7 +26,11 @@ export async function middleware(req: NextRequest) {
     }
 
     // Redirect to dashboard if token exists and accessing login or register page
-    if (pathname === '/login' || pathname === '/register') {
+    if (
+      pathname === '/login' ||
+      pathname === '/register' ||
+      pathname.startsWith('/email')
+    ) {
       const url = req.nextUrl.clone();
       url.pathname = '/dashboard';
       return NextResponse.redirect(url);
@@ -46,5 +50,5 @@ export async function middleware(req: NextRequest) {
 
 // Protect the /dashboard route and login/register routes
 export const config = {
-  matcher: ['/dashboard/:path*', '/login', '/register'],
+  matcher: ['/dashboard/:path*', '/login', '/register', '/email'],
 };

@@ -10,19 +10,20 @@ export async function POST(req: NextRequest) {
   if (req.method !== 'POST') {
     return NextResponse.json(
       { message: 'Method not allowed' },
-      { status: 405 } // Use 405 for method not allowed
+      { status: 405 }
     );
   }
 
   try {
     const requestData: ResendVerify = await req.json();
-    const { email } = requestData;
-
-    console.log(email, 'EMAIL');
+    const email = requestData;
 
     await resendVerificationEmail(email);
     return NextResponse.json(
-      { message: `Resend verify successfully to ${email}` },
+      {
+        message: `Resend verify successfully to ${email}`,
+        data: requestData,
+      },
       { status: 200 }
     );
   } catch (error) {

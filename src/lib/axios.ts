@@ -1,4 +1,4 @@
-import axios from 'axios';
+import axios, { AxiosRequestConfig, AxiosResponse } from 'axios';
 // import { getToken } from 'next-auth/jwt';
 
 const axiosInstance = axios.create({
@@ -8,4 +8,16 @@ const axiosInstance = axios.create({
   },
 });
 
+export const fetchData = async <T>(
+  url: string,
+  method: AxiosRequestConfig['method'] = 'GET',
+  data: any = null
+): Promise<T> => {
+  const response: AxiosResponse<T> = await axiosInstance.request<T>({
+    url,
+    method,
+    data,
+  });
+  return response.data;
+};
 export default axiosInstance;

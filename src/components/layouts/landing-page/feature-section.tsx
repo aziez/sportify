@@ -26,8 +26,7 @@ const FeatureSection = ({
             </span>
           </h1>
         </>
-      }
-    >
+      }>
       <ScrollArea className="h-full px-4">
         <BentoGrid className="mx-auto max-w-4xl md:auto-rows-[20rem]">
           {features.map((feature, i) => (

@@ -1,4 +1,5 @@
 import '@/styles/globals.css';
+import '@uploadcare/react-uploader/core.css';
 
 import type { Metadata } from 'next';
 import { Inter as FontSans } from 'next/font/google';
@@ -39,14 +40,12 @@ export default async function RootLayout({
           'min-h-screen bg-background font-sans antialiased',
           fontSans.variable,
           fontJakarta.variable
-        )}
-      >
+        )}>
         <ThemeProvider
           attribute="class"
           defaultTheme="system"
           enableSystem
-          disableTransitionOnChange
-        >
+          disableTransitionOnChange>
           <QueryProviders>
             <AuthProvider session={session}>
               <LayoutProvider>{children}</LayoutProvider>

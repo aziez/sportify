@@ -1,8 +1,8 @@
-import { NextAuthOptions } from 'next-auth';
 import CredentialsProvider from 'next-auth/providers/credentials';
 import GoogleProvider from 'next-auth/providers/google';
 import { PrismaAdapter } from '@next-auth/prisma-adapter';
 import { compare } from 'bcrypt';
+import { NextAuthOptions } from 'next-auth';
 
 import prisma from '@/lib/prisma';
 
@@ -19,7 +19,7 @@ export const authOptions: NextAuthOptions = {
           throw new Error('Missing credentials');
         }
 
-        const user = await prisma.user.findFirst({
+        const user = await prisma.user.findUnique({
           where: { email: credentials.email },
         });
 
@@ -27,7 +27,12 @@ export const authOptions: NextAuthOptions = {
           throw new Error('Invalid email or password');
         }
 
-        const isVerified = user.emailVerifToken === null;
+        const isVerified =
+          user.emailVerifToken === null || user.emailVerifiedAt !== null;
+
+        const role = await prisma.role.findUnique({
+          where: { id: user?.rolesId },
+        });
 
         const passwordMatch = await compare(
           credentials.password,
@@ -42,7 +47,7 @@ export const authOptions: NextAuthOptions = {
           id: user.id,
           displayName: user.displayName,
           email: user.email,
-          role: user.rolesId,
+          role: role.name,
           isVerified,
         };
       },

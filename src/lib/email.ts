@@ -5,15 +5,25 @@ import { NextResponse } from 'next/server';
 import { render } from '@react-email/components';
 
 import prisma from './prisma';
+require('dotenv').config();
+
 import EmailTemplateVerify from '../components/emails/verify-template';
 
 export const sendVerificationEmail = async (email: string, token: string) => {
+  console.log(process.env.MAIL_FROM, 'EMAIL SENDERRRR');
+
   const transporter = nodemailer.createTransport({
     host: process.env.NEXT_PUBLIC_MAIL_HOST,
-    port: Number(process.env.NEXT_PUBLIC_MAIL_PORT) || 0,
+    secure: true,
+    port: Number(process.env.NEXT_PUBLIC_MAIL_PORT) || 465,
+    tls: {
+      ciphers: 'SSLv3',
+    },
+    debug: true,
+    connectionTimeout: 100000,
     auth: {
-      user: process.env.NEXT_PUBLIC_MAIL_USERNAME,
-      pass: process.env.NEXT_PUBLIC_MAIL_PASSWORD,
+      user: process.env.MAIL_FROM,
+      pass: process.env.MAIL_PASSWORD,
     },
   });
 
@@ -22,7 +32,7 @@ export const sendVerificationEmail = async (email: string, token: string) => {
   const emailHtml = await render(EmailTemplateVerify({ magicLink: magicLink }));
 
   const mailOptions = {
-    from: process.env.NEXT_PUBLIC_MAIL_FROM, // Specify the sender's email address
+    from: process.env.MAIL_FROM, // Specify the sender's email address
     to: email,
     subject: 'Verify your email address',
     html: emailHtml,
@@ -40,7 +50,7 @@ export const sendVerificationEmail = async (email: string, token: string) => {
   }
 };
 
-export const resendVerificationEmail = async (email: string) => {
+export const resendVerificationEmail = async (email: any) => {
   const emailVerificationToken = await generateEmailVerificationToken();
 
   try {

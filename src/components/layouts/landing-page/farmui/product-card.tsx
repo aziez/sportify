@@ -24,8 +24,7 @@ const StarIcon: FC<StarIconProps> = ({ className }) => (
     stroke="currentColor"
     strokeWidth="2"
     strokeLinecap="round"
-    strokeLinejoin="round"
-  >
+    strokeLinejoin="round">
     <polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2" />
   </svg>
 );
@@ -48,9 +47,11 @@ export const ProductCard = ({
   translate,
 }: {
   product: {
+    id: string;
     title: string;
-    link: string;
-    thumbnail: string;
+    description: string;
+    img: string;
+    harga: number;
     sale?: boolean;
     rating?: number;
   };
@@ -64,14 +65,13 @@ export const ProductCard = ({
       whileHover={{
         y: -20,
       }}
-      key={product.title}
-      className="group/product relative h-96 w-[20rem] flex-shrink-0"
-    >
+      key={product.id}
+      className="group/product relative h-96 w-[20rem] flex-shrink-0">
       <Card className="overflow-hidden rounded-lg bg-white shadow-md dark:bg-gray-950">
         <div className="relative">
           <Image
-            src={product.thumbnail}
-            alt={product.title}
+            src={product?.img}
+            alt={product.id}
             className="h-64 w-full object-cover"
             width={600}
             height={400}
@@ -93,13 +93,12 @@ export const ProductCard = ({
             </div>
           </div>
           <p className="text-sm text-gray-500 dark:text-gray-400">
-            Crafted with premium fleece, this hoodie is perfect for cozy days
-            and chilly nights.
+            {product?.description}
           </p>
           <div className="flex items-center justify-between">
-            <h2 className="text-2xl font-bold">$49.99</h2>
+            <h2 className="text-2xl font-bold">${product.harga}</h2>
             <h3 className="text-lg font-bold text-red-500 line-through">
-              $69.99
+              ${(product.harga * 25) / 10}
             </h3>
           </div>
         </CardContent>

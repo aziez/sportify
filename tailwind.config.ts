@@ -22,6 +22,9 @@ const config: Config = {
       },
     },
     extend: {
+      backgroundImage: () => ({
+        'top-hero': "url('/img/hero.jpeg')",
+      }),
       animation: {
         'accordion-down': 'accordion-down 0.2s ease-out',
         'accordion-up': 'accordion-up 0.2s ease-out',

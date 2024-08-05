@@ -1,7 +1,7 @@
 import Image from 'next/image';
 
 import welcomeImg from 'public/img/DSCF2992-scaled-e1717593656488.jpg';
-import Sfund from 'public/logo.svg';
+import Sportify from 'public/logo.svg';
 import FormLogin from '@/components/layouts/login/form-login';
 
 export default function Login() {
@@ -10,9 +10,9 @@ export default function Login() {
       <div className="flex h-screen items-center justify-center px-6 py-12">
         <div className="mx-auto grid w-[500px] gap-6">
           <div className="grid gap-2">
-            <Sfund className="h-[100px] w-[100px]" />
+            <Sportify className="h-[100px] w-[100px]" />
             <p className="text-balance text-muted-foreground">
-              Enter your account bellow to login to your SFUND account
+              Enter your account bellow to login to your SPORTIFY account
             </p>
           </div>
           <div className="grid gap-4">

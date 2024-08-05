@@ -1,0 +1,37 @@
+{
+  "Identitas dan Verifikasi": [
+    "Penyewa harus menyerahkan fotokopi KTP atau paspor yang masih berlaku.",
+    "Mahasiswa dapat menggunakan kartu pelajar sebagai bukti tambahan identitas."
+  ],
+  "Usia Minimum": [
+    "Penyewa harus berusia minimal 18 tahun.",
+    "Bagi penyewa di bawah usia 18 tahun, harus ada persetujuan dan pendampingan dari orang tua atau wali."
+  ],
+  "Pembayaran dan Deposit": [
+    "Pembayaran dilakukan di muka sesuai dengan durasi rental.",
+    "Dikenakan deposit sebagai jaminan alat yang direntalkan. Deposit akan dikembalikan setelah alat dikembalikan dalam kondisi baik.",
+    "Kami menerima pembayaran melalui transfer bank, kartu kredit, dan dompet digital."
+  ],
+  "Durasi Rental": [
+    "Harian/Mingguan/Bulanan: Penyewa dapat memilih durasi rental sesuai kebutuhan dengan biaya yang disesuaikan."
+  ],
+  "Pengambilan dan Pengembalian": [
+    "Alat dapat diambil di kantor kami atau lokasi lain yang disepakati.",
+    "Alat harus dikembalikan sesuai dengan tanggal dan waktu yang disepakati. Keterlambatan akan dikenakan denda."
+  ],
+  "Kondisi Alat": [
+    "Penyewa harus memeriksa kondisi alat sebelum membawa pulang. Laporkan kerusakan atau ketidaksesuaian segera.",
+    "Penyewa bertanggung jawab menjaga alat dalam kondisi baik selama masa rental."
+  ],
+  "Kerusakan dan Kehilangan": [
+    "Penyewa dikenakan biaya perbaikan jika alat mengalami kerusakan ringan.",
+    "Penyewa bertanggung jawab penuh atas biaya penggantian alat jika terjadi kerusakan berat atau kehilangan."
+  ],
+  "Pembatalan": [
+    "Pembatalan rental harus dilakukan minimal 24 jam sebelum waktu pengambilan. Biaya pembatalan akan dikenakan sebesar 20% dari total biaya rental."
+  ],
+  "Penggunaan Alat": [
+    "Alat hanya boleh digunakan sesuai dengan fungsinya dan tidak boleh disewakan atau dipinjamkan kepada pihak ketiga.",
+    "Penyewa harus memastikan penggunaan alat dengan aman dan sesuai standar keselamatan."
+  ]
+}

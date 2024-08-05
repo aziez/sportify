@@ -3,106 +3,185 @@ generator client {
 }
 
 datasource db {
-  provider  = "postgresql"
-  url       = env("DATABASE_URL")
-  directUrl = env("DIRECT_URL")
+  provider = "mysql"
+  url      = env("DATABASE_URL")
 }
 
+enum CategoryType {
+  FUTSAL
+  BADMINTON
+  VOLLY
+}
+
+enum SubCategoryType {
+  BOLA
+  ROMPI
+  JERSY
+  RAKET
+  SHUTTELCOCK
+  LAPANGAN
+}
+
+enum RoleType {
+  Vendor
+  Customer
+}
+
+enum VarianType {
+  COLORS
+  IMAGES
+}
 
 model Role {
-  id              String @id @default(uuid())
-  name            String @unique
-  users           User[]
+  id        String   @id @default(uuid())
+  name      RoleType
+  createdAt DateTime @default(now())
+  users     User[]
+}
+
+model Notification {
+  id        String    @id @default(uuid())
+  userId    String
+  message   String
+  createdAt DateTime  @default(now())
+  bookings  Booking[]
+  user      User      @relation(fields: [userId], references: [id])
 }
 
 model User {
   id              String         @id @default(uuid())
-  displayName     String         @unique
-  password        String        
+  displayName     String
+  password        String
   email           String         @unique
   emailVerifToken String?        @db.VarChar(255)
-  emailVerifiedAt DateTime? 
-  rolesId         String
-  role            Role           @relation(fields: [rolesId], references: [id])
-  phone           String?         @unique
-  address         String?
+  emailVerifiedAt DateTime?
   imageUrl        String?
+  rolesId         String
+  createdAt       DateTime       @default(now())
   bookings        Booking[]
-  products        Product[]
   notifications   Notification[]
+  venue           Venue?
+  roles           Role           @relation(fields: [rolesId], references: [id])
 }
 
-
-model Notification {
-  id        String      @id @default(uuid())
-  userId    String
-  message   String
-  createdAt DateTime
-  user      User?        @relation(fields: [userId], references: [id])
-  bookings  Booking[]
+model Venue {
+  id        String    @id @default(uuid())
+  userId    String    @unique
+  name      String
+  logo      String
+  location  String
+  lat       Float
+  lng       Float
+  createdAt DateTime  @default(now())
+  products  Product[]
+  fields    Field[]
+  user      User      @relation(fields: [userId], references: [id])
 }
-
 
 model Product {
-  id          String    @id @default(uuid())
-  userId      String
-  name        String
-  categoryId    String    
-  location    String?
-  address     String?
-  facilities  String?
-  pricePerHour Float
-  pricePerDay  Float
-  description String
-  imageUrl    String
-  user        User    @relation(fields: [userId], references: [id])
-  category    Categories @relation(fields: [categoryId], references: [id])
-  bookings    Booking[]
+  id             String        @id @default(uuid())
+  name           String
+  venueId        String
+  categoryId     String
+  subcategoryId  String
+  availableStock Int
+  variant        Variant[]
+  pricePerHour   Float
+  pricePerDay    Float
+  description    String
+  imageUrl       String
+  createdAt      DateTime      @default(now())
+  bookings       Booking[]
+  category       Categories    @relation(fields: [categoryId], references: [id])
+  subcategory    Subcategories @relation(fields: [subcategoryId], references: [id])
+  venue          Venue         @relation(fields: [venueId], references: [id])
+}
 
+model Variant {
+  id        String     @id @default(uuid())
+  type      VarianType
+  content   String
+  Product   Product    @relation(fields: [productId], references: [id])
+  productId String
+}
+
+model Field {
+  id             String       @id @default(uuid())
+  name           String
+  venueId        String
+  fieldType      CategoryType
+  categoriesId   String
+  availableStock Int
+  pricePerHour   Float
+  pricePerDay    Float
+  description    String
+  imageUrl       String
+  lat            String
+  lng            String
+  location       String
+  createdAt      DateTime     @default(now())
+  bookings       Booking[]
+  venue          Venue        @relation(fields: [venueId], references: [id])
+  Categories     Categories   @relation(fields: [categoriesId], references: [id])
 }
 
 model Categories {
-  id          String @id @default(uuid())
-  name        String
-  Products    Product[]
+  id            String          @id @default(uuid())
+  name          CategoryType
+  createdAt     DateTime        @default(now())
+  Subcategories Subcategories[]
+  Products      Product[]
+  Fields        Field[]
 }
 
+model Subcategories {
+  id         String          @id @default(uuid())
+  categoryId String
+  name       SubCategoryType
+  createdAt  DateTime        @default(now())
+  product    Product[]
+  category   Categories      @relation(fields: [categoryId], references: [id])
+}
 
 model Booking {
-  id             String        @id @default(uuid())
+  id             String       @id @default(uuid())
   userId         String
   productId      String
+  fieldId        String
   paymentId      String
   notificationId String
   bookingDate    DateTime
   duration       Float
-  user           User          @relation(fields: [userId], references: [id])
-  product        Product       @relation(fields: [productId], references: [id])
-  payment        Payment       @relation(fields: [paymentId], references: [id])
-  notification   Notification  @relation(fields: [notificationId], references: [id])
+  createdAt      DateTime     @default(now())
+  notification   Notification @relation(fields: [notificationId], references: [id])
+  payment        Payment      @relation(fields: [paymentId], references: [id])
+  product        Product      @relation(fields: [productId], references: [id])
+  field          Field        @relation(fields: [fieldId], references: [id])
+  user           User         @relation(fields: [userId], references: [id])
 }
 
 model Payment {
-  id             String        @id @default(uuid())
-  amount         Float
-  method         String
-  transactionId  String
-  transaction    Transaction   @relation(fields: [transactionId], references: [id])
-  booking        Booking[]
+  id            String      @id @default(uuid())
+  amount        Float
+  method        String
+  transactionId String
+  createdAt     DateTime    @default(now())
+  booking       Booking[]
+  transaction   Transaction @relation(fields: [transactionId], references: [id])
 }
 
 model Transaction {
-  id        String             @id @default(uuid())
+  id        String            @id @default(uuid())
   statusId  String
   amount    Float
-  createdAt DateTime
-  status    TransactionStatus  @relation(fields: [statusId], references: [id])
+  createdAt DateTime          @default(now())
   payments  Payment[]
+  status    TransactionStatus @relation(fields: [statusId], references: [id])
 }
 
 model TransactionStatus {
-  id            String         @id @default(uuid())
-  status        String
-  transactions  Transaction[]
+  id           String        @id @default(uuid())
+  status       String
+  createdAt    DateTime      @default(now())
+  transactions Transaction[]
 }
-
