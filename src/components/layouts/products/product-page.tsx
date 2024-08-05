@@ -3,6 +3,7 @@
 import React, { useState, useEffect } from 'react';
 import Head from 'next/head';
 import { useRouter, usePathname } from 'next/navigation';
+
 import {
   Carousel,
   CarouselContent,
@@ -88,6 +89,7 @@ export default function ProductPage({ title, products }: Props) {
           </form>
         </div>
       </div>
+
       {Object.keys(products).map((category) => (
         <div key={category} className="container">
           <h1 className="mb-4 text-xl font-bold md:text-5xl">

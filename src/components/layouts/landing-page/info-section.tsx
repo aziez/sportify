@@ -15,6 +15,7 @@ import { Separator } from '@/components/ui/separator';
 const InfoSection = () => {
   return (
     <div className="gap-4">
+      <Separator className="my-16 hidden h-1 md:flex" />
       <div className="mt-4 grid w-full items-center justify-center text-center md:grid-cols-2 md:text-start">
         <div className="order-last h-full md:order-first">
           <h1 className="text-xl font-bold text-black dark:text-white md:text-5xl">
