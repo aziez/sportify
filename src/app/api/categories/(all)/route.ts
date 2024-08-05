@@ -38,7 +38,7 @@ export async function GET(req: NextRequest) {
 
 // ADD DATA CATEGORIES
 export interface CategoriesData {
-  name: string;
+  name: any;
 }
 
 export async function POST(request: Request) {
@@ -76,7 +76,7 @@ export async function POST(request: Request) {
 // UPDATE DATA CATEGORIES
 export interface UpdateCategoryData {
   id: string;
-  name: string;
+  name: any;
 }
 
 export async function PATCH(request: Request) {
