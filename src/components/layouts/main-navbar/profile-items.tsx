@@ -1,6 +1,8 @@
 'use client';
 
 import * as React from 'react';
+import { signOut, useSession } from 'next-auth/react';
+import { useRouter } from 'next/navigation';
 
 import { Button } from '@/components/ui/button';
 import {
@@ -12,8 +14,6 @@ import {
   DropdownMenuTrigger,
 } from '@/components/ui/dropdown-menu';
 import { Avatar, AvatarFallback, AvatarImage } from '@/components/ui/avatar';
-import { signOut, useSession } from 'next-auth/react';
-import { useRouter } from 'next/navigation';
 
 export const ProfileMenu = () => {
   const { data: session } = useSession();
@@ -25,8 +25,7 @@ export const ProfileMenu = () => {
         <Button
           className="btn-circle rounded-full border"
           variant={'ringHover'}
-          size={'icon'}
-        >
+          size={'icon'}>
           <Avatar className="h-8 w-8">
             <AvatarImage src="https://github.com/shadcn.png" />
             <AvatarFallback>CN</AvatarFallback>
