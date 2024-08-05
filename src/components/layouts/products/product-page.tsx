@@ -1,6 +1,6 @@
 'use client';
 
-import React, { useState, useEffect } from 'react';
+import React, { useState } from 'react';
 import Head from 'next/head';
 import { useRouter, usePathname } from 'next/navigation';
 
@@ -15,7 +15,6 @@ import { Separator } from '@/components/ui/separator';
 import CardLapangan from './lapangan-card';
 import CardProduct from './product-card';
 import { Button } from '@/components/ui/button';
-import { Input } from '@/components/ui/input';
 
 type Product = {
   title: string;
