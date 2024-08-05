@@ -1,4 +1,3 @@
-import { ProductCard } from '@/components/layouts/landing-page/farmui/product-card';
 import CardLapangan from '@/components/layouts/products/lapangan-card';
 import CardProduct from '@/components/layouts/products/product-card';
 import {
@@ -99,8 +98,8 @@ export default async function Futsal() {
         <h1 className="mb-4 text-xl font-bold md:text-5xl">Bola</h1>
         <Carousel className="w-full">
           <CarouselContent>
-            {bolas.map((bola) => (
-              <CarouselItem className="md:basis-1/4 lg:basis-1/4">
+            {bolas.map((bola, index) => (
+              <CarouselItem key={index} className="md:basis-1/4 lg:basis-1/4">
                 <CardProduct product={bola} />
               </CarouselItem>
             ))}
@@ -114,8 +113,8 @@ export default async function Futsal() {
         <h1 className="mb-4 text-xl font-bold md:text-5xl">Rompi</h1>
         <Carousel className="w-full">
           <CarouselContent>
-            {rompis.map((rompi) => (
-              <CarouselItem className="md:basis-1/4 lg:basis-1/4">
+            {rompis.map((rompi, index) => (
+              <CarouselItem key={index} className="md:basis-1/4 lg:basis-1/4">
                 <CardProduct product={rompi} />
               </CarouselItem>
             ))}
@@ -129,8 +128,8 @@ export default async function Futsal() {
         <h1 className="mb-4 text-xl font-bold md:text-5xl">Lapangan</h1>
         <Carousel className="w-full">
           <CarouselContent>
-            {lapangans.map((lapangan) => (
-              <CarouselItem className="md:basis-1/2 lg:basis-1/2">
+            {lapangans.map((lapangan, index) => (
+              <CarouselItem key={index} className="md:basis-1/2 lg:basis-1/2">
                 <CardLapangan product={lapangan} />
               </CarouselItem>
             ))}

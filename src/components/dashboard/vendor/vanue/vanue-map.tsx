@@ -1,3 +1,5 @@
+/* eslint-disable import/no-named-as-default-member */
+/* eslint-disable import/no-unresolved */
 'use client';
 
 import 'leaflet/dist/leaflet.css';

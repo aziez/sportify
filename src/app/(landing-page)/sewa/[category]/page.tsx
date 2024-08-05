@@ -1,5 +1,6 @@
 import React from 'react';
 import { notFound } from 'next/navigation';
+
 import CardProduct from '@/components/layouts/products/product-card';
 
 // sewaproducts.ts
