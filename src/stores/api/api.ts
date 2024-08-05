@@ -10,6 +10,8 @@ export const emailApi = {
 
 export const vanueApi = {
   addVanue: (data: any) => axiosInstance.post('/api/vanue', data),
+  getVanue: (userId: string) =>
+    axiosInstance.get(`/api/vanue/?userId=${userId}`),
 };
 
 export const productsApi = {
@@ -17,4 +19,5 @@ export const productsApi = {
 };
 export const categoriesApi = {
   allCategories: () => axiosInstance.get('/api/categories'),
+  // allCategories: () => axiosInstance.get('/api/categories'),
 };

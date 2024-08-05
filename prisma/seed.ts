@@ -1,58 +1,61 @@
 import { PrismaClient } from '@prisma/client';
-import { faker } from '@faker-js/faker';
 
 const prisma = new PrismaClient();
 
-const facilities = [
-  'Parking',
-  'Changing Rooms',
-  'Showers',
-  'Equipment Rental',
-  'Cafeteria',
-  'First Aid',
-  'Wi-Fi',
-];
-
-const getRandomFacilities = () => {
-  const numberOfFacilities = Math.floor(Math.random() * facilities.length) + 1;
-  return Array.from(
-    { length: numberOfFacilities },
-    () => facilities[Math.floor(Math.random() * facilities.length)]
-  ).join(', ');
-};
-
-const createProduct = (userId: string, categoryId: string) => ({
-  name: faker.company.name(),
-  userId,
-  categoryId,
-  location: faker.address.cityName(),
-  address: faker.address.streetAddress(),
-  facilities: getRandomFacilities(),
-  pricePerHour: parseFloat(faker.commerce.price(10, 100)),
-  pricePerDay: parseFloat(faker.commerce.price(100, 1000)),
-  description: faker.lorem.paragraph(),
-  imageUrl: faker.image.sports(),
-});
-
-const main = async () => {
+async function main() {
   console.log('Start seeding ...');
 
   // Create roles
-  const vendorRole = await prisma.role.create({
-    data: {
-      name: 'Vendor',
-      users: {},
-    },
+  console.log('----ROLE BUILDING---');
+  await prisma.role.createMany({
+    data: [{ name: 'Vendor' }, { name: 'Customer' }],
   });
-  const customer = await prisma.role.create({
-    data: {
-      name: 'Customer',
-      users: {},
-    },
+
+  // Clear existing categories
+  await prisma.categories.deleteMany({});
+
+  // Create categories
+  console.log('----CATEGORIES BUILDING---');
+  await prisma.categories.createMany({
+    data: [{ name: 'BADMINTON' }, { name: 'FUTSAL' }, { name: 'VOLLY' }],
+    skipDuplicates: true, // Skip duplicates if they exist
   });
-  console.log(vendorRole);
-  console.log(customer);
-};
+
+  // Retrieve categories to get the IDs
+  const categories = await prisma.categories.findMany();
+  const categoryMap = categories.reduce(
+    (map, category) => {
+      map[category.name] = category.id;
+      return map;
+    },
+    {} as Record<string, string>
+  );
+
+  // Clear existing subcategories
+  await prisma.subcategories.deleteMany({});
+
+  // Create subcategories
+  console.log('----SUBCATEGORIES BUILDING---');
+  await prisma.subcategories.createMany({
+    data: [
+      { name: 'JERSY', categoryId: categoryMap['BADMINTON'] },
+      { name: 'LAPANGAN', categoryId: categoryMap['BADMINTON'] },
+      { name: 'ROMPI', categoryId: categoryMap['BADMINTON'] },
+      { name: 'RAKET', categoryId: categoryMap['BADMINTON'] },
+      { name: 'SHUTTELCOCK', categoryId: categoryMap['BADMINTON'] },
+      { name: 'BOLA', categoryId: categoryMap['FUTSAL'] },
+      { name: 'JERSY', categoryId: categoryMap['FUTSAL'] },
+      { name: 'LAPANGAN', categoryId: categoryMap['FUTSAL'] },
+      { name: 'ROMPI', categoryId: categoryMap['FUTSAL'] },
+      { name: 'BOLA', categoryId: categoryMap['VOLLY'] },
+      { name: 'JERSY', categoryId: categoryMap['VOLLY'] },
+      { name: 'LAPANGAN', categoryId: categoryMap['VOLLY'] },
+      { name: 'ROMPI', categoryId: categoryMap['VOLLY'] },
+    ],
+  });
+
+  console.log('Seeding finished.');
+}
 
 main()
   .then(async () => {

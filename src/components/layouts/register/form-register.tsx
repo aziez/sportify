@@ -82,11 +82,9 @@ const FormRegister = () => {
 
   return (
     <Form {...form}>
-      <Toaster />
       <form
         onSubmit={form.handleSubmit(onSubmit)}
-        className="2x:mt-7 mt-5 space-y-6"
-      >
+        className="2x:mt-7 mt-5 space-y-6">
         <FormField
           control={form.control}
           name="displayName"
@@ -167,8 +165,7 @@ const FormRegister = () => {
                 <div className="relative flex items-center font-sans">
                   <Select
                     onValueChange={field.onChange}
-                    defaultValue={field.value}
-                  >
+                    defaultValue={field.value}>
                     <SelectTrigger>
                       <SelectValue placeholder="Tipe User" />
                     </SelectTrigger>

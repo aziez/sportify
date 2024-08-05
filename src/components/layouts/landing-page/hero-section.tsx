@@ -53,8 +53,7 @@ export const HeroParallax = () => {
   return (
     <div
       ref={ref}
-      className="relative flex h-full flex-col self-auto overflow-hidden py-80 antialiased [perspective:1000px] [transform-style:preserve-3d]"
-    >
+      className="relative flex h-full flex-col self-auto overflow-hidden py-80 antialiased [perspective:1000px] [transform-style:preserve-3d]">
       <Header />
       <motion.div
         style={{
@@ -63,8 +62,7 @@ export const HeroParallax = () => {
           translateY,
           opacity,
         }}
-        className="mb-20 bg-slate-300 py-8"
-      >
+        className="mb-20 bg-slate-300 py-8">
         <h1 className="mb-8 text-center text-xl font-bold text-primary dark:text-white md:text-4xl">
           Featured Products
         </h1>
@@ -119,8 +117,7 @@ export const Header = () => {
           Icon={ShoppingBagIcon}
           iconPlacement="right"
           size={'lg'}
-          className="mt-4 rounded-full"
-        >
+          className="mt-4 rounded-full">
           Shop Now
         </Button>
       </div>

@@ -57,7 +57,7 @@ export default async function Home() {
       {/* <MainNavbar /> */}
       <Hero />
       <main className="p-12">
-        <SearchOption/>
+        <SearchOption />
         <InfoSection />
         <Team />
         <About />

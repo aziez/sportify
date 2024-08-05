@@ -7,7 +7,7 @@
   "endOfLine": "auto",
   "importOrder": ["^@core/(.*)$", "^@server/(.*)$", "^@ui/(.*)$", "^[./]"],
   "importOrderSeparation": false,
-  " jsxBracketSameLine": true,
+  "jsxBracketSameLine": true,
 
   "plugins": ["prettier-plugin-tailwindcss"]
 }

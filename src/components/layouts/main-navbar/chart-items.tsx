@@ -19,12 +19,10 @@ export const ChartItem = () => {
         <Button
           variant={'ringHover'}
           className="indicator rounded-full"
-          size={'icon'}
-        >
+          size={'icon'}>
           <Badge
             variant={'outline'}
-            className="indicator-item border-none bg-none text-white dark:text-black"
-          >
+            className="indicator-item border-none bg-none text-white dark:text-black">
             8
           </Badge>
           <span className="sr-only">Chart list</span>

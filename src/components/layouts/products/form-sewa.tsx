@@ -1,6 +1,25 @@
 'use client';
-import { Button } from '@/components/ui/button';
-import { Calendar } from '@/components/ui/calendar';
+import { zodResolver } from '@hookform/resolvers/zod';
+import { format, addDays } from 'date-fns';
+import { CalendarIcon } from 'lucide-react';
+import { useForm, useWatch } from 'react-hook-form';
+import { useEffect } from 'react';
+import { id } from 'date-fns/locale';
+import { z } from 'zod';
+
+import { cn } from '@/lib/utils';
+import {
+  Select,
+  SelectContent,
+  SelectItem,
+  SelectTrigger,
+  SelectValue,
+} from '@/components/ui/select';
+import {
+  Popover,
+  PopoverContent,
+  PopoverTrigger,
+} from '@/components/ui/popover';
 import {
   Form,
   FormControl,
@@ -9,27 +28,8 @@ import {
   FormLabel,
   FormMessage,
 } from '@/components/ui/form';
-import {
-  Popover,
-  PopoverContent,
-  PopoverTrigger,
-} from '@/components/ui/popover';
-import {
-  Select,
-  SelectContent,
-  SelectItem,
-  SelectTrigger,
-  SelectValue,
-} from '@/components/ui/select';
-import { cn } from '@/lib/utils';
-import { zodResolver } from '@hookform/resolvers/zod';
-import { format, addDays } from 'date-fns';
-import { CalendarIcon } from 'lucide-react';
-import { useForm, useWatch } from 'react-hook-form';
-import { useEffect } from 'react';
-import { id } from 'date-fns/locale';
-
-import { z } from 'zod';
+import { Calendar } from '@/components/ui/calendar';
+import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
 
 const FormSchema = z.object({
@@ -98,8 +98,7 @@ const FormSewa = () => {
                         className={cn(
                           'w-full pl-3 text-left font-normal',
                           !field.value && 'text-muted-foreground'
-                        )}
-                      >
+                        )}>
                         {field.value ? (
                           format(field.value, 'PPP', { locale: id })
                         ) : (
@@ -132,8 +131,7 @@ const FormSewa = () => {
                 <FormLabel>Hari</FormLabel>
                 <Select
                   onValueChange={field.onChange}
-                  defaultValue={field.value}
-                >
+                  defaultValue={field.value}>
                   <FormControl>
                     <SelectTrigger>
                       <SelectValue placeholder="Pilih hari" />
@@ -169,8 +167,7 @@ const FormSewa = () => {
                           'w-full pl-3 text-left font-normal',
                           !field.value && 'text-muted-foreground'
                         )}
-                        disabled
-                      >
+                        disabled>
                         {field.value ? (
                           format(field.value, 'PPP', { locale: id })
                         ) : (
@@ -199,8 +196,7 @@ const FormSewa = () => {
         <Button
           type="submit"
           variant="default"
-          className="w-full rounded-full p-6 text-lg font-bold"
-        >
+          className="w-full rounded-full p-6 text-lg font-bold">
           Sewa Sekarang
         </Button>
       </form>

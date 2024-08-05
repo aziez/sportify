@@ -1,10 +1,9 @@
 'use client';
 
 import Link from 'next/link';
-import { signOut, useSession } from 'next-auth/react';
-
+import { useSession } from 'next-auth/react';
 import Image from 'next/image';
-import { UserCircle, UserIcon } from 'lucide-react';
+
 import { Button } from '../ui/button';
 import ChartItem from './main-navbar/chart-items';
 import ProfileMenu from './main-navbar/profile-items';
@@ -23,12 +22,16 @@ const MainNavbar = () => {
     },
     {
       label: 'Lapangan',
-      link: '/venue'
+      link: '/venue',
     },
     {
       label: 'Sewa Perlengkapan',
-      link: '/rental'
+      link: '/rental',
+    },{
+      label: 'Store',
+      link: '/store',
     },
+
     {
       label: 'Syarat dan Cara Sewa',
       link: '/terms-conditions',
@@ -46,22 +49,19 @@ const MainNavbar = () => {
           <Button
             variant={'outline'}
             size={'icon'}
-            className="h-8 w-8 rounded-full"
-          >
+            className="h-8 w-8 rounded-full">
             <Fb className="h-4 w-4" />
           </Button>
           <Button
             variant={'outline'}
             size={'icon'}
-            className="h-8 w-8 rounded-full"
-          >
+            className="h-8 w-8 rounded-full">
             <Tw className="h-5 w-5" />
           </Button>
           <Button
             variant={'outline'}
             size={'icon'}
-            className="h-8 w-8 rounded-full"
-          >
+            className="h-8 w-8 rounded-full">
             <Ig className="h-4 w-4" />
           </Button>
         </div>

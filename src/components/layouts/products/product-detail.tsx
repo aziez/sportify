@@ -1,4 +1,10 @@
+/* eslint-disable jsx-a11y/img-redundant-alt */
+/* eslint-disable jsx-a11y/no-noninteractive-element-interactions */
+/* eslint-disable jsx-a11y/click-events-have-key-events */
+/* eslint-disable @next/next/no-img-element */
 'use client';
+import { useCallback, useEffect, useState } from 'react';
+
 import { Button } from '@/components/ui/button';
 import {
   Carousel,
@@ -6,10 +12,7 @@ import {
   CarouselContent,
   CarouselItem,
 } from '@/components/ui/carousel';
-
 import { Separator } from '@/components/ui/separator';
-
-import { useCallback, useEffect, useState } from 'react';
 import FormSewa from './form-sewa';
 
 export default function ProductDetail({ product }: { product: any }) {
@@ -31,7 +34,7 @@ export default function ProductDetail({ product }: { product: any }) {
     if (product) {
       setData(product);
     }
-  });
+  }, [api, product]);
 
   console.log(data, 'DATAAAA');
 
@@ -73,8 +76,7 @@ export default function ProductDetail({ product }: { product: any }) {
           </h1>
           <Button
             variant="ringHover"
-            className="mt-4 flex w-full items-center justify-between rounded-full bg-[#ffa800] hover:bg-[#ffaa008c]"
-          >
+            className="mt-4 flex w-full items-center justify-between rounded-full bg-[#ffa800] hover:bg-[#ffaa008c]">
             <p className="text-base">Promo Semarang 20%</p>
             <p>
               Berakhir dalam <br />

@@ -12,6 +12,7 @@ import LayoutProvider from '@/provider/layout-provider';
 import { ThemeProvider } from '@/provider/theme-provider';
 import { fontJakarta } from '@/styles/font';
 import QueryProviders from '@/provider/query-provider';
+import { Toaster } from 'react-hot-toast';
 
 const fontSans = FontSans({
   subsets: ['latin'],
@@ -40,17 +41,18 @@ export default async function RootLayout({
           'min-h-screen bg-background font-sans antialiased',
           fontSans.variable,
           fontJakarta.variable
-        )}
-      >
+        )}>
         <ThemeProvider
           attribute="class"
           defaultTheme="system"
           enableSystem
-          disableTransitionOnChange
-        >
+          disableTransitionOnChange>
           <QueryProviders>
             <AuthProvider session={session}>
-              <LayoutProvider>{children}</LayoutProvider>
+              <LayoutProvider>
+                <Toaster />
+                {children}
+              </LayoutProvider>
             </AuthProvider>
           </QueryProviders>
         </ThemeProvider>

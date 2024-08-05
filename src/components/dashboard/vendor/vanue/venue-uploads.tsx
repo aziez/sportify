@@ -1,7 +1,6 @@
 'use client';
 
 import { FileUploaderMinimal } from '@uploadcare/react-uploader';
-import { useState } from 'react';
 
 const UploadsLogo = ({ handleChangeEvenet }) => {
   return (

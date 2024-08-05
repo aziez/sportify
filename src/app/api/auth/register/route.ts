@@ -15,7 +15,7 @@ export interface RegisterRequestData {
   displayName: string;
   email: string;
   password: string;
-  role: string;
+  role: any;
 }
 
 export async function POST(request: Request) {
@@ -54,6 +54,7 @@ async function registerHandle(
     const verificationToken = await generateEmailVerificationToken();
 
     const isEmailExist = await checkIsExits(email);
+
     if (isEmailExist) {
       return NextResponse.json(
         { message: 'Email already exists' },
@@ -91,15 +92,6 @@ async function registerHandle(
     );
   } catch (e) {
     console.error('Error in registration:', e);
-    if (
-      e instanceof Prisma.PrismaClientKnownRequestError &&
-      e.code === 'P2002'
-    ) {
-      return NextResponse.json(
-        { message: 'Email is already registered' },
-        { status: 400 }
-      );
-    }
     return NextResponse.json(
       { message: 'Something went wrong. Please try again later.' },
       { status: 500 }
@@ -113,8 +105,8 @@ async function checkIsExits(email: string) {
   });
 }
 
-async function checkRole(role: string) {
-  return prisma.role.findUnique({
+async function checkRole(role: any) {
+  return prisma.role.findFirst({
     where: { name: role },
   });
 }

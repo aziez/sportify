@@ -1,5 +1,6 @@
 import ProductDetail from '@/components/layouts/products/product-detail';
 import { Separator } from '@/components/ui/separator';
+
 const bolas = [
   {
     title: 'Proteam Bola Futsal Warrior',

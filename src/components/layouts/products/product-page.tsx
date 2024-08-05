@@ -45,7 +45,7 @@ export default function ProductPage({ title, products }: Props) {
             <CarouselContent>
               {products[category].map(product => (
                 <CarouselItem
-                  className={`md:basis-1/${category === 'lapangan' ? '2' : '4'} lg:basis-1/${category === 'lapangan' ? '2' : '4'}`}
+                  className="md:basis-1/4"
                   key={product.link}
                 >
                   {category === 'lapangan' ? <CardLapangan product={product} /> : <CardProduct product={product} />}

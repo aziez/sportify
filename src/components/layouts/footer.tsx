@@ -1,4 +1,5 @@
-import { Button } from '../ui/button';
+/* eslint-disable @next/next/no-img-element */
+/* eslint-disable jsx-a11y/img-redundant-alt */
 
 export default function Footer() {
   return (
@@ -49,8 +50,7 @@ export default function Footer() {
             href="http://unimus.ac.id"
             target="_blank"
             rel="noopener noreferrer"
-            className="font-jakarta text-base font-bold text-blue-600 visited:text-purple-600"
-          >
+            className="font-jakarta text-base font-bold text-blue-600 visited:text-purple-600">
             Universitas Muhammadiyah Semarang.
           </a>
         </p>
