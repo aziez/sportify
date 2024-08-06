@@ -27,7 +27,6 @@ import { Textarea } from '@/components/ui/textarea';
 import VanueMaps from './vanue-map';
 import UploadsLogo from './venue-uploads';
 import { vanueApi } from '@/stores/api/api';
-import { getUserVanue } from '@/hooks/vanues/use-vanues';
 
 const FormSchema = z.object({
   name: z.string().min(2, {
@@ -47,7 +46,7 @@ const FormSchema = z.object({
   }),
 });
 
-const VanueForm = (userId: any) => {
+const VanueForm = () => {
   const [position, setPosition] = useState<{ lat: number; lng: number } | null>(
     null
   );
@@ -164,7 +163,7 @@ const VanueForm = (userId: any) => {
                             readOnly
                             type="hidden"
                             placeholder="lat..."
-                            value={position ? position.lat : ''}
+                            value={position ? position.lat : field.value}
                             {...field}
                           />
                         </FormControl>

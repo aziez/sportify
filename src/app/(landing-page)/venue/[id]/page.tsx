@@ -1,10 +1,9 @@
-import VenueDetails from "@/components/layouts/venue/venue-details";
-
+import VenueDetails from '@/components/layouts/venue/venue-details';
 
 export default function VenueBooking() {
   return (
-   <div className="">
-        <VenueDetails/>
-   </div>
-  )
+    <div className="">
+      <VenueDetails />
+    </div>
+  );
 }

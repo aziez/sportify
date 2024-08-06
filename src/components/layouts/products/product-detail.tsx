@@ -76,7 +76,7 @@ export default function ProductDetail({ product }: { product: any }) {
           </h1>
           <Button
             variant="ringHover"
-            className="mt-4 flex w-full items-center justify-between rounded-full bg-[#ffa800] hover:bg-[#ffaa008c]">
+            className="mt-4 flex w-full items-center justify-between rounded-full bg-tangerine-400 hover:bg-tangerine-700">
             <p className="text-base">Promo Semarang 20%</p>
             <p>
               Berakhir dalam <br />
