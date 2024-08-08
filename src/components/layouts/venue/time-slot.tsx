@@ -9,7 +9,15 @@ const timeSlots = [
   { time: "21:00 - 22:00", price: "Rp240.000", booked: false }
 ];
 
-const TimeSlotCard = ({ time, price, booked, selected, onClick }) => (
+interface TimeSlotCardProps {
+  time: string;
+  price: string;
+  booked: boolean;
+  selected: boolean;
+  onClick: () => void;
+}
+
+const TimeSlotCard: React.FC<TimeSlotCardProps> = ({ time, price, booked, selected, onClick }) => (
   <div
     className={`border rounded-lg p-4 text-center cursor-pointer ${
       selected
@@ -26,10 +34,10 @@ const TimeSlotCard = ({ time, price, booked, selected, onClick }) => (
   </div>
 );
 
-const TimeSlotSelector = () => {
-  const [selectedSlots, setSelectedSlots] = useState([]);
+const TimeSlotSelector: React.FC = () => {
+  const [selectedSlots, setSelectedSlots] = useState<number[]>([]);
 
-  const toggleSlot = (index) => {
+  const toggleSlot = (index: number) => {
     if (selectedSlots.includes(index)) {
       setSelectedSlots(selectedSlots.filter((slot) => slot !== index));
     } else {

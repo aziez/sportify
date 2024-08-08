@@ -18,9 +18,8 @@ import {
 } from '@/components/ui/card';
 import { Button } from '@/components/ui/button';
 import { Badge } from '@/components/ui/badge';
-import CalendarNavigation from './date-options';
-import TotalVenue from './total-venue';
 import { DateOption } from './date-option';
+import TotalVenue from './total-venue';
 
 export default function VenueDetails() {
   return (

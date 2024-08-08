@@ -2,9 +2,17 @@ import CredentialsProvider from 'next-auth/providers/credentials';
 import GoogleProvider from 'next-auth/providers/google';
 import { PrismaAdapter } from '@next-auth/prisma-adapter';
 import { compare } from 'bcrypt';
-import { NextAuthOptions } from 'next-auth';
+import { NextAuthOptions, User } from 'next-auth';
 
 import prisma from '@/lib/prisma';
+
+interface CustomUser extends User {
+  id: string;
+  displayName: string;
+  email: string;
+  role: string;
+  isVerified: boolean;
+}
 
 export const authOptions: NextAuthOptions = {
   providers: [
@@ -31,25 +39,24 @@ export const authOptions: NextAuthOptions = {
           user.emailVerifToken === null || user.emailVerifiedAt !== null;
 
         const role = await prisma.role.findUnique({
-          where: { id: user?.rolesId },
+          where: { id: user.rolesId },
         });
 
-        const passwordMatch = await compare(
-          credentials.password,
-          user.password
-        );
+        const passwordMatch = await compare(credentials.password, user.password);
 
         if (!passwordMatch) {
           throw new Error('Invalid password');
         }
 
-        return {
+        const customUser: CustomUser = {
           id: user.id,
           displayName: user.displayName,
           email: user.email,
-          role: role.name,
+          role: role?.name ?? 'Customer',
           isVerified,
         };
+
+        return customUser;
       },
     }),
     GoogleProvider({
@@ -68,11 +75,12 @@ export const authOptions: NextAuthOptions = {
   callbacks: {
     async jwt({ token, user }) {
       if (user) {
-        token.id = user.id;
-        token.displayName = user.displayName;
-        token.email = user.email;
-        token.role = user.role;
-        token.isVerified = user.isVerified;
+        const customUser = user as CustomUser;
+        token.id = customUser.id;
+        token.displayName = customUser.displayName;
+        token.email = customUser.email;
+        token.role = customUser.role;
+        token.isVerified = customUser.isVerified;
       }
       return token;
     },
