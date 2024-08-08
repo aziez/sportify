@@ -1,6 +1,7 @@
 'use client';
-import { Button } from '@/components/ui/button';
 import { ArrowRightCircleIcon, MapPin, TextSearch } from 'lucide-react';
+
+import { Button } from '@/components/ui/button';
 import {
   Select,
   SelectContent,
@@ -12,18 +13,21 @@ import { Input } from '@/components/ui/input';
 
 export default function SearchVenue() {
   return (
-    <div className="mb-10 ">
-      
+    <div className="mb-10">
       <div className="">
-        <form className="flex flex-col md:flex-row gap-6">
-        <label className="input input-bordered flex items-center gap-2">
-            <TextSearch className="w-5"/>
-            <input type="text" className="grow border-0" placeholder="Nama Venue" />
-        </label>
-          <label className="input input-bordered flex items-center gap-2">
-            <MapPin className="w-5"/>
+        <form className="flex flex-col gap-6 md:flex-row">
+          <div className="input input-bordered flex items-center gap-2">
+            <TextSearch className="w-5" />
+            <input
+              type="text"
+              className="grow border-0"
+              placeholder="Nama Venue"
+            />
+          </div>
+          <div className="input input-bordered flex items-center gap-2">
+            <MapPin className="w-5" />
             <input type="text" className="grow border-0" placeholder="Lokasi" />
-            </label>
+          </div>
           <Select>
             <SelectTrigger className="h-12 w-full max-w-sm">
               <SelectValue placeholder="Cabang Olahraga" />
@@ -36,8 +40,7 @@ export default function SearchVenue() {
           </Select>
           <Button
             variant={'outline'}
-            className="rounded-fll w-full md:w-[50%] rounded-full border-black"
-          >
+            className="rounded-fll w-full rounded-full border-black md:w-[50%]">
             Temukan <ArrowRightCircleIcon className="ml-4" />
           </Button>
         </form>

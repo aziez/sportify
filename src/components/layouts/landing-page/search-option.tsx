@@ -7,6 +7,8 @@ import {
   TextSearch,
 } from 'lucide-react';
 import { useForm } from 'react-hook-form';
+import { useRouter } from 'next/navigation';
+import toast from 'react-hot-toast';
 
 import { Button } from '@/components/ui/button';
 import {
@@ -16,28 +18,16 @@ import {
   SelectTrigger,
   SelectValue,
 } from '@/components/ui/select';
-import { useCategories } from '@/hooks/categories/use-categories';
 import { useMediaQuery } from '@/hooks/use-media-query';
 import { Form, FormControl, FormField, FormItem } from '@/components/ui/form';
 import { Input } from '@/components/ui/input';
-import { useRouter } from 'next/navigation';
-import toast from 'react-hot-toast';
 
-export default function SearchOption() {
+export default function SearchOption({ data }) {
   const isDesktop = useMediaQuery('(min-width: 768px)');
-  const { data: categories, error, isLoading } = useCategories();
-
-  if (isLoading) {
-    return <h1>Loading data...</h1>;
-  }
-
-  if (error) {
-    return <h1>Error loading data</h1>;
-  }
 
   return (
-    <div className="container relative z-50 -mt-24 grid items-center justify-center rounded-xl bg-rose-950 p-8 text-white">
-      <SearchForm categories={categories} />
+    <div className="container relative z-10 -mt-16 grid items-center justify-center">
+      <SearchForm categories={data} />
     </div>
   );
 }
@@ -62,83 +52,79 @@ function SearchForm({ categories }) {
 
   return (
     <Form {...form}>
-      <form onSubmit={form.handleSubmit(onSubmit)}>
-        <div className="flex justify-center gap-3 align-baseline">
-          <FormField
-            control={form.control}
-            name="subcategory"
-            render={({ field }) => (
-              <FormItem>
-                <FormControl>
-                  <div className="flex items-center rounded-md border border-white bg-transparent px-3">
-                    <TextSearch className="w-5" />
-                    <Select
-                      onValueChange={field.onChange}
-                      defaultValue={field.value}>
-                      <SelectTrigger className="h-12 w-full max-w-sm border-none focus-visible:ring-0">
-                        <SelectValue placeholder="Pilih kategori" />
-                      </SelectTrigger>
-                      <SelectContent>
-                        <SelectItem value="venue">Sewa Lapangan</SelectItem>
-                        <SelectItem value="rental">
-                          Sewa Perlengkapan
-                        </SelectItem>
-                        <SelectItem value="buy">Beli Perlengkapan</SelectItem>
-                      </SelectContent>
-                    </Select>
-                  </div>
-                </FormControl>
-              </FormItem>
-            )}
-          />
-          <FormField
-            control={form.control}
-            name="location"
-            render={({ field }) => (
-              <FormItem>
-                <FormControl>
-                  <div className="flex items-center rounded-md border border-white bg-transparent px-3">
-                    <MapPinIcon className="w-5" />
-
-                    <Input
-                      className="h-12 border-none focus-visible:outline-none focus-visible:ring-0"
-                      type="text"
-                      placeholder="Masukkan nama lokasi..."
-                      {...field}
-                    />
-                  </div>
-                </FormControl>
-              </FormItem>
-            )}
-          />
-          <FormField
-            control={form.control}
-            name="category"
-            render={({ field }) => (
-              <FormItem>
-                <FormControl>
-                  <Select
-                    onValueChange={field.onChange}
-                    defaultValue={field.value}>
-                    <SelectTrigger className="h-12 w-full max-w-sm">
-                      <SelectValue placeholder="Pilih cabang olahraga" />
-                    </SelectTrigger>
-                    <SelectContent>
-                      {categories?.data?.map((category) => (
-                        <SelectItem key={category.id} value={category.name}>
-                          {category.name}
-                        </SelectItem>
-                      ))}
-                    </SelectContent>
-                  </Select>
-                </FormControl>
-              </FormItem>
-            )}
-          />
-          <Button variant={'ringHover'} className="h-12 rounded-md">
-            Temukan <ArrowRightCircleIcon className="ml-4" />
-          </Button>
-        </div>
+      <form
+        onSubmit={form.handleSubmit(onSubmit)}
+        className="align-center flex flex-col justify-center gap-6 rounded-xl bg-tangerine-400 p-8 md:flex-row">
+        <FormField
+          control={form.control}
+          name="subcategory"
+          render={({ field }) => (
+            <FormItem>
+              <FormControl>
+                <Select
+                  onValueChange={field.onChange}
+                  defaultValue={field.value}>
+                  <SelectTrigger className="h-12 w-full max-w-sm">
+                    <SelectValue placeholder="Pilih kategori" />
+                  </SelectTrigger>
+                  <SelectContent>
+                    <SelectItem value="venue">Sewa Lapangan</SelectItem>
+                    <SelectItem value="rental">Sewa Perlengkapan</SelectItem>
+                    <SelectItem value="buy">Beli Perlengkapan</SelectItem>
+                  </SelectContent>
+                </Select>
+              </FormControl>
+            </FormItem>
+          )}
+        />
+        <FormField
+          control={form.control}
+          name="location"
+          render={({ field }) => (
+            <FormItem>
+              <FormControl>
+                <div className="input input-bordered flex items-center gap-2 border-white bg-transparent">
+                  <MapPinIcon className="w-5" />
+                  <input
+                    className="grow border-0"
+                    type="text"
+                    placeholder="Masukkan nama lokasi..."
+                    {...field}
+                  />
+                </div>
+              </FormControl>
+            </FormItem>
+          )}
+        />
+        <FormField
+          control={form.control}
+          name="category"
+          render={({ field }) => (
+            <FormItem>
+              <FormControl>
+                <Select
+                  onValueChange={field.onChange}
+                  defaultValue={field.value}>
+                  <SelectTrigger className="h-12 w-full max-w-sm">
+                    <SelectValue placeholder="Pilih cabang olahraga" />
+                  </SelectTrigger>
+                  <SelectContent>
+                    {categories?.data?.map((category) => (
+                      <SelectItem key={category.id} value={category.name}>
+                        {category.name}
+                      </SelectItem>
+                    ))}
+                  </SelectContent>
+                </Select>
+              </FormControl>
+            </FormItem>
+          )}
+        />
+        <Button
+          variant={'outline'}
+          className="rounded-fll h-12 w-full rounded-full border-black md:w-[50%]">
+          Temukan <ArrowRightCircleIcon className="ml-4" />
+        </Button>
       </form>
     </Form>
   );

@@ -1,7 +1,7 @@
 import { NextResponse } from 'next/server';
+import { getServerSession } from 'next-auth';
 
 import prisma from '@/lib/prisma';
-import { getServerSession } from 'next-auth';
 import { authOptions } from '@/lib/auth';
 
 export interface VanueData {
@@ -23,7 +23,7 @@ export async function POST(request: Request) {
   try {
     const requestData: VanueData = await request.json();
     const session = await getServerSession(authOptions);
-    const userId = await session?.user?.id;
+    const userId = (await session?.user?.id) as string;
     const { name, location, lat, lng, logo } = requestData;
 
     await prisma.venue.create({

@@ -3,7 +3,14 @@
 import React, { useState, useEffect } from 'react';
 import Head from 'next/head';
 import { useRouter, usePathname } from 'next/navigation';
-import { Carousel, CarouselContent, CarouselItem, CarouselNext, CarouselPrevious } from '@/components/ui/carousel';
+
+import {
+  Carousel,
+  CarouselContent,
+  CarouselItem,
+  CarouselNext,
+  CarouselPrevious,
+} from '@/components/ui/carousel';
 import { Separator } from '@/components/ui/separator';
 import CardLapangan from './lapangan-card';
 import CardProduct from './product-card';
@@ -26,7 +33,6 @@ type Props = {
 };
 
 export default function ProductPage({ title, products }: Props) {
- 
   return (
     <div className="mt-4 p-4">
       <Head>
@@ -35,20 +41,21 @@ export default function ProductPage({ title, products }: Props) {
       <h1 className="mb-4 text-center font-jakarta text-2xl font-bold md:text-7xl">
         {title.toUpperCase()} DAY
       </h1>
-      
-      {Object.keys(products).map(category => (
+
+      {Object.keys(products).map((category) => (
         <div key={category} className="container">
           <h1 className="mb-4 text-xl font-bold md:text-5xl">
             {category.charAt(0).toUpperCase() + category.slice(1)}
           </h1>
           <Carousel className="w-full">
             <CarouselContent>
-              {products[category].map(product => (
-                <CarouselItem
-                  className="md:basis-1/4"
-                  key={product.link}
-                >
-                  {category === 'lapangan' ? <CardLapangan product={product} /> : <CardProduct product={product} />}
+              {products[category].map((product) => (
+                <CarouselItem className="md:basis-1/4" key={product.link}>
+                  {category === 'lapangan' ? (
+                    <CardLapangan product={product} />
+                  ) : (
+                    <CardProduct product={product} />
+                  )}
                 </CarouselItem>
               ))}
             </CarouselContent>

@@ -1,3 +1,4 @@
+'use client';
 /* eslint-disable @typescript-eslint/no-unused-vars */
 import Footer from '@/components/layouts/footer';
 import About from '@/components/layouts/landing-page/about';
@@ -7,8 +8,11 @@ import SearchOption from '@/components/layouts/landing-page/search-option';
 import Team from '@/components/layouts/landing-page/team';
 import MainNavbar from '@/components/layouts/main-navbar';
 import Navbar from '@/components/layouts/main-navbar/navbar';
+import { useCategories } from '@/hooks/categories/use-categories';
 
-export default async function Home() {
+export default function Home() {
+  const { data: categories, error, isLoading } = useCategories();
+
   const features = [
     {
       title: 'Sport Equipment',
@@ -53,18 +57,13 @@ export default async function Home() {
 
   return (
     <>
-      {/* <Navbar menus={menus} /> */}
-      {/* <MainNavbar /> */}
       <Hero />
-      <main className="p-12">
-        <SearchOption />
+      <main className="px-32">
+        <SearchOption data={categories ?? null} />
         <InfoSection />
         <Team />
         <About />
       </main>
-      {/* <HeroParallax /> */}
-      {/* <FeatureSection features={features} /> */}
-      {/* <Footer /> */}
     </>
   );
 }
