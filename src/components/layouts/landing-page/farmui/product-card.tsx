@@ -30,7 +30,7 @@ const StarIcon: FC<StarIconProps> = ({ className }) => (
 );
 
 const Rating: FC<RatingProps> = ({ value }) => {
-  const stars = [];
+  const stars: JSX.Element[] = [];
   for (let i = 0; i < 5; i++) {
     stars.push(
       <StarIcon
