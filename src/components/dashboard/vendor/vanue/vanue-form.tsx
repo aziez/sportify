@@ -163,7 +163,6 @@ const VanueForm = () => {
                             readOnly
                             type="hidden"
                             placeholder="lat..."
-                            value={position ? position.lat : field.value}
                             {...field}
                           />
                         </FormControl>
@@ -180,7 +179,6 @@ const VanueForm = () => {
                             readOnly
                             type="hidden"
                             placeholder="lng..."
-                            value={position ? position.lng : ''}
                             {...field}
                           />
                         </FormControl>
