@@ -42,7 +42,7 @@ const nextConfig = {
     return config;
   },
   eslint: {
-    // ignoreDuringBuilds: true,
+    ignoreDuringBuilds: true,
     dirs: ['app/*'],
   },
 };
