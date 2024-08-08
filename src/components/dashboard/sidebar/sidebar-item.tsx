@@ -9,6 +9,7 @@ import {
   Users,
   StoreIcon,
   Bell,
+  BookOpenCheck,
 } from 'lucide-react';
 
 // Sidebar items configuration
@@ -36,12 +37,19 @@ const sidebarItems: SidebarItemConfig[] = [
     href: '/dashboard/products',
     icon: <Package className="h-4 w-4" />,
     label: 'Products',
+    roles: ["vendor"]
   },
-  { href: '#', icon: <Users className="h-4 w-4" />, label: 'Customers' },
+  {
+    href: '/dashboard/bookings',
+    icon: <BookOpenCheck className="h-4 w-4" />,
+    label: 'Bookings',
+    roles: ["vendor"]
+  },
+  { href: '#', icon: <Users className="h-4 w-4" />, label: 'Customers', roles:["admin"] },
   {
     href: '/dashboard/vanues',
     icon: <StoreIcon className="h-4 w-4" />,
-    label: 'Vanue Setting',
+    label: 'Vanue',
     roles: ['vendor'],
   },
 ];

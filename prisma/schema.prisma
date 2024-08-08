@@ -7,6 +7,182 @@ datasource db {
   url      = env("DATABASE_URL")
 }
 
+model Role {
+  id        String   @id @default(uuid())
+  name      RoleType
+  createdAt DateTime @default(now())
+  users     User[]
+}
+
+model Notification {
+  id        String    @id @default(uuid())
+  userId    String
+  message   String
+  createdAt DateTime  @default(now())
+  bookings  Booking[]
+  user      User      @relation(fields: [userId], references: [id])
+
+  @@index([userId], map: "Notification_userId_fkey")
+}
+
+model User {
+  id              String         @id @default(uuid())
+  displayName     String
+  password        String
+  email           String         @unique
+  emailVerifToken String?        @db.VarChar(255)
+  emailVerifiedAt DateTime?
+  imageUrl        String?
+  rolesId         String
+  createdAt       DateTime       @default(now())
+  bookings        Booking[]
+  notifications   Notification[]
+  roles           Role           @relation(fields: [rolesId], references: [id])
+  venue           Venue?
+
+  @@index([rolesId], map: "User_rolesId_fkey")
+}
+
+model Venue {
+  id        String    @id @default(uuid())
+  userId    String    @unique
+  name      String
+  logo      String
+  location  String
+  lat       Float
+  lng       Float
+  createdAt DateTime  @default(now())
+  fields    Field?
+  products  Product[]
+  user      User      @relation(fields: [userId], references: [id])
+}
+
+model Product {
+  id             String        @id @default(uuid())
+  name           String
+  venueId        String
+  categoryId     String
+  subcategoryId  String
+  pricePerHour   Float
+  pricePerDay    Float
+  description    String
+  imageUrl       String
+  availableStock Int
+  createdAt      DateTime      @default(now())
+  bookings       Booking[]
+  category       Categories    @relation(fields: [categoryId], references: [id])
+  subcategory    Subcategories @relation(fields: [subcategoryId], references: [id])
+  venue          Venue         @relation(fields: [venueId], references: [id])
+  variant        Variant[]
+
+  @@index([categoryId], map: "Product_categoryId_fkey")
+  @@index([subcategoryId], map: "Product_subcategoryId_fkey")
+  @@index([venueId], map: "Product_venueId_fkey")
+}
+
+model Variant {
+  id        String     @id @default(uuid())
+  type      VarianType
+  content   String
+  productId String
+  Product   Product    @relation(fields: [productId], references: [id])
+
+  @@index([productId], map: "Variant_productId_fkey")
+}
+
+model Field {
+  id             String       @id @default(uuid())
+  name           String
+  venueId        String       @unique
+  fieldType      CategoryType
+  categoriesId   String
+  availableStock Int
+  pricePerHour   Float
+  pricePerDay    Float
+  description    String
+  imageUrl       String
+  location       String
+  createdAt      DateTime     @default(now())
+  bookings       Booking[]
+  Categories     Categories   @relation(fields: [categoriesId], references: [id])
+  venue          Venue        @relation(fields: [venueId], references: [id])
+
+  @@index([categoriesId], map: "Field_categoriesId_fkey")
+}
+
+model Categories {
+  id            String          @id @default(uuid())
+  name          CategoryType
+  createdAt     DateTime        @default(now())
+  Fields        Field[]
+  Products      Product[]
+  Subcategories Subcategories[]
+}
+
+model Subcategories {
+  id         String          @id @default(uuid())
+  categoryId String
+  name       SubCategoryType
+  createdAt  DateTime        @default(now())
+  product    Product[]
+  category   Categories      @relation(fields: [categoryId], references: [id])
+
+  @@index([categoryId], map: "Subcategories_categoryId_fkey")
+}
+
+model Booking {
+  id             String       @id @default(uuid())
+  userId         String
+  productId      String?
+  paymentId      String
+  notificationId String
+  bookingDate    DateTime
+  duration       Float
+  createdAt      DateTime     @default(now())
+  fieldId        String?
+  field          Field?       @relation(fields: [fieldId], references: [id])
+  notification   Notification @relation(fields: [notificationId], references: [id])
+  payment        Payment      @relation(fields: [paymentId], references: [id])
+  product        Product?     @relation(fields: [productId], references: [id])
+  user           User         @relation(fields: [userId], references: [id])
+
+  @@index([fieldId], map: "Booking_fieldId_fkey")
+  @@index([notificationId], map: "Booking_notificationId_fkey")
+  @@index([paymentId], map: "Booking_paymentId_fkey")
+  @@index([productId], map: "Booking_productId_fkey")
+  @@index([userId], map: "Booking_userId_fkey")
+}
+
+model Payment {
+  id            String      @id @default(uuid())
+  amount        Float
+  method        String
+  transactionId String
+  createdAt     DateTime    @default(now())
+  booking       Booking[]
+  transaction   Transaction @relation(fields: [transactionId], references: [id])
+
+  @@index([transactionId], map: "Payment_transactionId_fkey")
+}
+
+model Transaction {
+  id        String            @id @default(uuid())
+  statusId  String
+  amount    Float
+  createdAt DateTime          @default(now())
+  payments  Payment[]
+  status    TransactionStatus @relation(fields: [statusId], references: [id])
+
+  @@index([statusId], map: "Transaction_statusId_fkey")
+}
+
+model TransactionStatus {
+  id           String        @id @default(uuid())
+  status       String
+  createdAt    DateTime      @default(now())
+  transactions Transaction[]
+}
+
 enum CategoryType {
   FUTSAL
   BADMINTON
@@ -30,156 +206,4 @@ enum RoleType {
 enum VarianType {
   COLORS
   IMAGES
-}
-
-model Role {
-  id        String   @id @default(uuid())
-  name      RoleType
-  createdAt DateTime @default(now())
-  users     User[]
-}
-
-model Notification {
-  id        String    @id @default(uuid())
-  userId    String
-  message   String
-  createdAt DateTime  @default(now())
-  bookings  Booking[]
-  user      User      @relation(fields: [userId], references: [id])
-}
-
-model User {
-  id              String         @id @default(uuid())
-  displayName     String
-  password        String
-  email           String         @unique
-  emailVerifToken String?        @db.VarChar(255)
-  emailVerifiedAt DateTime?
-  imageUrl        String?
-  rolesId         String
-  createdAt       DateTime       @default(now())
-  bookings        Booking[]
-  notifications   Notification[]
-  venue           Venue?
-  roles           Role           @relation(fields: [rolesId], references: [id])
-}
-
-model Venue {
-  id        String    @id @default(uuid())
-  userId    String    @unique
-  name      String
-  logo      String
-  location  String
-  lat       Float
-  lng       Float
-  createdAt DateTime  @default(now())
-  products  Product[]
-  fields    Field[]
-  user      User      @relation(fields: [userId], references: [id])
-}
-
-model Product {
-  id             String        @id @default(uuid())
-  name           String
-  venueId        String
-  categoryId     String
-  subcategoryId  String
-  availableStock Int
-  variant        Variant[]
-  pricePerHour   Float
-  pricePerDay    Float
-  description    String
-  imageUrl       String
-  createdAt      DateTime      @default(now())
-  bookings       Booking[]
-  category       Categories    @relation(fields: [categoryId], references: [id])
-  subcategory    Subcategories @relation(fields: [subcategoryId], references: [id])
-  venue          Venue         @relation(fields: [venueId], references: [id])
-}
-
-model Variant {
-  id        String     @id @default(uuid())
-  type      VarianType
-  content   String
-  Product   Product    @relation(fields: [productId], references: [id])
-  productId String
-}
-
-model Field {
-  id             String       @id @default(uuid())
-  name           String
-  venueId        String       @unique
-  fieldType      CategoryType
-  categoriesId   String
-  availableStock Int
-  pricePerHour   Float
-  pricePerDay    Float
-  description    String
-  imageUrl       String
-  location       String
-  createdAt      DateTime     @default(now())
-  bookings       Booking[]
-  venue          Venue        @relation(fields: [venueId], references: [id])
-  Categories     Categories   @relation(fields: [categoriesId], references: [id])
-}
-
-model Categories {
-  id            String          @id @default(uuid())
-  name          CategoryType
-  createdAt     DateTime        @default(now())
-  Subcategories Subcategories[]
-  Products      Product[]
-  Fields        Field[]
-}
-
-model Subcategories {
-  id         String          @id @default(uuid())
-  categoryId String
-  name       SubCategoryType
-  createdAt  DateTime        @default(now())
-  product    Product[]
-  category   Categories      @relation(fields: [categoryId], references: [id])
-}
-
-model Booking {
-  id             String       @id @default(uuid())
-  userId         String
-  productId      String
-  fieldId        String
-  paymentId      String
-  notificationId String
-  bookingDate    DateTime
-  duration       Float
-  createdAt      DateTime     @default(now())
-  notification   Notification @relation(fields: [notificationId], references: [id])
-  payment        Payment      @relation(fields: [paymentId], references: [id])
-  product        Product      @relation(fields: [productId], references: [id])
-  field          Field        @relation(fields: [fieldId], references: [id])
-  user           User         @relation(fields: [userId], references: [id])
-}
-
-model Payment {
-  id            String      @id @default(uuid())
-  amount        Float
-  method        String
-  transactionId String
-  createdAt     DateTime    @default(now())
-  booking       Booking[]
-  transaction   Transaction @relation(fields: [transactionId], references: [id])
-}
-
-model Transaction {
-  id        String            @id @default(uuid())
-  statusId  String
-  amount    Float
-  createdAt DateTime          @default(now())
-  payments  Payment[]
-  status    TransactionStatus @relation(fields: [statusId], references: [id])
-}
-
-model TransactionStatus {
-  id           String        @id @default(uuid())
-  status       String
-  createdAt    DateTime      @default(now())
-  transactions Transaction[]
 }
