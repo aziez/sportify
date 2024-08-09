@@ -1,16 +1,7 @@
 /* eslint-disable jsx-a11y/label-has-associated-control */
 'use client';
-import {
-  ArrowRightCircleIcon,
-  MapPin,
-  MapPinIcon,
-  TextSearch,
-} from 'lucide-react';
-import { useForm } from 'react-hook-form';
-import { useRouter } from 'next/navigation';
-import toast from 'react-hot-toast';
-
 import { Button } from '@/components/ui/button';
+import { Form, FormControl, FormField, FormItem } from '@/components/ui/form';
 import {
   Select,
   SelectContent,
@@ -19,8 +10,10 @@ import {
   SelectValue,
 } from '@/components/ui/select';
 import { useMediaQuery } from '@/hooks/use-media-query';
-import { Form, FormControl, FormField, FormItem } from '@/components/ui/form';
-import { Input } from '@/components/ui/input';
+import { ArrowRightCircleIcon, MapPinIcon } from 'lucide-react';
+import { useRouter } from 'next/navigation';
+import { useForm } from 'react-hook-form';
+import toast from 'react-hot-toast';
 
 export default function SearchOption({ data }) {
   const isDesktop = useMediaQuery('(min-width: 768px)');
@@ -54,7 +47,8 @@ function SearchForm({ categories }) {
     <Form {...form}>
       <form
         onSubmit={form.handleSubmit(onSubmit)}
-        className="align-center flex flex-col justify-center gap-6 rounded-xl bg-tangerine-400 p-8 md:flex-row">
+        className="align-center flex flex-col justify-center gap-6 rounded-xl bg-tangerine-400 p-8 md:flex-row"
+      >
         <FormField
           control={form.control}
           name="subcategory"
@@ -63,7 +57,8 @@ function SearchForm({ categories }) {
               <FormControl>
                 <Select
                   onValueChange={field.onChange}
-                  defaultValue={field.value}>
+                  defaultValue={field.value}
+                >
                   <SelectTrigger className="h-12 w-full max-w-sm">
                     <SelectValue placeholder="Pilih kategori" />
                   </SelectTrigger>
@@ -104,7 +99,8 @@ function SearchForm({ categories }) {
               <FormControl>
                 <Select
                   onValueChange={field.onChange}
-                  defaultValue={field.value}>
+                  defaultValue={field.value}
+                >
                   <SelectTrigger className="h-12 w-full max-w-sm">
                     <SelectValue placeholder="Pilih cabang olahraga" />
                   </SelectTrigger>
@@ -122,7 +118,8 @@ function SearchForm({ categories }) {
         />
         <Button
           variant={'outline'}
-          className="rounded-fll h-12 w-full rounded-full border-black md:w-[50%]">
+          className="rounded-fll h-12 w-full rounded-full border-black md:w-[50%]"
+        >
           Temukan <ArrowRightCircleIcon className="ml-4" />
         </Button>
       </form>

@@ -1,25 +1,6 @@
 'use client';
-import { zodResolver } from '@hookform/resolvers/zod';
-import { format, addDays } from 'date-fns';
-import { CalendarIcon } from 'lucide-react';
-import { useForm, useWatch } from 'react-hook-form';
-import { useEffect } from 'react';
-import { id } from 'date-fns/locale';
-import { z } from 'zod';
-
-import { cn } from '@/lib/utils';
-import {
-  Select,
-  SelectContent,
-  SelectItem,
-  SelectTrigger,
-  SelectValue,
-} from '@/components/ui/select';
-import {
-  Popover,
-  PopoverContent,
-  PopoverTrigger,
-} from '@/components/ui/popover';
+import { Button } from '@/components/ui/button';
+import { Calendar } from '@/components/ui/calendar';
 import {
   Form,
   FormControl,
@@ -28,9 +9,27 @@ import {
   FormLabel,
   FormMessage,
 } from '@/components/ui/form';
-import { Calendar } from '@/components/ui/calendar';
-import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
+import {
+  Popover,
+  PopoverContent,
+  PopoverTrigger,
+} from '@/components/ui/popover';
+import {
+  Select,
+  SelectContent,
+  SelectItem,
+  SelectTrigger,
+  SelectValue,
+} from '@/components/ui/select';
+import { cn } from '@/lib/utils';
+import { zodResolver } from '@hookform/resolvers/zod';
+import { addDays, format } from 'date-fns';
+import { id } from 'date-fns/locale';
+import { CalendarIcon } from 'lucide-react';
+import { useEffect } from 'react';
+import { useForm, useWatch } from 'react-hook-form';
+import { z } from 'zod';
 
 const FormSchema = z.object({
   item: z.string({ required_error: 'Jumlah barang tidak boleh kosong' }).min(1),
@@ -52,7 +51,7 @@ const FormSewa = () => {
 
   const startDate = useWatch({ control: form.control, name: 'startDate' });
   const totalDay = parseInt(
-    useWatch({ control: form.control, name: 'totalDay' })
+    useWatch({ control: form.control, name: 'totalDay' }),
   );
 
   useEffect(() => {
@@ -97,8 +96,9 @@ const FormSewa = () => {
                         variant="outline"
                         className={cn(
                           'w-full pl-3 text-left font-normal',
-                          !field.value && 'text-muted-foreground'
-                        )}>
+                          !field.value && 'text-muted-foreground',
+                        )}
+                      >
                         {field.value ? (
                           format(field.value, 'PPP', { locale: id })
                         ) : (
@@ -131,7 +131,8 @@ const FormSewa = () => {
                 <FormLabel>Hari</FormLabel>
                 <Select
                   onValueChange={field.onChange}
-                  defaultValue={field.value}>
+                  defaultValue={field.value}
+                >
                   <FormControl>
                     <SelectTrigger>
                       <SelectValue placeholder="Pilih hari" />
@@ -165,9 +166,10 @@ const FormSewa = () => {
                         variant="outline"
                         className={cn(
                           'w-full pl-3 text-left font-normal',
-                          !field.value && 'text-muted-foreground'
+                          !field.value && 'text-muted-foreground',
                         )}
-                        disabled>
+                        disabled
+                      >
                         {field.value ? (
                           format(field.value, 'PPP', { locale: id })
                         ) : (
@@ -196,7 +198,8 @@ const FormSewa = () => {
         <Button
           type="submit"
           variant="default"
-          className="w-full rounded-full p-6 text-lg font-bold">
+          className="w-full rounded-full p-6 text-lg font-bold"
+        >
           Sewa Sekarang
         </Button>
       </form>

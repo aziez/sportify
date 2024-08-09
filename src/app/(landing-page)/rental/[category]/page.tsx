@@ -1,6 +1,6 @@
-import React from 'react';
-import { notFound } from 'next/navigation';
 import CardProduct from '@/components/layouts/products/product-card';
+import { notFound } from 'next/navigation';
+import React from 'react';
 
 // sewaproducts.ts
 const Product = {
@@ -15,13 +15,13 @@ const Product = {
       name: 'Bola Futsal',
       imageUrl: '/sample/futsal/b2.png',
       price: 30000,
-      link: '/futsal-vest'
+      link: '/futsal-vest',
     },
     {
       name: 'Bola Futsal',
       imageUrl: '/sample/futsal/b3.png',
       price: 30000,
-      link: '/futsal-vest'
+      link: '/futsal-vest',
     },
   ],
   volly: [
@@ -35,15 +35,14 @@ const Product = {
       name: 'Bola Volley',
       imageUrl: '/sample/volly/b2.png',
       price: 60000,
-      link: '/volley-jersey'
+      link: '/volley-jersey',
     },
     {
       name: 'Bola Volley',
       imageUrl: '/sample/volly/b3.png',
       price: 60000,
-      link: '/volley-jersey'
+      link: '/volley-jersey',
     },
-
   ],
   badminton: [
     {
@@ -51,16 +50,14 @@ const Product = {
       imageUrl: '/sample/volly/b1.png',
       price: 70000,
       link: '/badminton-racket',
-     
     },
     {
       name: 'Shuttlecock',
       imageUrl: '/sample/volly/b1.png',
       price: 20000,
-      link: '/shuttlecock'
+      link: '/shuttlecock',
     },
-    
-  ]
+  ],
 };
 
 type Product = {
@@ -91,8 +88,8 @@ const CategoryPage: React.FC<Props> = ({ params }) => {
         Sewa Perlengkapan {category.charAt(0).toUpperCase() + category.slice(1)}
       </h1>
       <div className="container">
-        <div className="grid gap-4 grid-cols-1 md:grid-cols-2 lg:grid-cols-3">
-          {productList.map(product => (
+        <div className="grid grid-cols-1 gap-4 md:grid-cols-2 lg:grid-cols-3">
+          {productList.map((product) => (
             <CardProduct key={product.link} product={product} />
           ))}
         </div>
@@ -102,7 +99,7 @@ const CategoryPage: React.FC<Props> = ({ params }) => {
 };
 
 export async function generateStaticParams() {
-  return Object.keys(Product).map(category => ({ category }));
+  return Object.keys(Product).map((category) => ({ category }));
 }
 
 export default CategoryPage;

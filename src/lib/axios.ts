@@ -11,7 +11,7 @@ const axiosInstance = axios.create({
 export const fetchData = async <T>(
   url: string,
   method: AxiosRequestConfig['method'] = 'GET',
-  data: any = null
+  data: any = null,
 ): Promise<T> => {
   const response: AxiosResponse<T> = await axiosInstance.request<T>({
     url,

@@ -11,7 +11,7 @@ const sewaProducts = {
       title: 'Rompi Futsal',
       img: '/sample/futsal/b2.png',
       harga: 30000,
-      link: '/futsal-vest'
+      link: '/futsal-vest',
     },
   ],
   volly: [
@@ -25,9 +25,8 @@ const sewaProducts = {
       title: 'Jersey Volley',
       img: '/sample/volly/jersey1.png',
       harga: 60000,
-      link: '/volley-jersey'
+      link: '/volley-jersey',
     },
-
   ],
   badminton: [
     {
@@ -35,16 +34,14 @@ const sewaProducts = {
       img: '/sample/volly/b1.png',
       harga: 70000,
       link: '/badminton-racket',
-     
     },
     {
       title: 'Shuttlecock',
       img: '/sample/volly/b1.png',
       harga: 20000,
-      link: '/shuttlecock'
+      link: '/shuttlecock',
     },
-    
-  ]
+  ],
 };
 
 export default sewaProducts;

@@ -1,8 +1,7 @@
+import FormLogin from '@/components/layouts/login/form-login';
 import Image from 'next/image';
-
 import welcomeImg from 'public/img/DSCF2992-scaled-e1717593656488.jpg';
 import Sportify from 'public/logo.svg';
-import FormLogin from '@/components/layouts/login/form-login';
 
 export default function Login() {
   return (

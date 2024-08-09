@@ -1,9 +1,7 @@
 'use client';
 
-import { useSession } from 'next-auth/react';
-import Link from 'next/link';
-
 import { Button } from '../../ui/button';
+
 import {
   DropdownMenu,
   DropdownMenuContent,
@@ -11,6 +9,8 @@ import {
   DropdownMenuTrigger,
 } from '@/components/ui/dropdown-menu';
 import { Label } from '@/components/ui/label';
+import { useSession } from 'next-auth/react';
+import Link from 'next/link';
 
 const Navbar = ({
   menus,
@@ -27,7 +27,8 @@ const Navbar = ({
       <DropdownMenu>
         <DropdownMenuTrigger
           asChild
-          className="bg-none lg:hidden xl:hidden 2xl:hidden">
+          className="bg-none lg:hidden xl:hidden 2xl:hidden"
+        >
           <Button variant={'ghost'}>
             <Label className="swap swap-rotate">
               <input type="checkbox" />
@@ -37,7 +38,8 @@ const Navbar = ({
                 xmlns="http://www.w3.org/2000/svg"
                 fill="none"
                 viewBox="0 0 24 24"
-                stroke="currentColor">
+                stroke="currentColor"
+              >
                 <path
                   strokeLinecap="round"
                   strokeLinejoin="round"
@@ -50,7 +52,8 @@ const Navbar = ({
               <svg
                 className="swap-on h-5 w-5 fill-current"
                 xmlns="http://www.w3.org/2000/svg"
-                viewBox="0 0 512 512">
+                viewBox="0 0 512 512"
+              >
                 <polygon points="400 145.49 366.51 112 256 222.51 145.49 112 112 145.49 222.51 256 112 366.51 145.49 400 256 289.49 366.51 400 400 366.51 289.49 256 400 145.49" />
               </svg>
             </Label>

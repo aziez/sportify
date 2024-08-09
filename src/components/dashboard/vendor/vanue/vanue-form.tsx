@@ -1,10 +1,7 @@
 'use client';
 
-import { zodResolver } from '@hookform/resolvers/zod';
-import { useEffect, useState, useTransition } from 'react';
-import { useForm } from 'react-hook-form';
-import { z } from 'zod';
-import { useSession } from 'next-auth/react';
+import VanueMaps from './vanue-map';
+import UploadsLogo from './venue-uploads';
 
 import { Button } from '@/components/ui/button';
 import {
@@ -24,9 +21,11 @@ import {
 } from '@/components/ui/form';
 import { Input } from '@/components/ui/input';
 import { Textarea } from '@/components/ui/textarea';
-import VanueMaps from './vanue-map';
-import UploadsLogo from './venue-uploads';
 import { vanueApi } from '@/stores/api/api';
+import { zodResolver } from '@hookform/resolvers/zod';
+import { useEffect, useState, useTransition } from 'react';
+import { useForm } from 'react-hook-form';
+import { z } from 'zod';
 
 const FormSchema = z.object({
   name: z.string().min(2, {
@@ -48,7 +47,7 @@ const FormSchema = z.object({
 
 const VanueForm = () => {
   const [position, setPosition] = useState<{ lat: number; lng: number } | null>(
-    null
+    null,
   );
 
   const [pending, start] = useTransition();

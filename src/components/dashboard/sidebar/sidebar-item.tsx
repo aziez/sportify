@@ -1,16 +1,15 @@
 // components/SidebarItem.tsx
-import Link from 'next/link';
 import { Badge } from '@/components/ui/badge';
-import { usePathname } from 'next/navigation';
 import {
-  Home,
-  ShoppingCart,
-  Package,
-  Users,
-  StoreIcon,
-  Bell,
   BookOpenCheck,
+  Home,
+  Package,
+  ShoppingCart,
+  StoreIcon,
+  Users,
 } from 'lucide-react';
+import Link from 'next/link';
+import { usePathname } from 'next/navigation';
 
 // Sidebar items configuration
 interface SidebarItemConfig {
@@ -37,15 +36,20 @@ const sidebarItems: SidebarItemConfig[] = [
     href: '/dashboard/products',
     icon: <Package className="h-4 w-4" />,
     label: 'Products',
-    roles: ["vendor"]
+    roles: ['vendor'],
   },
   {
     href: '/dashboard/bookings',
     icon: <BookOpenCheck className="h-4 w-4" />,
     label: 'Bookings',
-    roles: ["vendor"]
+    roles: ['vendor'],
   },
-  { href: '#', icon: <Users className="h-4 w-4" />, label: 'Customers', roles:["admin"] },
+  {
+    href: '#',
+    icon: <Users className="h-4 w-4" />,
+    label: 'Customers',
+    roles: ['admin'],
+  },
   {
     href: '/dashboard/vanues',
     icon: <StoreIcon className="h-4 w-4" />,
@@ -61,7 +65,8 @@ const SidebarItem = ({ href, icon, label, badgeCount }: SidebarItemConfig) => {
   return (
     <Link
       href={href}
-      className={`flex items-center gap-3 rounded-lg px-3 py-2 transition-all ${isActive ? 'bg-muted text-primary' : 'text-muted-foreground hover:text-primary'}`}>
+      className={`flex items-center gap-3 rounded-lg px-3 py-2 transition-all ${isActive ? 'bg-muted text-primary' : 'text-muted-foreground hover:text-primary'}`}
+    >
       {icon}
       {label}
       {badgeCount !== undefined && (

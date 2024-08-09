@@ -1,6 +1,5 @@
-import { NextRequest, NextResponse } from 'next/server';
-
 import { resendVerificationEmail } from '@/lib/email';
+import { NextRequest, NextResponse } from 'next/server';
 
 export interface ResendVerify {
   email: string;
@@ -10,7 +9,7 @@ export async function POST(req: NextRequest) {
   if (req.method !== 'POST') {
     return NextResponse.json(
       { message: 'Method not allowed' },
-      { status: 405 }
+      { status: 405 },
     );
   }
 
@@ -24,13 +23,13 @@ export async function POST(req: NextRequest) {
         message: `Resend verify successfully to ${email}`,
         data: requestData,
       },
-      { status: 200 }
+      { status: 200 },
     );
   } catch (error) {
     console.error('Failed to resend verification email:', error);
     return NextResponse.json(
       { message: 'Internal server error' },
-      { status: 500 }
+      { status: 500 },
     );
   }
 }

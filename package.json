@@ -7,9 +7,11 @@
     "dev": "next dev",
     "build": "pnpm prisma generate && next build",
     "start": "next start",
-    "lint": "next lint",
-    "lint:fix": "eslint . --ext .js,.jsx,.ts,.tsx --fix",
-    "seed": "ts-node -r tsconfig-paths/register prisma/seed.ts"
+    "seed": "ts-node -r tsconfig-paths/register prisma/seed.ts",
+    "lint": "pnpm eslint .",
+    "lint:fix": "pnpm eslint . --fix && pnpm prettier --write \"**/*.{js,jsx,ts,tsx,json,scss,css,md}\"",
+    "lint:strict": "pnpm eslint . --ext .js,.jsx,.ts,.tsx",
+    "prettier": "prettier --write */**/*.{js,jsx,json,ts,tsx,scss,css,md}"
   },
   "dependencies": {
     "@hookform/resolvers": "^3.9.0",
@@ -91,10 +93,13 @@
     "eslint-plugin-react": "^7.35.0",
     "eslint-plugin-react-hooks": "^4.6.2",
     "eslint-plugin-simple-import-sort": "^12.1.1",
+    "lint-staged": "^15.2.8",
     "postcss": "^8.4.40",
     "prettier": "^3.3.3",
+    "prettier-plugin-organize-imports": "^4.0.0",
     "prettier-plugin-tailwindcss": "^0.6.5",
     "prisma": "^5.17.0",
+    "shx": "^0.3.4",
     "tailwindcss": "^3.4.7",
     "ts-node": "^10.9.2",
     "tsconfig-paths": "^4.2.0",

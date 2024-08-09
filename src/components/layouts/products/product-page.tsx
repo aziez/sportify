@@ -1,8 +1,7 @@
 'use client';
 
-import React, { useState, useEffect } from 'react';
-import Head from 'next/head';
-import { useRouter, usePathname } from 'next/navigation';
+import CardLapangan from './lapangan-card';
+import CardProduct from './product-card';
 
 import {
   Carousel,
@@ -12,10 +11,7 @@ import {
   CarouselPrevious,
 } from '@/components/ui/carousel';
 import { Separator } from '@/components/ui/separator';
-import CardLapangan from './lapangan-card';
-import CardProduct from './product-card';
-import { Button } from '@/components/ui/button';
-import { Input } from '@/components/ui/input';
+import Head from 'next/head';
 
 type Product = {
   name: string;

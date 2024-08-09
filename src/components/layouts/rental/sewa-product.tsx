@@ -1,7 +1,7 @@
-import React from 'react';
-import { MotionValue } from 'framer-motion';
-
 import { ProductCard } from '../landing-page/farmui/product-card';
+
+import { MotionValue } from 'framer-motion';
+import React from 'react';
 
 type Product = {
   id: string;

@@ -1,13 +1,10 @@
 'use client';
 /* eslint-disable @typescript-eslint/no-unused-vars */
-import Footer from '@/components/layouts/footer';
 import About from '@/components/layouts/landing-page/about';
 import Hero from '@/components/layouts/landing-page/hero';
 import InfoSection from '@/components/layouts/landing-page/info-section';
 import SearchOption from '@/components/layouts/landing-page/search-option';
 import Team from '@/components/layouts/landing-page/team';
-import MainNavbar from '@/components/layouts/main-navbar';
-import Navbar from '@/components/layouts/main-navbar/navbar';
 import { useCategories } from '@/hooks/categories/use-categories';
 
 export default function Home() {

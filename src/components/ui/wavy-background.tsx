@@ -1,9 +1,8 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
 'use client';
-import React, { useEffect, useRef, useState } from 'react';
-import { createNoise3D } from 'simplex-noise';
-
 import { cn } from '@/lib/utils';
+import { useEffect, useRef, useState } from 'react';
+import { createNoise3D } from 'simplex-noise';
 
 export const WavyBackground = ({
   children,
@@ -107,7 +106,7 @@ export const WavyBackground = ({
     setIsSafari(
       typeof window !== 'undefined' &&
         navigator.userAgent.includes('Safari') &&
-        !navigator.userAgent.includes('Chrome')
+        !navigator.userAgent.includes('Chrome'),
     );
   }, []);
 
@@ -115,7 +114,7 @@ export const WavyBackground = ({
     <div
       className={cn(
         'flex h-screen flex-col items-center justify-center',
-        containerClassName
+        containerClassName,
       )}
     >
       <canvas

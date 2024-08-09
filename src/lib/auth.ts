@@ -1,10 +1,9 @@
-import CredentialsProvider from 'next-auth/providers/credentials';
-import GoogleProvider from 'next-auth/providers/google';
+import prisma from '@/lib/prisma';
 import { PrismaAdapter } from '@next-auth/prisma-adapter';
 import { compare } from 'bcrypt';
 import { NextAuthOptions, User } from 'next-auth';
-
-import prisma from '@/lib/prisma';
+import CredentialsProvider from 'next-auth/providers/credentials';
+import GoogleProvider from 'next-auth/providers/google';
 
 interface CustomUser extends User {
   id: string;
@@ -42,7 +41,10 @@ export const authOptions: NextAuthOptions = {
           where: { id: user.rolesId },
         });
 
-        const passwordMatch = await compare(credentials.password, user.password);
+        const passwordMatch = await compare(
+          credentials.password,
+          user.password,
+        );
 
         if (!passwordMatch) {
           throw new Error('Invalid password');

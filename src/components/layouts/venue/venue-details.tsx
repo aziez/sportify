@@ -1,25 +1,11 @@
-import React from 'react';
-import {
-  ArrowRightCircleIcon,
-  Car,
-  SquareArrowOutUpRight,
-  StarIcon,
-  Trash2Icon,
-} from 'lucide-react';
-import { StarFilledIcon } from '@radix-ui/react-icons';
-
-import {
-  Card,
-  CardContent,
-  CardDescription,
-  CardFooter,
-  CardHeader,
-  CardTitle,
-} from '@/components/ui/card';
-import { Button } from '@/components/ui/button';
-import { Badge } from '@/components/ui/badge';
 import { DateOption } from './date-option';
 import TotalVenue from './total-venue';
+
+import { Badge } from '@/components/ui/badge';
+import { Button } from '@/components/ui/button';
+import { Card, CardDescription, CardTitle } from '@/components/ui/card';
+import { StarFilledIcon } from '@radix-ui/react-icons';
+import { SquareArrowOutUpRight } from 'lucide-react';
 
 export default function VenueDetails() {
   return (
@@ -60,7 +46,8 @@ export default function VenueDetails() {
             </CardDescription>
             <Button
               variant={'outline'}
-              className="rounded-fll mt-3 max-w-xl rounded-full border-black">
+              className="rounded-fll mt-3 max-w-xl rounded-full border-black"
+            >
               Buka di Map <SquareArrowOutUpRight className="ml-4 w-4" />
             </Button>
             <a href="#check">

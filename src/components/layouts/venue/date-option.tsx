@@ -1,44 +1,42 @@
-"use client"
+'use client';
 
-import { zodResolver } from "@hookform/resolvers/zod"
-import { CalendarIcon } from "@radix-ui/react-icons"
-import { format } from "date-fns"
-import { useForm } from "react-hook-form"
-import { z } from "zod"
+import TimeSlotSelector from './time-slot';
 
-import { cn } from "@/lib/utils"
-import { Button } from "@/components/ui/button"
-import { Calendar } from "@/components/ui/calendar"
+import { Button } from '@/components/ui/button';
+import { Calendar } from '@/components/ui/calendar';
 import {
   Form,
   FormControl,
-  FormDescription,
   FormField,
   FormItem,
-  FormLabel,
   FormMessage,
-} from "@/components/ui/form"
+} from '@/components/ui/form';
 import {
   Popover,
   PopoverContent,
   PopoverTrigger,
-} from "@/components/ui/popover"
-import TimeSlotSelector from "./time-slot"
+} from '@/components/ui/popover';
+import { cn } from '@/lib/utils';
+import { zodResolver } from '@hookform/resolvers/zod';
+import { CalendarIcon } from '@radix-ui/react-icons';
+import { format } from 'date-fns';
+import { useForm } from 'react-hook-form';
+import { z } from 'zod';
+
 const FormSchema = z.object({
   dob: z.date({
-    required_error: "A date of birth is required.",
+    required_error: 'A date of birth is required.',
   }),
-})
+});
 
 export function DateOption() {
   const form = useForm<z.infer<typeof FormSchema>>({
     resolver: zodResolver(FormSchema),
-  })
-
+  });
 
   return (
     <Form {...form}>
-      <form  className=" flex items-center gap-3">
+      <form className="flex items-center gap-3">
         <FormField
           control={form.control}
           name="dob"
@@ -48,14 +46,14 @@ export function DateOption() {
                 <PopoverTrigger asChild>
                   <FormControl>
                     <Button
-                      variant={"outline"}
+                      variant={'outline'}
                       className={cn(
-                        "w-[240px] pl-3 text-left font-normal",
-                        !field.value && "text-muted-foreground"
+                        'w-[240px] pl-3 text-left font-normal',
+                        !field.value && 'text-muted-foreground',
                       )}
                     >
                       {field.value ? (
-                        format(field.value, "PPP")
+                        format(field.value, 'PPP')
                       ) : (
                         <span>Pick a date</span>
                       )}
@@ -69,7 +67,7 @@ export function DateOption() {
                     selected={field.value}
                     onSelect={field.onChange}
                     disabled={(date) =>
-                      date > new Date() || date < new Date("1900-01-01")
+                      date > new Date() || date < new Date('1900-01-01')
                     }
                     initialFocus
                   />
@@ -82,8 +80,8 @@ export function DateOption() {
         <Button>Submit</Button>
       </form>
       <div className="mt-10 w-[70%]">
-          <TimeSlotSelector/>
+        <TimeSlotSelector />
       </div>
     </Form>
-  )
+  );
 }

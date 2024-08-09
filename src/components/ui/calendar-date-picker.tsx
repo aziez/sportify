@@ -1,23 +1,5 @@
 'use client';
 
-import * as React from 'react';
-import { CalendarIcon } from 'lucide-react';
-import {
-  startOfWeek,
-  endOfWeek,
-  subDays,
-  startOfMonth,
-  endOfMonth,
-  startOfYear,
-  endOfYear,
-  startOfDay,
-  endOfDay,
-} from 'date-fns';
-import { toDate, formatInTimeZone } from 'date-fns-tz';
-import { DateRange } from 'react-day-picker';
-import { cva, VariantProps } from 'class-variance-authority';
-
-import { cn } from '@/lib/utils';
 import { Button } from '@/components/ui/button';
 import { Calendar } from '@/components/ui/calendar';
 import {
@@ -32,6 +14,23 @@ import {
   SelectTrigger,
   SelectValue,
 } from '@/components/ui/select';
+import { cn } from '@/lib/utils';
+import { cva, VariantProps } from 'class-variance-authority';
+import {
+  endOfDay,
+  endOfMonth,
+  endOfWeek,
+  endOfYear,
+  startOfDay,
+  startOfMonth,
+  startOfWeek,
+  startOfYear,
+  subDays,
+} from 'date-fns';
+import { formatInTimeZone, toDate } from 'date-fns-tz';
+import { CalendarIcon } from 'lucide-react';
+import * as React from 'react';
+import { DateRange } from 'react-day-picker';
 
 const months = [
   'January',
@@ -67,7 +66,7 @@ const multiSelectVariants = cva(
     defaultVariants: {
       variant: 'default',
     },
-  }
+  },
 );
 
 interface CalendarDatePickerProps
@@ -98,26 +97,28 @@ export const CalendarDatePicker = React.forwardRef<
       variant,
       ...props
     },
-    ref
+    ref,
   ) => {
     const [isPopoverOpen, setIsPopoverOpen] = React.useState(false);
     const [selectedRange, setSelectedRange] = React.useState<string | null>(
-      numberOfMonths === 2 ? 'This Year' : 'Today'
+      numberOfMonths === 2 ? 'This Year' : 'Today',
     );
     const [monthFrom, setMonthFrom] = React.useState<Date | undefined>(
-      date?.from
+      date?.from,
     );
     const [yearFrom, setYearFrom] = React.useState<number | undefined>(
-      date?.from?.getFullYear()
+      date?.from?.getFullYear(),
     );
     const [monthTo, setMonthTo] = React.useState<Date | undefined>(
-      numberOfMonths === 2 ? date?.to : date?.from
+      numberOfMonths === 2 ? date?.to : date?.from,
     );
     const [yearTo, setYearTo] = React.useState<number | undefined>(
-      numberOfMonths === 2 ? date?.to?.getFullYear() : date?.from?.getFullYear()
+      numberOfMonths === 2
+        ? date?.to?.getFullYear()
+        : date?.from?.getFullYear(),
     );
     const [highlightedPart, setHighlightedPart] = React.useState<string | null>(
-      null
+      null,
     );
 
     const timeZone = Intl.DateTimeFormat().resolvedOptions().timeZone;
@@ -172,7 +173,7 @@ export const CalendarDatePicker = React.forwardRef<
                 ? new Date(
                     date.from.getFullYear(),
                     newMonth.getMonth(),
-                    date.from.getDate()
+                    date.from.getDate(),
                   )
                 : newMonth;
           const to =
@@ -261,7 +262,7 @@ export const CalendarDatePicker = React.forwardRef<
 
     const years = Array.from(
       { length: yearsRange + 1 },
-      (_, i) => today.getFullYear() - yearsRange / 2 + i
+      (_, i) => today.getFullYear() - yearsRange / 2 + i,
     );
 
     const dateRanges = [
@@ -369,7 +370,7 @@ export const CalendarDatePicker = React.forwardRef<
             handleWheel as unknown as EventListener,
             {
               passive: false,
-            }
+            },
           );
         }
       };
@@ -381,7 +382,7 @@ export const CalendarDatePicker = React.forwardRef<
           if (element) {
             element.removeEventListener(
               'wheel',
-              handleWheel as unknown as EventListener
+              handleWheel as unknown as EventListener,
             );
           }
         });
@@ -408,7 +409,7 @@ export const CalendarDatePicker = React.forwardRef<
               {...props}
               className={cn(
                 'w-auto',
-                multiSelectVariants({ variant, className })
+                multiSelectVariants({ variant, className }),
               )}
               onClick={handleTogglePopover}
               suppressHydrationWarning
@@ -423,7 +424,7 @@ export const CalendarDatePicker = React.forwardRef<
                         className={cn(
                           'date-part',
                           highlightedPart === 'firstDay' &&
-                            'font-bold underline'
+                            'font-bold underline',
                         )}
                         onMouseOver={() => handleMouseOver('firstDay')}
                         onMouseLeave={handleMouseLeave}
@@ -435,7 +436,7 @@ export const CalendarDatePicker = React.forwardRef<
                         className={cn(
                           'date-part',
                           highlightedPart === 'firstMonth' &&
-                            'font-bold underline'
+                            'font-bold underline',
                         )}
                         onMouseOver={() => handleMouseOver('firstMonth')}
                         onMouseLeave={handleMouseLeave}
@@ -448,7 +449,7 @@ export const CalendarDatePicker = React.forwardRef<
                         className={cn(
                           'date-part',
                           highlightedPart === 'firstYear' &&
-                            'font-bold underline'
+                            'font-bold underline',
                         )}
                         onMouseOver={() => handleMouseOver('firstYear')}
                         onMouseLeave={handleMouseLeave}
@@ -463,7 +464,7 @@ export const CalendarDatePicker = React.forwardRef<
                             className={cn(
                               'date-part',
                               highlightedPart === 'secondDay' &&
-                                'font-bold underline'
+                                'font-bold underline',
                             )}
                             onMouseOver={() => handleMouseOver('secondDay')}
                             onMouseLeave={handleMouseLeave}
@@ -475,7 +476,7 @@ export const CalendarDatePicker = React.forwardRef<
                             className={cn(
                               'date-part',
                               highlightedPart === 'secondMonth' &&
-                                'font-bold underline'
+                                'font-bold underline',
                             )}
                             onMouseOver={() => handleMouseOver('secondMonth')}
                             onMouseLeave={handleMouseLeave}
@@ -488,7 +489,7 @@ export const CalendarDatePicker = React.forwardRef<
                             className={cn(
                               'date-part',
                               highlightedPart === 'secondYear' &&
-                                'font-bold underline'
+                                'font-bold underline',
                             )}
                             onMouseOver={() => handleMouseOver('secondYear')}
                             onMouseLeave={handleMouseLeave}
@@ -504,7 +505,7 @@ export const CalendarDatePicker = React.forwardRef<
                         id="day"
                         className={cn(
                           'date-part',
-                          highlightedPart === 'day' && 'font-bold underline'
+                          highlightedPart === 'day' && 'font-bold underline',
                         )}
                         onMouseOver={() => handleMouseOver('day')}
                         onMouseLeave={handleMouseLeave}
@@ -515,7 +516,7 @@ export const CalendarDatePicker = React.forwardRef<
                         id="month"
                         className={cn(
                           'date-part',
-                          highlightedPart === 'month' && 'font-bold underline'
+                          highlightedPart === 'month' && 'font-bold underline',
                         )}
                         onMouseOver={() => handleMouseOver('month')}
                         onMouseLeave={handleMouseLeave}
@@ -527,7 +528,7 @@ export const CalendarDatePicker = React.forwardRef<
                         id="year"
                         className={cn(
                           'date-part',
-                          highlightedPart === 'year' && 'font-bold underline'
+                          highlightedPart === 'year' && 'font-bold underline',
                         )}
                         onMouseOver={() => handleMouseOver('year')}
                         onMouseLeave={handleMouseLeave}
@@ -565,7 +566,7 @@ export const CalendarDatePicker = React.forwardRef<
                         className={cn(
                           'justify-start hover:bg-primary/90 hover:text-background',
                           selectedRange === label &&
-                            'bg-primary text-background hover:bg-primary/90 hover:text-background'
+                            'bg-primary text-background hover:bg-primary/90 hover:text-background',
                         )}
                         onClick={() => {
                           selectDateRange(start, end, label);
@@ -685,7 +686,7 @@ export const CalendarDatePicker = React.forwardRef<
         </Popover>
       </>
     );
-  }
+  },
 );
 
 CalendarDatePicker.displayName = 'CalendarDatePicker';

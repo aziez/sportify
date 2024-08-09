@@ -1,8 +1,7 @@
 'use client';
-import { useQuery, useMutation, useQueryClient } from '@tanstack/react-query';
-import axios from 'axios';
-
 import { productsApi } from '@/stores/api/api';
+import { useMutation, useQuery, useQueryClient } from '@tanstack/react-query';
+import axios from 'axios';
 
 const fetchProducts = async () => {
   const { data } = await productsApi.allproducts();

@@ -47,14 +47,16 @@ const EmailTemplateVerify = ({ magicLink }: RaycastMagicLinkEmailProps) => {
               </Text>
               <Button
                 className="bg-brand w-full px-3 py-2 font-medium leading-4 text-white"
-                href={`https://${domain}/email/verify?${magicLink}`}>
+                href={`https://${domain}/email/verify?${magicLink}`}
+              >
                 👉 Click here to verify your email 👈
               </Button>
               <Text className="text-sm">
                 Copy link bellow if the button ☝🏻 not workling
               </Text>
               <Link
-                href={`https://${domain}/email/verify?${magicLink}`}>{`https://${domain}/email/verify?${magicLink}`}</Link>
+                href={`https://${domain}/email/verify?${magicLink}`}
+              >{`https://${domain}/email/verify?${magicLink}`}</Link>
               <Text className="mt-4 text-lg">
                 This link will expire in 24 hours. If you didn't request this
                 email, please ignore it or contact our support team.
@@ -84,7 +86,8 @@ const EmailTemplateVerify = ({ magicLink }: RaycastMagicLinkEmailProps) => {
               <Text className="mt-2 text-lg">
                 <Link
                   className="text-primary"
-                  href="mailto:support@sportify.com">
+                  href="mailto:support@sportify.com"
+                >
                   support@sportify.com
                 </Link>
               </Text>

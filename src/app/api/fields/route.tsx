@@ -1,13 +1,12 @@
-import { NextRequest, NextResponse } from 'next/server';
-
 import prisma from '@/lib/prisma';
+import { NextRequest, NextResponse } from 'next/server';
 
 // GET ALL CATEGORIES
 export async function GET(req: NextRequest) {
   if (req.method !== 'GET') {
     return NextResponse.json(
       { message: 'Method not allowed' },
-      { status: 405 }
+      { status: 405 },
     );
   }
 
@@ -31,13 +30,13 @@ export async function GET(req: NextRequest) {
 
     return NextResponse.json(
       { message: `Successfully get data fields`, data: fields },
-      { status: 200 }
+      { status: 200 },
     );
   } catch (error) {
     console.error('Failed to get data:', error);
     return NextResponse.json(
       { message: 'Internal server error' },
-      { status: 500 }
+      { status: 500 },
     );
   }
 }

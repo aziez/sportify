@@ -1,9 +1,8 @@
 /* eslint-disable react-hooks/rules-of-hooks */
 'use client';
 
-import { useMutation, useQuery, useQueryClient } from '@tanstack/react-query';
-
 import { vanueApi } from '@/stores/api/api';
+import { useMutation, useQuery, useQueryClient } from '@tanstack/react-query';
 
 interface VanueInterface {
   name: string;

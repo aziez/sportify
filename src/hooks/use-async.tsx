@@ -13,7 +13,7 @@ type UseAsyncReturn<T> = [
 
 const useAsync = <T,>(
   api: ApiFunction<T>,
-  defaultLoading: boolean = false
+  defaultLoading: boolean = false,
 ): UseAsyncReturn<T> => {
   const [inProgress, setInProgress] = useState(defaultLoading);
   const [error, setError] = useState<string | undefined>(undefined);
@@ -33,7 +33,7 @@ const useAsync = <T,>(
           setError(
             err?.data?.message ??
               err?.data?.ErrorMessage?.indonesian ??
-              err?.message
+              err?.message,
           );
           reject(err);
         })

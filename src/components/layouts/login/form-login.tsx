@@ -1,15 +1,5 @@
 'use client';
 
-import { zodResolver } from '@hookform/resolvers/zod';
-import { AvatarIcon, EyeClosedIcon, EyeOpenIcon } from '@radix-ui/react-icons';
-import { Loader2Icon } from 'lucide-react';
-import { useRouter } from 'next/navigation';
-import { signIn } from 'next-auth/react';
-import { useState, useTransition } from 'react';
-import { useForm } from 'react-hook-form';
-import toast, { Toaster } from 'react-hot-toast';
-import { z } from 'zod';
-
 import { Button } from '@/components/ui/button';
 import {
   Form,
@@ -20,6 +10,15 @@ import {
   FormMessage,
 } from '@/components/ui/form';
 import { Input } from '@/components/ui/input';
+import { zodResolver } from '@hookform/resolvers/zod';
+import { AvatarIcon, EyeClosedIcon, EyeOpenIcon } from '@radix-ui/react-icons';
+import { Loader2Icon } from 'lucide-react';
+import { signIn } from 'next-auth/react';
+import { useRouter } from 'next/navigation';
+import { useState, useTransition } from 'react';
+import { useForm } from 'react-hook-form';
+import toast from 'react-hot-toast';
+import { z } from 'zod';
 
 const formSchema = z.object({
   email: z.string().email().min(1, { message: 'email is required' }),
@@ -67,7 +66,8 @@ const FormLogin = () => {
     <Form {...form}>
       <form
         onSubmit={handleSubmit(onSubmit)}
-        className="2x:mt-7 mt-5 space-y-6">
+        className="2x:mt-7 mt-5 space-y-6"
+      >
         <FormField
           control={control}
           name="email"

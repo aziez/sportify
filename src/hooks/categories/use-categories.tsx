@@ -1,7 +1,6 @@
 'use client';
-import { useQuery } from '@tanstack/react-query';
-
 import { categoriesApi } from '@/stores/api/api';
+import { useQuery } from '@tanstack/react-query';
 
 const fetchCategories = async () => {
   const { data } = await categoriesApi.allCategories();

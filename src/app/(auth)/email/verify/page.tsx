@@ -2,12 +2,6 @@
 'use client';
 
 // Importing necessary actions and components
-import { redirect, useRouter, useSearchParams } from 'next/navigation';
-import { useEffect, useState } from 'react';
-import Link from 'next/link';
-import toast, { Toaster } from 'react-hot-toast';
-
-import { findUserByEmail, verifyEmail } from '@/lib/email';
 import { Button } from '@/components/ui/button';
 import {
   Card,
@@ -16,7 +10,12 @@ import {
   CardTitle,
 } from '@/components/ui/card';
 import { Meteors } from '@/components/ui/meteors';
+import { findUserByEmail, verifyEmail } from '@/lib/email';
 import { useSession } from 'next-auth/react';
+import Link from 'next/link';
+import { redirect, useRouter, useSearchParams } from 'next/navigation';
+import { useEffect, useState } from 'react';
+import toast from 'react-hot-toast';
 
 // Defining the Email Verification Component
 export default function VerifyEmail() {
@@ -89,7 +88,6 @@ export default function VerifyEmail() {
   // Rendering the Email Verification Component
   return (
     <div className="relative flex h-[50rem] w-full items-center justify-center bg-white bg-grid-black/[0.2] dark:bg-black dark:bg-grid-white/[0.2]">
-
       {/* Radial gradient for the container to give a faded look */}
       <div className="pointer-events-none absolute inset-0 flex items-center justify-center bg-white [mask-image:radial-gradient(ellipse_at_center,transparent_20%,black)] dark:bg-black"></div>
       {/* <div className="absolute inset-0 h-full w-full scale-[0.80] transform rounded-full bg-red-500 bg-gradient-to-r from-blue-500 to-teal-500 blur-3xl" /> */}

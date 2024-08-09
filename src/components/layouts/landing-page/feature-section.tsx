@@ -1,9 +1,10 @@
 'use client';
 
+import { FeatureCard } from './farmui/feature-card';
+
 import { BentoGrid } from '@/components/ui/bento-grid';
 import { ContainerScroll } from '@/components/ui/container-scroll-animation';
 import { ScrollArea } from '@/components/ui/scroll-area';
-import { FeatureCard } from './farmui/feature-card';
 
 const FeatureSection = ({
   features,
@@ -26,7 +27,8 @@ const FeatureSection = ({
             </span>
           </h1>
         </>
-      }>
+      }
+    >
       <ScrollArea className="h-full px-4">
         <BentoGrid className="mx-auto max-w-4xl md:auto-rows-[20rem]">
           {features.map((feature, i) => (

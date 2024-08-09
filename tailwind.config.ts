@@ -1,6 +1,6 @@
+import svgToTinyDataUri from 'mini-svg-data-uri';
 import type { Config } from 'tailwindcss';
 import { fontFamily } from 'tailwindcss/defaultTheme';
-import svgToTinyDataUri from 'mini-svg-data-uri';
 import flattenColorPalette from 'tailwindcss/lib/util/flattenColorPalette';
 
 /** @type {import('tailwindcss').Config} */
@@ -78,30 +78,30 @@ const config: Config = {
         input: 'hsl(var(--input))',
         ring: 'hsl(var(--ring))',
         azure: {
-          '50': '#eef7ff',
-          '100': '#d9edff',
-          '200': '#bce0ff',
-          '300': '#8eceff',
-          '400': '#59b1ff',
-          '500': '#3290ff',
-          '600': '#2979f5',
-          '700': '#145ae1',
-          '800': '#1749b6',
-          '900': '#19418f',
-          '950': '#142857',
+          50: '#eef7ff',
+          100: '#d9edff',
+          200: '#bce0ff',
+          300: '#8eceff',
+          400: '#59b1ff',
+          500: '#3290ff',
+          600: '#2979f5',
+          700: '#145ae1',
+          800: '#1749b6',
+          900: '#19418f',
+          950: '#142857',
         },
         tangerine: {
-          '50': '#fff8ed',
-          '100': '#fef0d6',
-          '200': '#fcddac',
-          '300': '#fac577',
-          '400': '#f7a140',
-          '500': '#f58d29',
-          '600': '#e56a11',
-          '700': '#be5110',
-          '800': '#973f15',
-          '900': '#7a3614',
-          '950': '#421a08',
+          50: '#fff8ed',
+          100: '#fef0d6',
+          200: '#fcddac',
+          300: '#fac577',
+          400: '#f7a140',
+          500: '#f58d29',
+          600: '#e56a11',
+          700: '#be5110',
+          800: '#973f15',
+          900: '#7a3614',
+          950: '#421a08',
         },
       },
     },
@@ -115,21 +115,24 @@ const config: Config = {
         {
           'bg-grid': (value: any) => ({
             backgroundImage: `url("${svgToTinyDataUri(
-              `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 32 32" width="32" height="32" fill="none" stroke="${value}"><path d="M0 .5H31.5V32"/></svg>`
+              `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 32 32" width="32" height="32" fill="none" stroke="${value}"><path d="M0 .5H31.5V32"/></svg>`,
             )}")`,
           }),
           'bg-grid-small': (value: any) => ({
             backgroundImage: `url("${svgToTinyDataUri(
-              `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 32 32" width="8" height="8" fill="none" stroke="${value}"><path d="M0 .5H31.5V32"/></svg>`
+              `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 32 32" width="8" height="8" fill="none" stroke="${value}"><path d="M0 .5H31.5V32"/></svg>`,
             )}")`,
           }),
           'bg-dot': (value: any) => ({
             backgroundImage: `url("${svgToTinyDataUri(
-              `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 32 32" width="16" height="16" fill="none"><circle fill="${value}" id="pattern-circle" cx="10" cy="10" r="1.6257413380501518"></circle></svg>`
+              `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 32 32" width="16" height="16" fill="none"><circle fill="${value}" id="pattern-circle" cx="10" cy="10" r="1.6257413380501518"></circle></svg>`,
             )}")`,
           }),
         },
-        { values: flattenColorPalette(theme('backgroundColor')), type: 'color' }
+        {
+          values: flattenColorPalette(theme('backgroundColor')),
+          type: 'color',
+        },
       );
     },
   ],
@@ -138,7 +141,7 @@ const config: Config = {
 function addVariablesForColors({ addBase, theme }: any) {
   const allColors = flattenColorPalette(theme('colors'));
   const newVars = Object.fromEntries(
-    Object.entries(allColors).map(([key, val]) => [`--${key}`, val])
+    Object.entries(allColors).map(([key, val]) => [`--${key}`, val]),
   );
 
   addBase({

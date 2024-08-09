@@ -1,14 +1,5 @@
 'use client';
 
-import { zodResolver } from '@hookform/resolvers/zod';
-import { AvatarIcon, EyeClosedIcon, EyeOpenIcon } from '@radix-ui/react-icons';
-import { Loader2Icon, MailIcon } from 'lucide-react';
-import { useState, useTransition } from 'react';
-import { useForm } from 'react-hook-form';
-import toast, { Toaster } from 'react-hot-toast';
-import { z } from 'zod';
-import { useRouter } from 'next/navigation';
-
 import { Button } from '@/components/ui/button';
 import {
   Form,
@@ -26,8 +17,16 @@ import {
   SelectTrigger,
   SelectValue,
 } from '@/components/ui/select';
-import { authApi } from '@/stores/api/api';
 import useAsync from '@/hooks/use-async';
+import { authApi } from '@/stores/api/api';
+import { zodResolver } from '@hookform/resolvers/zod';
+import { AvatarIcon, EyeClosedIcon, EyeOpenIcon } from '@radix-ui/react-icons';
+import { Loader2Icon, MailIcon } from 'lucide-react';
+import { useRouter } from 'next/navigation';
+import { useState, useTransition } from 'react';
+import { useForm } from 'react-hook-form';
+import toast from 'react-hot-toast';
+import { z } from 'zod';
 
 const formSchema = z.object({
   displayName: z.string().min(1, { message: 'Username is required' }),
@@ -70,7 +69,7 @@ const FormRegister = () => {
           console.error('Response data:', error.response?.data);
           toast.error(
             'Registration failed: ' + error.response?.data?.message ||
-              error.message
+              error.message,
           );
         });
     });
@@ -84,7 +83,8 @@ const FormRegister = () => {
     <Form {...form}>
       <form
         onSubmit={form.handleSubmit(onSubmit)}
-        className="2x:mt-7 mt-5 space-y-6">
+        className="2x:mt-7 mt-5 space-y-6"
+      >
         <FormField
           control={form.control}
           name="displayName"
@@ -165,7 +165,8 @@ const FormRegister = () => {
                 <div className="relative flex items-center font-sans">
                   <Select
                     onValueChange={field.onChange}
-                    defaultValue={field.value}>
+                    defaultValue={field.value}
+                  >
                     <SelectTrigger>
                       <SelectValue placeholder="Tipe User" />
                     </SelectTrigger>

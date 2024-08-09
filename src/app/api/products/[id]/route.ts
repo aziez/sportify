@@ -1,10 +1,9 @@
-import { NextRequest, NextResponse } from 'next/server';
-
 import prisma from '@/lib/prisma';
+import { NextRequest, NextResponse } from 'next/server';
 
 export async function GET(
   req: NextRequest,
-  { params }: { params: { id: string } }
+  { params }: { params: { id: string } },
 ) {
   const id = params.id;
 
@@ -13,7 +12,7 @@ export async function GET(
   if (!id) {
     return NextResponse.json(
       { message: 'Category ID is required' },
-      { status: 400 }
+      { status: 400 },
     );
   }
 
@@ -29,19 +28,19 @@ export async function GET(
     if (!category) {
       return NextResponse.json(
         { message: 'Category not found' },
-        { status: 404 }
+        { status: 404 },
       );
     }
 
     return NextResponse.json(
       { message: 'Successfully retrieved category', data: category },
-      { status: 200 }
+      { status: 200 },
     );
   } catch (error) {
     console.error('Failed to get category:', error);
     return NextResponse.json(
       { message: 'Internal server error' },
-      { status: 500 }
+      { status: 500 },
     );
   }
 }

@@ -36,23 +36,23 @@ const products = [
 export default function page() {
   return (
     <div className="px-10 py-16">
-      <div className="flex flex-col md:flex-row items-start gap-3">
-      <div className="flex md:hidden">
-            <form className="w-full rounded-full">
-              <div className="relative">
-                <div className="pointer-events-none absolute inset-y-0 start-0 flex items-center ps-3">
-                  <SearchIcon className='w-4'/>
-                </div>
-                <input
-                  type="search"
-                  id="default-search"
-                  className="block w-full rounded-full border border-gray-300 bg-gray-50 p-4 ps-10 text-sm text-gray-900 focus:border-blue-500 focus:ring-blue-500 dark:border-gray-600 dark:bg-gray-700 dark:text-white dark:placeholder-gray-400 dark:focus:border-blue-500 dark:focus:ring-blue-500"
-                  placeholder="Cari Perlengkapan..."
-                  required
-                />
+      <div className="flex flex-col items-start gap-3 md:flex-row">
+        <div className="flex md:hidden">
+          <form className="w-full rounded-full">
+            <div className="relative">
+              <div className="pointer-events-none absolute inset-y-0 start-0 flex items-center ps-3">
+                <SearchIcon className="w-4" />
               </div>
-            </form>
-          </div>
+              <input
+                type="search"
+                id="default-search"
+                className="block w-full rounded-full border border-gray-300 bg-gray-50 p-4 ps-10 text-sm text-gray-900 focus:border-blue-500 focus:ring-blue-500 dark:border-gray-600 dark:bg-gray-700 dark:text-white dark:placeholder-gray-400 dark:focus:border-blue-500 dark:focus:ring-blue-500"
+                placeholder="Cari Perlengkapan..."
+                required
+              />
+            </div>
+          </form>
+        </div>
         <div className="basis-1/4">
           <FilterProduct />
         </div>
@@ -61,7 +61,7 @@ export default function page() {
             <form className="w-full rounded-full">
               <div className="relative">
                 <div className="pointer-events-none absolute inset-y-0 start-0 flex items-center ps-3">
-                  <SearchIcon className='w-4'/>
+                  <SearchIcon className="w-4" />
                 </div>
                 <input
                   type="search"
@@ -73,7 +73,7 @@ export default function page() {
               </div>
             </form>
           </div>
-          <div className="grid grid-cols-1 gap-4 md:grid-cols-2 lg:grid-cols-3 mt-10">
+          <div className="mt-10 grid grid-cols-1 gap-4 md:grid-cols-2 lg:grid-cols-3">
             {products.map((product, index) => (
               <CardProduct key={index} product={product} />
             ))}

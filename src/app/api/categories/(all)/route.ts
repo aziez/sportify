@@ -1,13 +1,12 @@
-import { NextRequest, NextResponse } from 'next/server';
-
 import prisma from '@/lib/prisma';
+import { NextRequest, NextResponse } from 'next/server';
 
 // GET ALL CATEGORIES
 export async function GET(req: NextRequest) {
   if (req.method !== 'GET') {
     return NextResponse.json(
       { message: 'Method not allowed' },
-      { status: 405 }
+      { status: 405 },
     );
   }
 
@@ -27,13 +26,13 @@ export async function GET(req: NextRequest) {
 
     return NextResponse.json(
       { message: `Successfully get data categories`, data: categories },
-      { status: 200 }
+      { status: 200 },
     );
   } catch (error) {
     console.error('Failed to get data:', error);
     return NextResponse.json(
       { message: 'Internal server error' },
-      { status: 500 }
+      { status: 500 },
     );
   }
 }
@@ -47,7 +46,7 @@ export async function POST(request: Request) {
   if (request.method !== 'POST') {
     return NextResponse.json(
       { message: 'Method not allowed' },
-      { status: 405 }
+      { status: 405 },
     );
   }
 
@@ -58,19 +57,19 @@ export async function POST(request: Request) {
 
     const newCategory = await prisma.categories.create({
       data: {
-        name: name,
+        name,
       },
     });
 
     return NextResponse.json(
       { message: 'Category added successfully', data: newCategory },
-      { status: 201 }
+      { status: 201 },
     );
   } catch (error) {
     console.error('Failed to add category:', error);
     return NextResponse.json(
       { message: 'Internal server error', error },
-      { status: 500 }
+      { status: 500 },
     );
   }
 }
@@ -85,7 +84,7 @@ export async function PATCH(request: Request) {
   if (request.method !== 'PATCH') {
     return NextResponse.json(
       { message: 'Method not allowed' },
-      { status: 405 }
+      { status: 405 },
     );
   }
 
@@ -95,19 +94,19 @@ export async function PATCH(request: Request) {
     const { id, name } = requestData;
 
     const updatedCategory = await prisma.categories.update({
-      where: { id: id },
-      data: { name: name },
+      where: { id },
+      data: { name },
     });
 
     return NextResponse.json(
       { message: 'Category updated successfully', data: updatedCategory },
-      { status: 200 }
+      { status: 200 },
     );
   } catch (error) {
     console.error('Failed to update category:', error);
     return NextResponse.json(
       { message: 'Internal server error', error },
-      { status: 500 }
+      { status: 500 },
     );
   }
 }
@@ -121,7 +120,7 @@ export async function DELETE(request: Request) {
   if (request.method !== 'DELETE') {
     return NextResponse.json(
       { message: 'Method not allowed' },
-      { status: 405 }
+      { status: 405 },
     );
   }
 
@@ -130,18 +129,18 @@ export async function DELETE(request: Request) {
     const { id } = requestData;
 
     const deletedCategory = await prisma.categories.delete({
-      where: { id: id },
+      where: { id },
     });
 
     return NextResponse.json(
       { message: 'Category deleted successfully', data: deletedCategory },
-      { status: 200 }
+      { status: 200 },
     );
   } catch (error) {
     console.error('Failed to delete category:', error);
     return NextResponse.json(
       { message: 'Internal server error', error },
-      { status: 500 }
+      { status: 500 },
     );
   }
 }

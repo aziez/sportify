@@ -1,10 +1,10 @@
 'use server';
-import { randomBytes } from 'crypto';
-import nodemailer from 'nodemailer';
-import { NextResponse } from 'next/server';
-import { render } from '@react-email/components';
-
 import prisma from './prisma';
+
+import { render } from '@react-email/components';
+import { randomBytes } from 'crypto';
+import { NextResponse } from 'next/server';
+import nodemailer from 'nodemailer';
 require('dotenv').config();
 
 import EmailTemplateVerify from '../components/emails/verify-template';
@@ -29,7 +29,7 @@ export const sendVerificationEmail = async (email: string, token: string) => {
 
   const magicLink = `email=${email}&token=${token}`;
 
-  const emailHtml = await render(EmailTemplateVerify({ magicLink: magicLink }));
+  const emailHtml = await render(EmailTemplateVerify({ magicLink }));
 
   const mailOptions = {
     from: process.env.MAIL_FROM, // Specify the sender's email address
@@ -41,8 +41,8 @@ export const sendVerificationEmail = async (email: string, token: string) => {
   try {
     await transporter.sendMail(mailOptions);
     return NextResponse.json(
-      { message: 'Email verify send successfully', email: email },
-      { status: 200 }
+      { message: 'Email verify send successfully', email },
+      { status: 200 },
     );
   } catch (error) {
     console.error('Failed to send email:', error);
@@ -65,8 +65,8 @@ export const resendVerificationEmail = async (email: any) => {
   }
 
   return NextResponse.json(
-    { message: 'Email verification sent', email: email },
-    { status: 200 }
+    { message: 'Email verification sent', email },
+    { status: 200 },
   );
 };
 

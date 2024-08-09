@@ -1,12 +1,13 @@
-import React, { useState } from "react";
+/* eslint-disable jsx-a11y/no-static-element-interactions */
+import React, { useState } from 'react';
 
 const timeSlots = [
-  { time: "18:00 - 19:00", price: "Rp240.000", booked: false },
-  { time: "19:00 - 20:00", price: "Booked", booked: true },
-  { time: "20:00 - 21:00", price: "Booked", booked: true },
-  { time: "21:00 - 22:00", price: "Rp240.000", booked: false },
-  { time: "21:00 - 22:00", price: "Rp240.000", booked: false },
-  { time: "21:00 - 22:00", price: "Rp240.000", booked: false }
+  { time: '18:00 - 19:00', price: 'Rp240.000', booked: false },
+  { time: '19:00 - 20:00', price: 'Booked', booked: true },
+  { time: '20:00 - 21:00', price: 'Booked', booked: true },
+  { time: '21:00 - 22:00', price: 'Rp240.000', booked: false },
+  { time: '21:00 - 22:00', price: 'Rp240.000', booked: false },
+  { time: '21:00 - 22:00', price: 'Rp240.000', booked: false },
 ];
 
 interface TimeSlotCardProps {
@@ -17,20 +18,33 @@ interface TimeSlotCardProps {
   onClick: () => void;
 }
 
-const TimeSlotCard: React.FC<TimeSlotCardProps> = ({ time, price, booked, selected, onClick }) => (
+const TimeSlotCard: React.FC<TimeSlotCardProps> = ({
+  time,
+  price,
+  booked,
+  selected,
+  onClick,
+}) => (
+  // eslint-disable-next-line jsx-a11y/click-events-have-key-events
   <div
-    className={`border rounded-lg p-4 text-center cursor-pointer ${
+    className={`cursor-pointer rounded-lg border p-4 text-center ${
       selected
-        ? "bg-gray-100 border-gray-500 text-gray-500"
+        ? 'border-gray-500 bg-gray-100 text-gray-500'
         : booked
-        ? "text-gray-400 border-gray-200"
-        : "border-gray-500"
+          ? 'border-gray-200 text-gray-400'
+          : 'border-gray-500'
     }`}
     onClick={onClick}
   >
-    <div className="text-xs font-medium">{booked ? "60 Menit" : "60 Menit"}</div>
-    <div className={`text-md font-bold ${booked ? "text-gray-400" : ""}`}>{time}</div>
-    <div className={`text-sm ${booked ? "text-gray-400" : "text-gray-500"}`}>{price}</div>
+    <div className="text-xs font-medium">
+      {booked ? '60 Menit' : '60 Menit'}
+    </div>
+    <div className={`text-md font-bold ${booked ? 'text-gray-400' : ''}`}>
+      {time}
+    </div>
+    <div className={`text-sm ${booked ? 'text-gray-400' : 'text-gray-500'}`}>
+      {price}
+    </div>
   </div>
 );
 
@@ -46,7 +60,7 @@ const TimeSlotSelector: React.FC = () => {
   };
 
   return (
-    <div className="grid grid-cols-2 md:grid-cols-4 gap-6">
+    <div className="grid grid-cols-2 gap-6 md:grid-cols-4">
       {timeSlots.map((slot, index) => (
         <TimeSlotCard
           key={index}

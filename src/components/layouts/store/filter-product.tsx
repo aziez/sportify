@@ -18,7 +18,7 @@ export default function FilterProduct() {
       <div className="w-full">
         <CardDescription>Category</CardDescription>
         {categories.map((category, index) => (
-          <div key={index} className="flex items-center space-x-2 mt-2 ">
+          <div key={index} className="mt-2 flex items-center space-x-2">
             <Checkbox id={`category-${index}`} />
             <label
               htmlFor={`category-${index}`}
@@ -30,8 +30,8 @@ export default function FilterProduct() {
         ))}
       </div>
 
-      <div className="w-full mt-6">
-        <CardDescription className='mb-2'>Lokasi</CardDescription>
+      <div className="mt-6 w-full">
+        <CardDescription className="mb-2">Lokasi</CardDescription>
         <Input type="email" placeholder="Cari Lokasi" />
       </div>
       <div className=""></div>

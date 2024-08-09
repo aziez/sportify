@@ -1,9 +1,9 @@
-import { NextRequest, NextResponse } from 'next/server';
 import prisma from '@/lib/prisma';
+import { NextRequest, NextResponse } from 'next/server';
 
 export async function GET(
   req: NextRequest,
-  { params }: { params: { id: string } }
+  { params }: { params: { id: string } },
 ) {
   const venueId = params.id;
 
@@ -12,13 +12,13 @@ export async function GET(
   if (!venueId) {
     return NextResponse.json(
       { message: 'Venue ID is required' },
-      { status: 400 }
+      { status: 400 },
     );
   }
 
   try {
     const field = await prisma.field.findUnique({
-      where: { venueId: venueId },
+      where: { venueId },
     });
 
     if (!field) {
@@ -27,13 +27,13 @@ export async function GET(
 
     return NextResponse.json(
       { message: 'Successfully retrieved field', data: field },
-      { status: 200 }
+      { status: 200 },
     );
   } catch (error) {
     console.error('Failed to get field:', error);
     return NextResponse.json(
       { message: 'Internal server error' },
-      { status: 500 }
+      { status: 500 },
     );
   }
 }

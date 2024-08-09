@@ -3,7 +3,7 @@
 /* eslint-disable jsx-a11y/click-events-have-key-events */
 /* eslint-disable @next/next/no-img-element */
 'use client';
-import { useCallback, useEffect, useState } from 'react';
+import FormSewa from './form-sewa';
 
 import { Button } from '@/components/ui/button';
 import {
@@ -13,7 +13,7 @@ import {
   CarouselItem,
 } from '@/components/ui/carousel';
 import { Separator } from '@/components/ui/separator';
-import FormSewa from './form-sewa';
+import { useCallback, useEffect, useState } from 'react';
 
 export default function ProductDetail({ product }: { product: any }) {
   const [api, setApi] = useState<CarouselApi>();
@@ -24,7 +24,7 @@ export default function ProductDetail({ product }: { product: any }) {
       if (!api) return;
       api?.scrollTo(index);
     },
-    [api]
+    [api],
   );
 
   useEffect(() => {
@@ -76,7 +76,8 @@ export default function ProductDetail({ product }: { product: any }) {
           </h1>
           <Button
             variant="ringHover"
-            className="mt-4 flex w-full items-center justify-between rounded-full bg-tangerine-400 hover:bg-tangerine-700">
+            className="mt-4 flex w-full items-center justify-between rounded-full bg-tangerine-400 hover:bg-tangerine-700"
+          >
             <p className="text-base">Promo Semarang 20%</p>
             <p>
               Berakhir dalam <br />

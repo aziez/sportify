@@ -1,10 +1,9 @@
-import Link from 'next/link';
-import { headers } from 'next/headers';
-
+import { CardBody, CardContainer, CardItem } from '@/components/ui/3d-cards';
 import { Button } from '@/components/ui/button';
 import { WavyBackground } from '@/components/ui/wavy-background';
+import { headers } from 'next/headers';
+import Link from 'next/link';
 import NoFound from 'public/nofound.svg';
-import { CardBody, CardContainer, CardItem } from '@/components/ui/3d-cards';
 
 export default async function NotFound() {
   const headersList = headers();

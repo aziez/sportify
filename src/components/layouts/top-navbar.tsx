@@ -1,17 +1,8 @@
 /* eslint-disable import/no-named-as-default */
 'use client';
-import {
-  Home,
-  LineChart,
-  Menu,
-  Package,
-  Package2,
-  Search,
-  ShoppingCart,
-  Users,
-} from 'lucide-react';
-import Link from 'next/link';
-import { signOut, useSession } from 'next-auth/react';
+import { ThemeToggle } from '../toogle-theme';
+import { Avatar, AvatarFallback, AvatarImage } from '../ui/avatar';
+import ChartItem from './main-navbar/chart-items';
 
 import { Badge } from '@/components/ui/badge';
 import { Button } from '@/components/ui/button';
@@ -32,9 +23,18 @@ import {
 } from '@/components/ui/dropdown-menu';
 import { Input } from '@/components/ui/input';
 import { Sheet, SheetContent, SheetTrigger } from '@/components/ui/sheet';
-import { ThemeToggle } from '../toogle-theme';
-import ChartItem from './main-navbar/chart-items';
-import { Avatar, AvatarFallback, AvatarImage } from '../ui/avatar';
+import {
+  Home,
+  LineChart,
+  Menu,
+  Package,
+  Package2,
+  Search,
+  ShoppingCart,
+  Users,
+} from 'lucide-react';
+import { signOut, useSession } from 'next-auth/react';
+import Link from 'next/link';
 
 const TopNavbar = () => {
   const { data: session } = useSession();
@@ -54,19 +54,22 @@ const TopNavbar = () => {
           <nav className="grid gap-2 text-lg font-medium">
             <Link
               href="#"
-              className="flex items-center gap-2 text-lg font-semibold">
+              className="flex items-center gap-2 text-lg font-semibold"
+            >
               <Package2 className="h-6 w-6" />
               <span className="sr-only">Sportify</span>
             </Link>
             <Link
               href="#"
-              className="mx-[-0.65rem] flex items-center gap-4 rounded-xl px-3 py-2 text-muted-foreground hover:text-foreground">
+              className="mx-[-0.65rem] flex items-center gap-4 rounded-xl px-3 py-2 text-muted-foreground hover:text-foreground"
+            >
               <Home className="h-5 w-5" />
               Dashboard
             </Link>
             <Link
               href="#"
-              className="mx-[-0.65rem] flex items-center gap-4 rounded-xl bg-muted px-3 py-2 text-foreground hover:text-foreground">
+              className="mx-[-0.65rem] flex items-center gap-4 rounded-xl bg-muted px-3 py-2 text-foreground hover:text-foreground"
+            >
               <ShoppingCart className="h-5 w-5" />
               Orders
               <Badge className="ml-auto flex h-6 w-6 shrink-0 items-center justify-center rounded-full">
@@ -75,19 +78,22 @@ const TopNavbar = () => {
             </Link>
             <Link
               href="#"
-              className="mx-[-0.65rem] flex items-center gap-4 rounded-xl px-3 py-2 text-muted-foreground hover:text-foreground">
+              className="mx-[-0.65rem] flex items-center gap-4 rounded-xl px-3 py-2 text-muted-foreground hover:text-foreground"
+            >
               <Package className="h-5 w-5" />
               Products
             </Link>
             <Link
               href="#"
-              className="mx-[-0.65rem] flex items-center gap-4 rounded-xl px-3 py-2 text-muted-foreground hover:text-foreground">
+              className="mx-[-0.65rem] flex items-center gap-4 rounded-xl px-3 py-2 text-muted-foreground hover:text-foreground"
+            >
               <Users className="h-5 w-5" />
               Customers
             </Link>
             <Link
               href="#"
-              className="mx-[-0.65rem] flex items-center gap-4 rounded-xl px-3 py-2 text-muted-foreground hover:text-foreground">
+              className="mx-[-0.65rem] flex items-center gap-4 rounded-xl px-3 py-2 text-muted-foreground hover:text-foreground"
+            >
               <LineChart className="h-5 w-5" />
               Analytics
             </Link>
@@ -129,7 +135,8 @@ const TopNavbar = () => {
           <Button
             className="btn-circle rounded-full border"
             variant={'ringHover'}
-            size={'icon'}>
+            size={'icon'}
+          >
             <Avatar className="h-8 w-8">
               <AvatarImage src="https://github.com/shadcn.png" />
               <AvatarFallback>CN</AvatarFallback>

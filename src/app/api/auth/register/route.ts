@@ -1,15 +1,13 @@
 // api/auth/register.route.ts
 
-import { hash } from 'bcrypt';
-import { NextResponse } from 'next/server';
-import { Prisma } from '@prisma/client';
-
-import prisma from '@/lib/prisma';
 import {
   generateEmailVerificationToken,
   isUsersEmailVerified,
   sendVerificationEmail,
 } from '@/lib/email';
+import prisma from '@/lib/prisma';
+import { hash } from 'bcrypt';
+import { NextResponse } from 'next/server';
 
 export interface RegisterRequestData {
   displayName: string;
@@ -31,21 +29,21 @@ export async function POST(request: Request) {
     console.error('Error:', error);
     return NextResponse.json(
       { message: 'An error occurred during registration.' },
-      { status: 400 }
+      { status: 400 },
     );
   }
 }
 
 async function registerHandle(
   requestData: RegisterRequestData,
-  request: Request
+  request: Request,
 ) {
   const { displayName, email, password, role } = requestData;
 
   if (!displayName || !email || !password || !role) {
     return NextResponse.json(
       { message: 'All fields are required' },
-      { status: 400 }
+      { status: 400 },
     );
   }
 
@@ -58,7 +56,7 @@ async function registerHandle(
     if (isEmailExist) {
       return NextResponse.json(
         { message: 'Email already exists' },
-        { status: 400 }
+        { status: 400 },
       );
     }
 
@@ -66,7 +64,7 @@ async function registerHandle(
     if (!rolesData) {
       return NextResponse.json(
         { message: 'Role is undefined' },
-        { status: 400 }
+        { status: 400 },
       );
     }
 
@@ -87,14 +85,14 @@ async function registerHandle(
     const url = `${baseUrl}/email/verify/send?email=${email}&verification_sent=1`;
 
     return NextResponse.json(
-      { message: 'Successfully Registered', url: url },
-      { status: 200 }
+      { message: 'Successfully Registered', url },
+      { status: 200 },
     );
   } catch (e) {
     console.error('Error in registration:', e);
     return NextResponse.json(
       { message: 'Something went wrong. Please try again later.' },
-      { status: 500 }
+      { status: 500 },
     );
   }
 }

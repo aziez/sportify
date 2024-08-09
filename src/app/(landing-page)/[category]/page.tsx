@@ -1,7 +1,6 @@
-import React from 'react';
-import { notFound } from 'next/navigation';
-
 import ProductPage from '@/components/layouts/products/product-page';
+import { notFound } from 'next/navigation';
+import React from 'react';
 
 type Product = {
   name: string;

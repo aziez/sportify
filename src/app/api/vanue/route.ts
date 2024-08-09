@@ -1,8 +1,7 @@
-import { NextResponse } from 'next/server';
-import { getServerSession } from 'next-auth';
-
-import prisma from '@/lib/prisma';
 import { authOptions } from '@/lib/auth';
+import prisma from '@/lib/prisma';
+import { getServerSession } from 'next-auth';
+import { NextResponse } from 'next/server';
 
 export interface VanueData {
   name: string;
@@ -16,7 +15,7 @@ export async function POST(request: Request) {
   if (request.method !== 'POST') {
     return NextResponse.json(
       { message: 'Method not allowed' },
-      { status: 405 }
+      { status: 405 },
     );
   }
 
@@ -39,13 +38,13 @@ export async function POST(request: Request) {
 
     return NextResponse.json(
       { message: 'Succesfully add vanue' },
-      { status: 201 }
+      { status: 201 },
     );
   } catch (error) {
     console.error('Failed to add vanue:', error);
     return NextResponse.json(
       { message: 'Internal server error', error },
-      { status: 500 }
+      { status: 500 },
     );
   }
 }
@@ -54,7 +53,7 @@ export async function GET(req: Request) {
   if (req.method !== 'GET') {
     return NextResponse.json(
       { message: 'Method not allowed' },
-      { status: 405 }
+      { status: 405 },
     );
   }
 
@@ -63,13 +62,13 @@ export async function GET(req: Request) {
 
     return NextResponse.json(
       { message: `Successfully get data vanues`, data: vanues },
-      { status: 200 }
+      { status: 200 },
     );
   } catch (error) {
     console.error('Failed to get data:', error);
     return NextResponse.json(
       { message: 'Internal server error' },
-      { status: 500 }
+      { status: 500 },
     );
   }
 }

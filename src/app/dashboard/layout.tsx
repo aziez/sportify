@@ -1,9 +1,6 @@
 'use client';
-import { useSession } from 'next-auth/react';
-import SideNavbar from '@/components/layouts/side-navbar';
+import SideBar from '@/components/dashboard/sidebar/sidebar-bar';
 import TopNavbar from '@/components/layouts/top-navbar';
-import { Button } from '@/components/ui/button';
-import { usePathname } from 'next/navigation';
 import {
   Breadcrumb,
   BreadcrumbItem,
@@ -13,7 +10,8 @@ import {
   BreadcrumbSeparator,
 } from '@/components/ui/breadcrumb';
 import { HomeIcon } from 'lucide-react';
-import SideBar from '@/components/dashboard/sidebar/sidebar-bar';
+import { useSession } from 'next-auth/react';
+import { usePathname } from 'next/navigation';
 
 export default function Dashboard({ children }) {
   const { data: session } = useSession();

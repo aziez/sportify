@@ -1,9 +1,9 @@
+import { Badge } from '../../../ui/badge';
+import { Card, CardContent } from '../../../ui/card';
+
 import { motion, MotionValue } from 'framer-motion';
 import Image from 'next/image';
 import { FC } from 'react';
-
-import { Badge } from '../../../ui/badge';
-import { Card, CardContent } from '../../../ui/card';
 
 interface StarIconProps {
   className?: string;
@@ -24,7 +24,8 @@ const StarIcon: FC<StarIconProps> = ({ className }) => (
     stroke="currentColor"
     strokeWidth="2"
     strokeLinecap="round"
-    strokeLinejoin="round">
+    strokeLinejoin="round"
+  >
     <polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2" />
   </svg>
 );
@@ -36,7 +37,7 @@ const Rating: FC<RatingProps> = ({ value }) => {
       <StarIcon
         key={i}
         className={`h-5 w-5 ${i < Math.floor(value) ? 'text-yellow-500' : 'text-gray-300 dark:text-gray-600'}`}
-      />
+      />,
     );
   }
   return <div className="flex items-center space-x-1">{stars}</div>;
@@ -66,7 +67,8 @@ export const ProductCard = ({
         y: -20,
       }}
       key={product.id}
-      className="group/product relative h-96 w-[20rem] flex-shrink-0">
+      className="group/product relative h-96 w-[20rem] flex-shrink-0"
+    >
       <Card className="overflow-hidden rounded-lg bg-white shadow-md dark:bg-gray-950">
         <div className="relative">
           <Image

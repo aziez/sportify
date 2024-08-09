@@ -1,11 +1,11 @@
 'use client';
+import { ProductCard } from './farmui/product-card';
+
+import { Button } from '@/components/ui/button';
+import { useProducts } from '@/hooks/products/use-products';
 import { motion, useScroll, useSpring, useTransform } from 'framer-motion';
 import { ShoppingBagIcon } from 'lucide-react';
 import React from 'react';
-
-import { Button } from '@/components/ui/button';
-import { ProductCard } from './farmui/product-card';
-import { useProducts } from '@/hooks/products/use-products';
 // import { ProductCard } from '@/components/component/product-card';
 
 export const HeroParallax = () => {
@@ -21,28 +21,28 @@ export const HeroParallax = () => {
 
   const translateX = useSpring(
     useTransform(scrollYProgress, [0, 1], [0, 1000]),
-    springConfig
+    springConfig,
   );
   const translateXReverse = useSpring(
     useTransform(scrollYProgress, [0, 1], [0, -1000]),
-    springConfig
+    springConfig,
   );
 
   const rotateX = useSpring(
     useTransform(scrollYProgress, [0, 0.2], [15, 0]),
-    springConfig
+    springConfig,
   );
   const opacity = useSpring(
     useTransform(scrollYProgress, [0, 0.2], [0.2, 1]),
-    springConfig
+    springConfig,
   );
   const rotateZ = useSpring(
     useTransform(scrollYProgress, [0, 0.2], [20, 0]),
-    springConfig
+    springConfig,
   );
   const translateY = useSpring(
     useTransform(scrollYProgress, [0, 0.2], [-700, 250]),
-    springConfig
+    springConfig,
   );
 
   if (error) return <p>Error loading products</p>;
@@ -53,7 +53,8 @@ export const HeroParallax = () => {
   return (
     <div
       ref={ref}
-      className="relative flex h-full flex-col self-auto overflow-hidden py-80 antialiased [perspective:1000px] [transform-style:preserve-3d]">
+      className="relative flex h-full flex-col self-auto overflow-hidden py-80 antialiased [perspective:1000px] [transform-style:preserve-3d]"
+    >
       <Header />
       <motion.div
         style={{
@@ -62,7 +63,8 @@ export const HeroParallax = () => {
           translateY,
           opacity,
         }}
-        className="mb-20 bg-slate-300 py-8">
+        className="mb-20 bg-slate-300 py-8"
+      >
         <h1 className="mb-8 text-center text-xl font-bold text-primary dark:text-white md:text-4xl">
           Featured Products
         </h1>
@@ -117,7 +119,8 @@ export const Header = () => {
           Icon={ShoppingBagIcon}
           iconPlacement="right"
           size={'lg'}
-          className="mt-4 rounded-full">
+          className="mt-4 rounded-full"
+        >
           Shop Now
         </Button>
       </div>

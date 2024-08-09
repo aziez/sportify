@@ -18,7 +18,8 @@ const Hero = () => {
             <Button
               variant={'ringHover'}
               size={'lg'}
-              className="mt-10 rounded-full bg-tangerine-400 hover:bg-tangerine-600">
+              className="mt-10 rounded-full bg-tangerine-400 hover:bg-tangerine-600"
+            >
               Promo Semarang 20%
             </Button>
           </div>

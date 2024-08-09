@@ -1,6 +1,4 @@
 'use client';
-import { ArrowRightCircleIcon, MapPin, TextSearch } from 'lucide-react';
-
 import { Button } from '@/components/ui/button';
 import {
   Select,
@@ -9,7 +7,7 @@ import {
   SelectTrigger,
   SelectValue,
 } from '@/components/ui/select';
-import { Input } from '@/components/ui/input';
+import { ArrowRightCircleIcon, MapPin, TextSearch } from 'lucide-react';
 
 export default function SearchVenue() {
   return (
@@ -40,7 +38,8 @@ export default function SearchVenue() {
           </Select>
           <Button
             variant={'outline'}
-            className="rounded-fll w-full rounded-full border-black md:w-[50%]">
+            className="rounded-fll w-full rounded-full border-black md:w-[50%]"
+          >
             Temukan <ArrowRightCircleIcon className="ml-4" />
           </Button>
         </form>

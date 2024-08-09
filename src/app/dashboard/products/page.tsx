@@ -1,9 +1,5 @@
 'use client';
-import Image from 'next/image';
-import { File, ListFilter, MoreHorizontal, PlusCircle } from 'lucide-react';
-
 import { Badge } from '@/components/ui/badge';
-
 import { Button } from '@/components/ui/button';
 import {
   Card,
@@ -31,6 +27,8 @@ import {
   TableRow,
 } from '@/components/ui/table';
 import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs';
+import { File, ListFilter, MoreHorizontal, PlusCircle } from 'lucide-react';
+import Image from 'next/image';
 
 export default function Products() {
   return (

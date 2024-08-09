@@ -1,21 +1,22 @@
 'use client';
 
-import { signIn } from 'next-auth/react';
-
 import { Button } from '@/components/ui/button';
+import { signIn } from 'next-auth/react';
 
 const RegisterWithGoogle = () => {
   return (
     <Button
       className="w-full"
       variant={'outline'}
-      onClick={() => signIn('google')}>
+      onClick={() => signIn('google')}
+    >
       <svg
         className="mr-2 h-auto w-4"
         width={46}
         height={47}
         viewBox="0 0 46 47"
-        fill="none">
+        fill="none"
+      >
         <path
           d="M46 24.0287C46 22.09 45.8533 20.68 45.5013 19.2112H23.4694V27.9356H36.4069C36.1429 30.1094 34.7347 33.37 31.5957 35.5731L31.5663 35.8669L38.5191 41.2719L38.9885 41.3306C43.4477 37.2181 46 31.1669 46 24.0287Z"
           fill="#4285F4"

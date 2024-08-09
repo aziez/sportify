@@ -1,10 +1,11 @@
 // components/SideBar.tsx
-import { useSession } from 'next-auth/react';
-import Spotify from 'public/logo.svg';
-import Link from 'next/link';
+import { SidebarItem, sidebarItems } from './sidebar-item';
+
 import { Button } from '@/components/ui/button';
 import { Bell } from 'lucide-react';
-import { SidebarItem, sidebarItems } from './sidebar-item';
+import { useSession } from 'next-auth/react';
+import Link from 'next/link';
+import Spotify from 'public/logo.svg';
 
 const SideBar = () => {
   const { data: session } = useSession();

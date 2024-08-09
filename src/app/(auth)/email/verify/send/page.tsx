@@ -1,12 +1,11 @@
 'use client';
-import { MailOpenIcon } from 'lucide-react';
-import { useSearchParams } from 'next/navigation';
-import { useTransition, useState, useEffect } from 'react';
-import toast from 'react-hot-toast';
-
 import { Button } from '@/components/ui/button';
 import useAsync from '@/hooks/use-async';
 import { emailApi } from '@/stores/api/api';
+import { MailOpenIcon } from 'lucide-react';
+import { useSearchParams } from 'next/navigation';
+import { useEffect, useState, useTransition } from 'react';
+import toast from 'react-hot-toast';
 
 export default function Send() {
   const searchParams = useSearchParams();
@@ -47,7 +46,7 @@ export default function Send() {
     } catch (error) {
       console.error('Failed to resend verification email:', error);
       toast.error(
-        'Failed to resend verification email. Please try again later.'
+        'Failed to resend verification email. Please try again later.',
       );
     }
   };
@@ -71,7 +70,8 @@ export default function Send() {
             variant={'shine'}
             className="w-full bg-primary-foreground"
             disabled={isButtonDisabled || isPending}
-            onClick={handleResendVerify}>
+            onClick={handleResendVerify}
+          >
             {isPending && (
               <span className="loading-xl loading loading-dots mr-4"></span>
             )}

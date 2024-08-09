@@ -1,17 +1,17 @@
 'use client';
 
-import Link from 'next/link';
-import { useSession } from 'next-auth/react';
-import Image from 'next/image';
-
+import { ThemeToggle } from '../toogle-theme';
 import { Button } from '../ui/button';
 import ChartItem from './main-navbar/chart-items';
+import Navbar from './main-navbar/navbar';
 import ProfileMenu from './main-navbar/profile-items';
+
+import { useSession } from 'next-auth/react';
+import Image from 'next/image';
+import Link from 'next/link';
 import Fb from 'public/social/fb.svg';
 import Ig from 'public/social/ig.svg';
 import Tw from 'public/social/x.svg';
-import Navbar from './main-navbar/navbar';
-import { ThemeToggle } from '../toogle-theme';
 
 const MainNavbar = () => {
   const { data: session } = useSession();
@@ -27,7 +27,8 @@ const MainNavbar = () => {
     {
       label: 'Sewa Perlengkapan',
       link: '/rental',
-    },{
+    },
+    {
       label: 'Store',
       link: '/store',
     },
@@ -49,19 +50,22 @@ const MainNavbar = () => {
           <Button
             variant={'outline'}
             size={'icon'}
-            className="h-8 w-8 rounded-full">
+            className="h-8 w-8 rounded-full"
+          >
             <Fb className="h-4 w-4" />
           </Button>
           <Button
             variant={'outline'}
             size={'icon'}
-            className="h-8 w-8 rounded-full">
+            className="h-8 w-8 rounded-full"
+          >
             <Tw className="h-5 w-5" />
           </Button>
           <Button
             variant={'outline'}
             size={'icon'}
-            className="h-8 w-8 rounded-full">
+            className="h-8 w-8 rounded-full"
+          >
             <Ig className="h-4 w-4" />
           </Button>
         </div>

@@ -1,9 +1,5 @@
 /* eslint-disable @next/next/no-img-element */
 /* eslint-disable jsx-a11y/alt-text */
-import { ArrowRightCircleIcon } from 'lucide-react';
-import Image from 'next/image';
-import Link from 'next/link';
-
 import { Button } from '@/components/ui/button';
 import {
   Carousel,
@@ -11,6 +7,9 @@ import {
   CarouselItem,
 } from '@/components/ui/carousel';
 import { Separator } from '@/components/ui/separator';
+import { ArrowRightCircleIcon } from 'lucide-react';
+import Image from 'next/image';
+import Link from 'next/link';
 
 const InfoSection = () => {
   return (
@@ -28,7 +27,8 @@ const InfoSection = () => {
           </p>
           <Button
             variant={'outline'}
-            className="w-[50%] rounded-full border-black px-6">
+            className="w-[50%] rounded-full border-black px-6"
+          >
             Info Lainya <ArrowRightCircleIcon className="ml-4" />
           </Button>
           <Carousel className="my-4 w-full">
@@ -63,7 +63,8 @@ const InfoSection = () => {
           <Link href={'/futsal'}>
             <Button
               variant={'outline'}
-              className="rounded-fll mt-12 w-[50%] rounded-full border-black">
+              className="rounded-fll mt-12 w-[50%] rounded-full border-black"
+            >
               Sewa Sekarang <ArrowRightCircleIcon className="ml-4" />
             </Button>
           </Link>
@@ -101,7 +102,8 @@ const InfoSection = () => {
           </p>
           <Button
             variant={'outline'}
-            className="w-[50%] rounded-full border-black px-6">
+            className="w-[50%] rounded-full border-black px-6"
+          >
             Info Lainya <ArrowRightCircleIcon className="ml-4" />
           </Button>
           <Carousel className="my-4 w-full">
@@ -135,7 +137,8 @@ const InfoSection = () => {
           <Link href={'/volly'}>
             <Button
               variant={'outline'}
-              className="rounded-fll mt-12 w-[50%] rounded-full border-black">
+              className="rounded-fll mt-12 w-[50%] rounded-full border-black"
+            >
               Sewa Sekarang <ArrowRightCircleIcon className="ml-4" />
             </Button>
           </Link>
@@ -155,7 +158,8 @@ const InfoSection = () => {
           </p>
           <Button
             variant={'outline'}
-            className="w-[50%] rounded-full border-black px-6">
+            className="w-[50%] rounded-full border-black px-6"
+          >
             Info Lainya <ArrowRightCircleIcon className="ml-4" />
           </Button>
           <Carousel className="my-4 w-full">
@@ -189,7 +193,8 @@ const InfoSection = () => {
           <Link href={'/badminton'}>
             <Button
               variant={'outline'}
-              className="rounded-fll mt-12 w-[50%] rounded-full border-black">
+              className="rounded-fll mt-12 w-[50%] rounded-full border-black"
+            >
               Sewa Sekarang <ArrowRightCircleIcon className="ml-4" />
             </Button>
           </Link>

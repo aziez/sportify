@@ -1,8 +1,5 @@
 'use client';
 
-import { ShoppingCartIcon } from 'lucide-react';
-import * as React from 'react';
-
 import { Badge } from '@/components/ui/badge';
 import { Button } from '@/components/ui/button';
 import {
@@ -11,6 +8,7 @@ import {
   DropdownMenuItem,
   DropdownMenuTrigger,
 } from '@/components/ui/dropdown-menu';
+import { ShoppingCartIcon } from 'lucide-react';
 
 export const ChartItem = () => {
   return (
@@ -19,10 +17,12 @@ export const ChartItem = () => {
         <Button
           variant={'ringHover'}
           className="indicator rounded-full"
-          size={'icon'}>
+          size={'icon'}
+        >
           <Badge
             variant={'outline'}
-            className="indicator-item border-none bg-none text-white dark:text-black">
+            className="indicator-item border-none bg-none text-white dark:text-black"
+          >
             8
           </Badge>
           <span className="sr-only">Chart list</span>

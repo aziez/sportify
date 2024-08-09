@@ -1,6 +1,10 @@
 /* eslint-disable @next/next/no-img-element */
 'use client';
 
+import VanueForm from './vanue-form';
+import VanueMaps from './vanue-map';
+
+import { Button } from '@/components/ui/button';
 import {
   Card,
   CardContent,
@@ -8,11 +12,8 @@ import {
   CardHeader,
   CardTitle,
 } from '@/components/ui/card';
-import { getUserVanue } from '@/hooks/vanues/use-vanues';
-import VanueMaps from './vanue-map';
 import { Separator } from '@/components/ui/separator';
-import { Button } from '@/components/ui/button';
-import VanueForm from './vanue-form';
+import { getUserVanue } from '@/hooks/vanues/use-vanues';
 
 const VanuePage = ({ userId }: { userId: string }) => {
   const { data: vanue, error, isLoading } = getUserVanue(userId);
@@ -61,7 +62,8 @@ const VanuePage = ({ userId }: { userId: string }) => {
         <div className="col-span-1">
           <Card
             x-chunk="dashboard-01-chunk-0"
-            className="flex flex-col items-center justify-center">
+            className="flex flex-col items-center justify-center"
+          >
             <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2">
               <CardTitle className="text-sm font-medium">Vanue Logo</CardTitle>
             </CardHeader>

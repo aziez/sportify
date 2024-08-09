@@ -1,17 +1,15 @@
-import '@/styles/globals.css';
-import '@uploadcare/react-uploader/core.css';
-
-import type { Metadata } from 'next';
-import { Inter as FontSans } from 'next/font/google';
-import { getServerSession } from 'next-auth';
-
 import { authOptions } from '@/lib/auth';
 import { cn } from '@/lib/utils';
 import AuthProvider from '@/provider/auth-provider';
 import LayoutProvider from '@/provider/layout-provider';
+import QueryProviders from '@/provider/query-provider';
 import { ThemeProvider } from '@/provider/theme-provider';
 import { fontJakarta } from '@/styles/font';
-import QueryProviders from '@/provider/query-provider';
+import '@/styles/globals.css';
+import '@uploadcare/react-uploader/core.css';
+import type { Metadata } from 'next';
+import { getServerSession } from 'next-auth';
+import { Inter as FontSans } from 'next/font/google';
 import { Toaster } from 'react-hot-toast';
 
 const fontSans = FontSans({
@@ -40,13 +38,15 @@ export default async function RootLayout({
         className={cn(
           'min-h-screen bg-background font-sans antialiased',
           fontSans.variable,
-          fontJakarta.variable
-        )}>
+          fontJakarta.variable,
+        )}
+      >
         <ThemeProvider
           attribute="class"
           defaultTheme="system"
           enableSystem
-          disableTransitionOnChange>
+          disableTransitionOnChange
+        >
           <QueryProviders>
             <AuthProvider session={session}>
               <LayoutProvider>
