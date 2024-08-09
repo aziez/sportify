@@ -133,17 +133,17 @@ model Subcategories {
 model Booking {
   id             String       @id @default(uuid())
   userId         String
-  productId      String?
+  productId      String
   paymentId      String
   notificationId String
   bookingDate    DateTime
   duration       Float
   createdAt      DateTime     @default(now())
-  fieldId        String?
-  field          Field?       @relation(fields: [fieldId], references: [id])
+  fieldId        String
+  field          Field        @relation(fields: [fieldId], references: [id])
   notification   Notification @relation(fields: [notificationId], references: [id])
   payment        Payment      @relation(fields: [paymentId], references: [id])
-  product        Product?     @relation(fields: [productId], references: [id])
+  product        Product      @relation(fields: [productId], references: [id])
   user           User         @relation(fields: [userId], references: [id])
 
   @@index([fieldId], map: "Booking_fieldId_fkey")

@@ -47,7 +47,7 @@ const FormSchema = z.object({
 
 const VanueForm = () => {
   const [position, setPosition] = useState<{ lat: number; lng: number } | null>(
-    null,
+    null
   );
 
   const [pending, start] = useTransition();
